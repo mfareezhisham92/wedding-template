@@ -4,11 +4,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-<sty#openingScreen{
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:#0b0b0b;
+color:white;
+}
+
+#openingScreen{
 position:fixed;
 top:0;
 left:0;
@@ -27,53 +42,38 @@ text-align:center;
 padding:20px;
 }
 
-#openingScreen h1{
+.opening-content h1{
 color:#D4AF37;
-}
-le>
-
-body{
-margin:0;
-font-family:'Montserrat', sans-serif;
-background:#0b0b0b;
-color:#fff;
-overflow-x:hidden;
+margin:15px 0;
 }
 
-/* HERO */
 .hero{
 height:100vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background: url('https://images.unsplash.com/photo-1529634891160-1b5c9a1c1c6a?auto=format&fit=crop&w=1500&q=80') center/cover;
-position:relative;
-}
 
-.hero::after{
-content:'';
-position:absolute;
-top:0;left:0;right:0;bottom:0;
-background:rgba(0,0,0,0.65);
+background:
+linear-gradient(
+rgba(0,0,0,.6),
+rgba(0,0,0,.8)
+),
+url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80");
+
+background-size:cover;
+background-position:center;
 }
 
 .hero-content{
-position:relative;
-z-index:2;
+padding:20px;
 }
 
-h1{
-font-family:'Cinzel', serif;
-font-size:45px;
+.hero h1{
+font-family:'Cinzel',serif;
+font-size:48px;
 color:#D4AF37;
-margin:10px 0;
-}
-
-h3{
-letter-spacing:3px;
-font-weight:300;
+margin:15px 0;
 }
 
 .section{
@@ -82,33 +82,29 @@ text-align:center;
 }
 
 .card{
-background:#151515;
+background:#161616;
+max-width:350px;
+margin:15px auto;
 padding:20px;
-margin:10px auto;
-max-width:300px;
-border-radius:12px;
-border:1px solid rgba(212,175,55,0.3);
+border-radius:15px;
+border:1px solid rgba(212,175,55,.3);
 }
 
 button{
 background:#D4AF37;
 border:none;
-padding:15px 25px;
-border-radius:30px;
+padding:14px 24px;
+border-radius:50px;
+font-weight:bold;
 cursor:pointer;
-font-size:16px;
-margin-top:10px;
 }
 
-a{text-decoration:none;color:white;}
-
-.fade{
-animation:fadeIn 2s ease-in;
+a{
+text-decoration:none;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
+.gold{
+color:#D4AF37;
 }
 
 </style>
@@ -116,11 +112,11 @@ to{opacity:1;transform:translateY(0);}
 </head>
 
 <body>
+
 <div id="openingScreen">
 
-  <div class="opening-content">
+<div class="opening-content">
 
-```
 <p>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
 
 <h3>THE WEDDING OF</h3>
@@ -128,18 +124,16 @@ to{opacity:1;transform:translateY(0);}
 <h1 id="openingCouple"></h1>
 
 <button onclick="openInvitation()">
-  Buka Jemputan
+Buka Jemputan
 </button>
-```
-
-  </div>
 
 </div>
 
-<!-- HERO -->
+</div>
 
 <div class="hero">
-<div class="hero-content fade">
+
+<div class="hero-content">
 
 <h3>THE WEDDING OF</h3>
 
@@ -147,20 +141,25 @@ to{opacity:1;transform:translateY(0);}
 
 <p id="tagline"></p>
 
-<h3 id="date"></h3>
+<br>
+
+<p id="date"></p>
 
 </div>
+
 </div>
 
-<!-- INVITATION -->
+<div class="section">
 
-<div class="section fade">
-<h2 style="color:#D4AF37;">Walimatul Urus</h2>
+<h2 class="gold">Walimatul Urus</h2>
+
+<br>
+
 <p id="host"></p>
-<p>Dengan penuh kesyukuran menjemput anda</p>
-</div>
 
-<!-- DETAILS -->
+<p>Dengan penuh kesyukuran menjemput anda ke majlis kami.</p>
+
+</div>
 
 <div class="section">
 
@@ -175,33 +174,44 @@ to{opacity:1;transform:translateY(0);}
 </div>
 
 <div class="card">
-<h3>Tempat</h3>
+<h3>Lokasi</h3>
 <p id="venue"></p>
 </div>
 
 </div>
 
-<!-- MAP -->
-
 <div class="section">
+
 <a id="mapLink" target="_blank">
+
 <button>📍 Lihat Lokasi</button>
+
 </a>
+
 </div>
 
-<!-- RSVP -->
-
 <div class="section">
+
 <a id="waLink" target="_blank">
+
 <button>💬 RSVP WhatsApp</button>
+
 </a>
+
 </div>
 
 <script>
 
+function openInvitation(){
+document.getElementById("openingScreen").style.display="none";
+}
+
 fetch("config.json")
-.then(res => res.json())
+.then(response => response.json())
 .then(data => {
+
+document.getElementById("openingCouple").innerText =
+data.groom + " & " + data.bride;
 
 document.getElementById("couple").innerText =
 data.groom + " & " + data.bride;
@@ -228,18 +238,13 @@ document.getElementById("mapLink").href =
 data.maps;
 
 document.getElementById("waLink").href =
-"https://wa.me/" + data.rsvp;
+"https://wa.me/" + data.rsvp +
+"?text=Assalamualaikum.%20Saya%20ingin%20mengesahkan%20kehadiran.";
 
+})
+.catch(error => {
+console.log(error);
 });
-
-</script>
-<script>
-
-function openInvitation(){
-
-document.getElementById("openingScreen").style.display="none";
-
-}
 
 </script>
 
