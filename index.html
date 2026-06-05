@@ -48,11 +48,28 @@ margin:15px 0;
 }
 
 .hero{
+.hero::before{
+content:"";
+position:absolute;
+
+top:20px;
+left:20px;
+right:20px;
+bottom:20px;
+
+border:2px solid rgba(212,175,55,.45);
+
+pointer-events:none;
+
+z-index:1;
+}
+  
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
+position:relative;
 
 background:
 linear-gradient(
@@ -65,9 +82,13 @@ background-size:cover;
 background-position:center;
 }
 
+
 .hero-content{
 padding:20px;
+position:relative;
+z-index:2;
 }
+
 
 .hero h1{
 font-family:'Cinzel',serif;
@@ -88,22 +109,50 @@ text-align:center;
 }
 
 .card{
-background:#161616;
+background:rgba(255,255,255,.04);
+
 max-width:350px;
+
 margin:15px auto;
-padding:20px;
-border-radius:15px;
+
+padding:25px;
+
+border-radius:20px;
+
 border:1px solid rgba(212,175,55,.3);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.4);
 }
 
+
 button{
-background:#D4AF37;
+background:linear-gradient(
+45deg,
+#D4AF37,
+#b8941f
+);
+
 border:none;
-padding:14px 24px;
+
+padding:15px 28px;
+
 border-radius:50px;
+
 font-weight:bold;
+
 cursor:pointer;
+
+transition:0.3s;
+
+box-shadow:
+0 5px 20px rgba(212,175,55,.3);
 }
+
+button:hover{
+transform:translateY(-2px);
+}
+
 
 a{
 text-decoration:none;
@@ -150,6 +199,15 @@ Buka Jemputan
 <br>
 
 <p id="date"></p>
+<br>
+
+<div id="countdown"
+style="
+font-size:18px;
+color:#D4AF37;
+font-weight:bold;
+">
+</div>
 
 </div>
 
@@ -239,6 +297,22 @@ data.time;
 
 document.getElementById("venue").innerText =
 data.venue;
+const targetDate = new Date(data.date);
+
+setInterval(() => {
+
+const now = new Date();
+
+const diff = targetDate - now;
+
+const days =
+Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("countdown").innerHTML =
+"⏳ " + days + " Hari Lagi";
+
+},1000);
+  
 
 document.getElementById("mapLink").href =
 data.maps;
