@@ -7,7 +7,7 @@
 
 <title>Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,165 +19,228 @@ box-sizing:border-box;
 
 body{
 font-family:'Montserrat',sans-serif;
-background:#0b0b0b;
+background:#050505;
 color:white;
+text-align:center;
 }
 
 #openingScreen{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#0b0b0b;
+inset:0;
+background:
+radial-gradient(circle at top,#2b2108,#050505 55%);
 z-index:9999;
-
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
+padding:25px;
 }
 
-.opening-content{
-padding:20px;
+.opening-card{
+width:100%;
+max-width:390px;
+min-height:640px;
+border:1px solid rgba(212,175,55,.55);
+padding:45px 25px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+box-shadow:0 0 40px rgba(212,175,55,.18);
+position:relative;
 }
 
-.opening-content h1{
-color:#D4AF37;
+.opening-card::before{
+content:"";
+position:absolute;
+inset:12px;
+border:1px solid rgba(212,175,55,.25);
+}
+
+.bismillah{
+font-size:22px;
+margin-bottom:35px;
+color:#f8e7b0;
+}
+
+.label{
+letter-spacing:4px;
+font-size:12px;
+color:#d4af37;
+margin-bottom:18px;
+}
+
+.main-title{
+font-family:'Cinzel',serif;
+font-size:40px;
+line-height:1.2;
+color:#d4af37;
+text-shadow:0 0 18px rgba(212,175,55,.35);
 margin:15px 0;
 }
 
+.script{
+font-family:'Great Vibes',cursive;
+font-size:34px;
+color:#f5d77b;
+margin:15px 0;
+}
+
+button{
+background:linear-gradient(135deg,#f3d77b,#b8941f);
+border:none;
+padding:15px 30px;
+border-radius:50px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 8px 25px rgba(212,175,55,.35);
+margin-top:25px;
+}
+
 .hero{
-height:100vh;
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.85)),
+url("cover.jpg");
+background-size:cover;
+background-position:center;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
-position:relative;
-
-background:
-linear-gradient(
-rgba(0,0,0,.6),
-rgba(0,0,0,.8)
-),
-url("cover.jpg");
-
-background-size:cover;
-background-position:center;
+padding:25px;
 }
 
-.hero::before{
+.invite-card{
+width:100%;
+max-width:420px;
+min-height:720px;
+border:1px solid rgba(212,175,55,.55);
+padding:45px 25px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.45);
+box-shadow:0 0 40px rgba(212,175,55,.18);
+position:relative;
+}
+
+.invite-card::before{
 content:"";
 position:absolute;
-
-top:20px;
-left:20px;
-right:20px;
-bottom:20px;
-
-border:2px solid rgba(212,175,55,.5);
-
+inset:12px;
+border:1px solid rgba(212,175,55,.22);
 pointer-events:none;
-
-z-index:3;
 }
 
-}
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-position:relative;
-
-background:
-linear-gradient(
-rgba(0,0,0,.6),
-rgba(0,0,0,.8)
-),
-url("cover.jpg");
-
-background-size:cover;
-background-position:center;
-}
-
-
-.hero-content{
-padding:20px;
+.content{
 position:relative;
 z-index:2;
 }
 
-
-.hero h1{
+#couple{
 font-family:'Cinzel',serif;
-font-size:48px;
-color:#D4AF37;
-
-text-shadow:
-0 0 10px rgba(212,175,55,0.5),
-0 0 20px rgba(212,175,55,0.3);
-
-margin:15px 0;
+font-size:42px;
+line-height:1.15;
+color:#d4af37;
+margin:20px 0;
+text-shadow:0 0 20px rgba(212,175,55,.35);
 }
 
+#tagline{
+font-family:'Great Vibes',cursive;
+font-size:32px;
+color:#f5d77b;
+margin-bottom:20px;
+}
+
+#date{
+font-size:15px;
+letter-spacing:2px;
+color:#f8e7b0;
+}
+
+#countdown{
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+}
+
+.count-box{
+border:1px solid rgba(212,175,55,.35);
+padding:10px 6px;
+border-radius:12px;
+background:rgba(255,255,255,.04);
+}
+
+.count-box strong{
+display:block;
+font-size:20px;
+color:#d4af37;
+}
+
+.count-box span{
+font-size:10px;
+letter-spacing:1px;
+}
 
 .section{
-padding:60px 20px;
-text-align:center;
+padding:55px 22px;
+}
+
+.section h2{
+font-family:'Cinzel',serif;
+color:#d4af37;
+margin-bottom:18px;
+font-size:26px;
 }
 
 .card{
-background:rgba(255,255,255,.04);
-
-max-width:350px;
-
-margin:15px auto;
-
-padding:25px;
-
-border-radius:20px;
-
-border:1px solid rgba(212,175,55,.3);
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.4);
+max-width:380px;
+margin:14px auto;
+padding:24px;
+border-radius:22px;
+background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+border:1px solid rgba(212,175,55,.28);
+box-shadow:0 12px 30px rgba(0,0,0,.45);
 }
 
-
-button{
-background:linear-gradient(
-45deg,
-#D4AF37,
-#b8941f
-);
-
-border:none;
-
-padding:15px 28px;
-
-border-radius:50px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:0.3s;
-
-box-shadow:
-0 5px 20px rgba(212,175,55,.3);
+.card h3{
+color:#d4af37;
+font-size:13px;
+letter-spacing:3px;
+margin-bottom:10px;
 }
 
-button:hover{
-transform:translateY(-2px);
+.card p{
+font-size:17px;
+line-height:1.5;
 }
 
+.actions{
+display:flex;
+flex-direction:column;
+gap:14px;
+align-items:center;
+padding-bottom:70px;
+}
+
+.footer{
+padding:60px 25px;
+background:#080808;
+border-top:1px solid rgba(212,175,55,.2);
+}
+
+.footer h2{
+font-family:'Great Vibes',cursive;
+font-size:42px;
+color:#d4af37;
+margin-bottom:10px;
+}
 
 a{
 text-decoration:none;
-}
-
-.gold{
-color:#D4AF37;
 }
 
 </style>
@@ -187,115 +250,79 @@ color:#D4AF37;
 <body>
 
 <div id="openingScreen">
-
-<div class="opening-content">
-
-<p style="font-size:22px;margin-bottom:20px;">
-بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
-</p>
-
-<h3 style="letter-spacing:4px;color:#D4AF37;">
-THE WEDDING OF
-</h3>
-
-
-<h1 id="openingCouple"></h1>
-
-<button onclick="openInvitation()">
-Buka Jemputan
-</button>
-
+  <div class="opening-card">
+    <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <p class="label">THE WEDDING OF</p>
+    <h1 class="main-title" id="openingCouple"></h1>
+    <p class="script">Dua Jiwa Satu Cinta</p>
+    <button onclick="openInvitation()">Buka Jemputan</button>
+  </div>
 </div>
 
+<section class="hero">
+  <div class="invite-card">
+    <div class="content">
+      <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+      <p class="label">THE WEDDING OF</p>
+      <h1 id="couple"></h1>
+      <p id="tagline"></p>
+      <p id="date"></p>
+
+```
+  <div id="countdown"></div>
 </div>
+```
 
-<div class="hero">
+  </div>
+</section>
 
-<div class="hero-content">
+<section class="section">
+  <h2>Walimatul Urus</h2>
+  <div class="card">
+    <p id="host"></p>
+    <br>
+    <p>Dengan penuh kesyukuran, kami menjemput anda ke majlis perkahwinan ini.</p>
+  </div>
+</section>
 
-<h3>THE WEDDING OF</h3>
+<section class="section">
+  <h2>Butiran Majlis</h2>
 
-<h1 id="couple"></h1>
+  <div class="card">
+    <h3>TARIKH</h3>
+    <p id="date2"></p>
+  </div>
 
-<p id="tagline"></p>
+  <div class="card">
+    <h3>MASA</h3>
+    <p id="time"></p>
+  </div>
 
-<br>
+  <div class="card">
+    <h3>LOKASI</h3>
+    <p id="venue"></p>
+  </div>
+</section>
 
-<p id="date"></p>
-<br>
+<section class="section actions">
+  <a id="mapLink" target="_blank">
+    <button>📍 Lihat Lokasi</button>
+  </a>
 
-<div id="countdown"
-style="
-margin-top:20px;
-font-size:22px;
-color:#D4AF37;
-font-weight:bold;
-padding:12px 24px;
-border:1px solid rgba(212,175,55,.4);
-border-radius:50px;
-display:inline-block;
-">
-</div>
+  <a id="waLink" target="_blank">
+    <button>💬 RSVP WhatsApp</button>
+  </a>
+</section>
 
-</div>
-
-</div>
-
-<div class="section">
-
-<h2 class="gold">Walimatul Urus</h2>
-
-<br>
-
-<p id="host"></p>
-
-<p>Dengan penuh kesyukuran menjemput anda ke majlis kami.</p>
-
-</div>
-
-<div class="section">
-
-<div class="card">
-<h3>Tarikh</h3>
-<p id="date2"></p>
-</div>
-
-<div class="card">
-<h3>Masa</h3>
-<p id="time"></p>
-</div>
-
-<div class="card">
-<h3>Lokasi</h3>
-<p id="venue"></p>
-</div>
-
-</div>
-
-<div class="section">
-
-<a id="mapLink" target="_blank">
-
-<button>📍 Lihat Lokasi</button>
-
-</a>
-
-</div>
-
-<div class="section">
-
-<a id="waLink" target="_blank">
-
-<button>💬 RSVP WhatsApp</button>
-
-</a>
-
-</div>
+<section class="footer">
+  <h2>Terima Kasih</h2>
+  <p>Kehadiran dan doa restu anda amat kami hargai.</p>
+</section>
 
 <script>
 
 function openInvitation(){
-document.getElementById("openingScreen").style.display="none";
+  document.getElementById("openingScreen").style.display="none";
 }
 
 fetch("config.json")
@@ -325,29 +352,35 @@ data.time;
 
 document.getElementById("venue").innerText =
 data.venue;
-const targetDate = new Date(data.date);
-
-setInterval(() => {
-
-const now = new Date();
-
-const diff = targetDate - now;
-
-const days =
-Math.floor(diff/(1000*60*60*24));
-
-document.getElementById("countdown").innerHTML =
-"⏳ " + days + " Hari Lagi";
-
-},1000);
-  
 
 document.getElementById("mapLink").href =
 data.maps;
 
 document.getElementById("waLink").href =
 "https://wa.me/" + data.rsvp +
-"?text=Assalamualaikum.%20Saya%20ingin%20mengesahkan%20kehadiran.";
+"?text=Assalamualaikum.%20Saya%20ingin%20mengesahkan%20kehadiran%20ke%20majlis%20ini.%20Terima%20kasih.";
+
+const targetDate = new Date(data.date);
+
+setInterval(() => {
+
+const now = new Date();
+const diff = targetDate - now;
+
+const days = Math.floor(diff / (1000*60*60*24));
+const hours = Math.floor((diff / (1000*60*60)) % 24);
+const minutes = Math.floor((diff / (1000*60)) % 60);
+const seconds = Math.floor((diff / 1000) % 60);
+
+document.getElementById("countdown").innerHTML =
+`
+<div class="count-box"><strong>${days}</strong><span>HARI</span></div>
+<div class="count-box"><strong>${hours}</strong><span>JAM</span></div>
+<div class="count-box"><strong>${minutes}</strong><span>MINIT</span></div>
+<div class="count-box"><strong>${seconds}</strong><span>SAAT</span></div>
+`;
+
+},1000);
 
 })
 .catch(error => {
