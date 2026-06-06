@@ -10,11 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -22,32 +25,32 @@ font-family:'Montserrat',sans-serif;
 background:#050505;
 color:white;
 text-align:center;
+overflow-x:hidden;
 }
 
 #openingScreen{
 position:fixed;
 inset:0;
-background:
-radial-gradient(circle at top,#2b2108,#050505 55%);
+background:radial-gradient(circle at top,#2b2108,#050505 60%);
 z-index:9999;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:25px;
+padding:22px;
 }
 
 .opening-card{
 width:100%;
 max-width:390px;
-min-height:640px;
+height:88vh;
 border:1px solid rgba(212,175,55,.55);
-padding:45px 25px;
+padding:35px 24px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-box-shadow:0 0 40px rgba(212,175,55,.18);
 position:relative;
+box-shadow:0 0 45px rgba(212,175,55,.18);
 }
 
 .opening-card::before{
@@ -57,75 +60,42 @@ inset:12px;
 border:1px solid rgba(212,175,55,.25);
 }
 
-.bismillah{
-font-size:22px;
-margin-bottom:35px;
-color:#f8e7b0;
-}
-
-.label{
-letter-spacing:4px;
-font-size:12px;
-color:#d4af37;
-margin-bottom:18px;
-}
-
-.main-title{
-font-family:'Cinzel',serif;
-font-size:40px;
-line-height:1.2;
-color:#d4af37;
-text-shadow:0 0 18px rgba(212,175,55,.35);
-margin:15px 0;
-}
-
-.script{
-font-family:'Great Vibes',cursive;
-font-size:34px;
-color:#f5d77b;
-margin:15px 0;
-}
-
-button{
-background:linear-gradient(135deg,#f3d77b,#b8941f);
-border:none;
-padding:15px 30px;
-border-radius:50px;
-font-weight:700;
-cursor:pointer;
-box-shadow:0 8px 25px rgba(212,175,55,.35);
-margin-top:25px;
-}
-
-.hero{
+.screen{
 min-height:100vh;
-background:
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.85)),
-url("cover.jpg");
-background-size:cover;
-background-position:center;
+padding:28px 20px;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:25px;
+background:
+linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.88)),
+url("cover.jpg");
+background-size:cover;
+background-position:center;
+scroll-snap-align:start;
 }
 
-.invite-card{
+.story{
+scroll-snap-type:y mandatory;
+overflow-y:auto;
+height:100vh;
+}
+
+.card{
 width:100%;
-max-width:420px;
-min-height:720px;
+max-width:410px;
+min-height:78vh;
 border:1px solid rgba(212,175,55,.55);
-padding:45px 25px;
+background:rgba(0,0,0,.48);
+padding:38px 24px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:rgba(0,0,0,.45);
-box-shadow:0 0 40px rgba(212,175,55,.18);
 position:relative;
+box-shadow:0 0 45px rgba(212,175,55,.18);
 }
 
-.invite-card::before{
+.card::before{
 content:"";
 position:absolute;
 inset:12px;
@@ -136,28 +106,55 @@ pointer-events:none;
 .content{
 position:relative;
 z-index:2;
+opacity:0;
+transform:translateY(25px);
+transition:1.2s ease;
 }
 
-#couple{
+.content.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.bismillah{
+font-size:22px;
+color:#f8e7b0;
+margin-bottom:30px;
+}
+
+.label{
+font-size:12px;
+letter-spacing:4px;
+color:#d4af37;
+margin-bottom:18px;
+}
+
+.main-title{
 font-family:'Cinzel',serif;
-font-size:42px;
+font-size:clamp(34px,10vw,46px);
 line-height:1.15;
 color:#d4af37;
-margin:20px 0;
-text-shadow:0 0 20px rgba(212,175,55,.35);
+text-shadow:0 0 20px rgba(212,175,55,.38);
+margin:18px 0;
 }
 
-#tagline{
+.script{
 font-family:'Great Vibes',cursive;
-font-size:32px;
+font-size:clamp(30px,9vw,42px);
 color:#f5d77b;
-margin-bottom:20px;
+margin:18px 0;
 }
 
-#date{
-font-size:15px;
-letter-spacing:2px;
-color:#f8e7b0;
+h2{
+font-family:'Cinzel',serif;
+font-size:28px;
+color:#d4af37;
+margin-bottom:22px;
+}
+
+p{
+font-size:16px;
+line-height:1.8;
 }
 
 #countdown{
@@ -165,13 +162,14 @@ margin-top:25px;
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:8px;
+width:100%;
 }
 
 .count-box{
 border:1px solid rgba(212,175,55,.35);
-padding:10px 6px;
+padding:10px 5px;
 border-radius:12px;
-background:rgba(255,255,255,.04);
+background:rgba(255,255,255,.05);
 }
 
 .count-box strong{
@@ -181,68 +179,74 @@ color:#d4af37;
 }
 
 .count-box span{
-font-size:10px;
+font-size:9px;
 letter-spacing:1px;
 }
 
-.section{
-padding:55px 22px;
-}
-
-.section h2{
-font-family:'Cinzel',serif;
-color:#d4af37;
-margin-bottom:18px;
-font-size:26px;
-}
-
-.card{
-max-width:380px;
-margin:14px auto;
-padding:24px;
-border-radius:22px;
-background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+.detail-box{
+width:100%;
+margin:12px auto;
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,.06);
 border:1px solid rgba(212,175,55,.28);
-box-shadow:0 12px 30px rgba(0,0,0,.45);
 }
 
-.card h3{
+.detail-box h3{
 color:#d4af37;
-font-size:13px;
+font-size:12px;
 letter-spacing:3px;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
-.card p{
-font-size:17px;
-line-height:1.5;
-}
-
-.actions{
-display:flex;
-flex-direction:column;
-gap:14px;
-align-items:center;
-padding-bottom:70px;
-}
-
-.footer{
-padding:60px 25px;
-background:#080808;
-border-top:1px solid rgba(212,175,55,.2);
-}
-
-.footer h2{
-font-family:'Great Vibes',cursive;
-font-size:42px;
-color:#d4af37;
-margin-bottom:10px;
+button{
+background:linear-gradient(135deg,#f3d77b,#b8941f);
+border:none;
+padding:15px 30px;
+border-radius:50px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 8px 25px rgba(212,175,55,.35);
+margin:8px;
 }
 
 a{
 text-decoration:none;
 }
 
+.hint{
+position:absolute;
+bottom:22px;
+font-size:12px;
+letter-spacing:2px;
+color:rgba(255,255,255,.65);
+animation:bounce 1.8s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(8px);}
+}
+
+@media(max-width:480px){
+.card{
+min-height:82vh;
+padding:34px 22px;
+}
+
+.bismillah{
+font-size:20px;
+}
+
+p{
+font-size:15px;
+}
+
+button{
+width:85%;
+max-width:280px;
+}
+}
 </style>
 
 </head>
@@ -251,60 +255,77 @@ text-decoration:none;
 
 <div id="openingScreen">
   <div class="opening-card">
-    <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-    <p class="label">THE WEDDING OF</p>
-    <h1 class="main-title" id="openingCouple"></h1>
-    <p class="script">Dua Jiwa Satu Cinta</p>
-    <button onclick="openInvitation()">Buka Jemputan</button>
-  </div>
-</div>
-
-<section class="hero">
-  <div class="invite-card">
-    <div class="content">
+    <div class="content show">
       <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
       <p class="label">THE WEDDING OF</p>
-      <h1 id="couple"></h1>
-      <p id="tagline"></p>
-      <p id="date"></p>
-
-```
-  <div id="countdown"></div>
+      <h1 class="main-title" id="openingCouple"></h1>
+      <p class="script">Dua Jiwa Satu Cinta</p>
+      <button onclick="openInvitation()">Buka Jemputan</button>
+    </div>
+  </div>
 </div>
+
+<main class="story" id="story">
+
+<section class="screen">
+  <div class="card">
+    <div class="content reveal">
+      <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+      <p class="label">THE WEDDING OF</p>
+      <h1 class="main-title" id="couple"></h1>
+      <p class="script" id="tagline"></p>
+      <p id="date"></p>
+      <div id="countdown"></div>
+    </div>
+    <div class="hint">SWIPE</div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="card">
+    <div class="content reveal">
+      <h2>Walimatul Urus</h2>
+      <p id="host"></p>
+      <br>
+      <p>Dengan penuh kesyukuran, kami menjemput anda ke majlis perkahwinan ini.</p>
+    </div>
+    <div class="hint">SWIPE</div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="card">
+    <div class="content reveal">
+      <h2>Butiran Majlis</h2>
+
 ```
-
-  </div>
-</section>
-
-<section class="section">
-  <h2>Walimatul Urus</h2>
-  <div class="card">
-    <p id="host"></p>
-    <br>
-    <p>Dengan penuh kesyukuran, kami menjemput anda ke majlis perkahwinan ini.</p>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Butiran Majlis</h2>
-
-  <div class="card">
+  <div class="detail-box">
     <h3>TARIKH</h3>
     <p id="date2"></p>
   </div>
 
-  <div class="card">
+  <div class="detail-box">
     <h3>MASA</h3>
     <p id="time"></p>
   </div>
 
-  <div class="card">
+  <div class="detail-box">
     <h3>LOKASI</h3>
     <p id="venue"></p>
   </div>
+</div>
+<div class="hint">SWIPE</div>
+```
+
+  </div>
 </section>
 
-<section class="section actions">
+<section class="screen">
+  <div class="card">
+    <div class="content reveal">
+      <h2>Lokasi & RSVP</h2>
+
+```
   <a id="mapLink" target="_blank">
     <button>📍 Lihat Lokasi</button>
   </a>
@@ -312,18 +333,44 @@ text-decoration:none;
   <a id="waLink" target="_blank">
     <button>💬 RSVP WhatsApp</button>
   </a>
+</div>
+<div class="hint">SWIPE</div>
+```
+
+  </div>
 </section>
 
-<section class="footer">
-  <h2>Terima Kasih</h2>
-  <p>Kehadiran dan doa restu anda amat kami hargai.</p>
+<section class="screen">
+  <div class="card">
+    <div class="content reveal">
+      <h2 class="script">Terima Kasih</h2>
+      <p>Kehadiran dan doa restu anda amat kami hargai.</p>
+      <br>
+      <p id="closingCouple" class="label"></p>
+    </div>
+  </div>
 </section>
+
+</main>
 
 <script>
-
 function openInvitation(){
-  document.getElementById("openingScreen").style.display="none";
+document.getElementById("openingScreen").style.display="none";
+
+setTimeout(() => {
+document.querySelectorAll(".reveal")[0].classList.add("show");
+},300);
 }
+
+const observer = new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.45});
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 fetch("config.json")
 .then(response => response.json())
@@ -333,6 +380,9 @@ document.getElementById("openingCouple").innerText =
 data.groom + " & " + data.bride;
 
 document.getElementById("couple").innerText =
+data.groom + " & " + data.bride;
+
+document.getElementById("closingCouple").innerText =
 data.groom + " & " + data.bride;
 
 document.getElementById("tagline").innerText =
@@ -386,8 +436,8 @@ document.getElementById("countdown").innerHTML =
 .catch(error => {
 console.log(error);
 });
-
 </script>
 
 </body>
 </html>
+
