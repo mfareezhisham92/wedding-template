@@ -9,7 +9,6 @@
 
 <script>
 const K = {
-  guestName: "Encik Rizal & Keluarga",
   groomName: "Ahmad Faris",
   brideName: "Siti Aisyah",
   eventType: "Walimatul Urus",
@@ -21,11 +20,10 @@ const K = {
   hostName: "Dr R & Dr A",
   venueName: "DPB",
   venueAddress: "Dewan Perdana Ballroom",
-  mapsURL: "https://maps.google.com",
-  wazeURL: "https://waze.com",
 
+  mapsURL: "https://maps.google.com",
   waNumber: "60123456789",
-  waMessage: "Assalamualaikum, saya ingin mengesahkan kehadiran ke majlis Alif & Alia. Terima kasih.",
+  waMessage: "Assalamualaikum, saya ingin mengesahkan kehadiran ke majlis. Terima kasih.",
 
   tagline: "Dua Jiwa Satu Cinta",
   customMsg: "Dengan penuh kesyukuran, kami menjemput Tuan/Puan hadir bersama menyerikan majlis kami.",
@@ -34,14 +32,15 @@ const K = {
 </script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 html,body{
 height:100%;
-overflow:hidden;
 font-family:'Nunito',sans-serif;
-background:#070504;
+background:#060403;
 color:#fff;
+overflow:hidden;
+text-align:center;
 }
 
 body::before{
@@ -49,7 +48,7 @@ content:"";
 position:fixed;
 inset:0;
 background:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.92)),
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.9)),
 url("cover.jpg");
 background-size:cover;
 background-position:center;
@@ -61,72 +60,110 @@ content:"";
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at top,rgba(201,169,110,.25),transparent 35%),
-radial-gradient(circle at bottom,rgba(201,169,110,.14),transparent 45%);
+radial-gradient(circle at top,rgba(201,169,110,.24),transparent 35%),
+radial-gradient(circle at bottom,rgba(201,169,110,.12),transparent 45%);
 z-index:-1;
 }
 
-.serif{font-family:'Cormorant Garamond',serif}
-.script{font-family:'Dancing Script',cursive}
-.gold{color:#c9a96e}
+.gold{color:#c9a96e;}
+.script{font-family:'Dancing Script',cursive;}
+.serif{font-family:'Cormorant Garamond',serif;}
+
 .small{
 font-size:10px;
 letter-spacing:.28em;
 text-transform:uppercase;
 }
 
-/* INTRO */
-#intro{
+.divider{
+width:90px;
+height:1px;
+background:linear-gradient(90deg,transparent,#c9a96e,transparent);
+margin:22px auto;
+}
+
+/* OPENING DOORS */
+#doorScreen{
 position:fixed;
 inset:0;
-z-index:30;
+z-index:50;
 display:flex;
-align-items:center;
 justify-content:center;
-padding:24px;
-background:rgba(0,0,0,.75);
+align-items:center;
+background:#050302;
+overflow:hidden;
 }
 
-.intro-card{
-width:100%;
+.door{
+position:absolute;
+top:0;
+width:50%;
+height:100%;
+background:
+linear-gradient(90deg,#050302,#241805,#4a3510,#241805,#050302);
+z-index:1;
+transition:1.8s ease-in-out;
+}
+
+.leftDoor{
+left:0;
+border-right:1px solid rgba(201,169,110,.5);
+}
+
+.rightDoor{
+right:0;
+border-left:1px solid rgba(201,169,110,.5);
+}
+
+#doorScreen.open .leftDoor{
+transform:translateX(-100%);
+}
+
+#doorScreen.open .rightDoor{
+transform:translateX(100%);
+}
+
+.open-card{
+z-index:2;
+width:88%;
 max-width:390px;
-height:84vh;
-border:1px solid rgba(201,169,110,.65);
+height:82vh;
+border:1px solid rgba(201,169,110,.7);
+background:rgba(0,0,0,.58);
+backdrop-filter:blur(5px);
 display:flex;
 flex-direction:column;
-align-items:center;
 justify-content:center;
-text-align:center;
+align-items:center;
 padding:32px 24px;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(5px);
-box-shadow:0 0 45px rgba(201,169,110,.2);
 position:relative;
+box-shadow:0 0 45px rgba(201,169,110,.25);
+transition:1s ease;
 }
 
-.intro-card::before{
+.open-card::before{
 content:"";
 position:absolute;
 inset:13px;
-border:1px solid rgba(201,169,110,.25);
+border:1px solid rgba(201,169,110,.28);
 }
 
-.intro-inner{
+.open-inner{
 position:relative;
-z-index:2;
+z-index:3;
 }
 
 .bismillah{
 font-size:23px;
 line-height:2;
+color:#f7e5bd;
 margin-bottom:26px;
-color:#f6e2b0;
 }
 
 .names{
 font-family:'Dancing Script',cursive;
-font-size:clamp(38px,11vw,54px);
-line-height:1.08;
+font-size:clamp(40px,12vw,58px);
+line-height:1.05;
 color:#f7e5bd;
 margin:18px 0;
 }
@@ -140,215 +177,82 @@ color:#c9a96e;
 margin:8px 0;
 }
 
-.divider{
-width:90px;
-height:1px;
-background:linear-gradient(90deg,transparent,#c9a96e,transparent);
-margin:22px auto;
-}
-
 button{
 border:none;
 background:linear-gradient(135deg,#f7df9b,#b88a2c);
 color:#1d1306;
 font-weight:700;
-padding:14px 30px;
+padding:14px 32px;
 border-radius:999px;
 box-shadow:0 10px 30px rgba(201,169,110,.35);
 cursor:pointer;
 }
 
-/* ENVELOPE */
-#envelopeScene{
-position:fixed;
-inset:0;
-z-index:25;
-display:none;
-align-items:center;
-justify-content:center;
-background:rgba(0,0,0,.88);
-perspective:1200px;
+#doorScreen.open .open-card{
+opacity:0;
+transform:scale(.92);
 }
 
-.envelope{
-width:310px;
-height:215px;
-position:relative;
-transform-style:preserve-3d;
-animation:envIn 1s ease forwards;
-}
-
-.env-back{
-position:absolute;
-inset:0;
-background:linear-gradient(145deg,#2d2008,#080604);
-border:1px solid rgba(201,169,110,.8);
-box-shadow:0 0 50px rgba(201,169,110,.25);
-}
-
-.env-flap{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:58%;
-background:linear-gradient(145deg,#d7b777,#624512);
-clip-path:polygon(0 0,100% 0,50% 100%);
-transform-origin:top;
-z-index:5;
-}
-
-.env-letter{
-position:absolute;
-left:22px;
-right:22px;
-bottom:18px;
-height:160px;
-background:#fff7df;
-border:1px solid #c9a96e;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:'Dancing Script',cursive;
-font-size:34px;
-color:#2d2008;
-z-index:2;
-}
-
-.env-left{
-position:absolute;
-left:0;
-bottom:0;
-width:50%;
-height:100%;
-background:linear-gradient(145deg,#171005,#050403);
-clip-path:polygon(0 0,100% 50%,0 100%);
-z-index:4;
-}
-
-.env-right{
-position:absolute;
-right:0;
-bottom:0;
-width:50%;
-height:100%;
-background:linear-gradient(145deg,#171005,#050403);
-clip-path:polygon(100% 0,0 50%,100% 100%);
-z-index:4;
-}
-
-.env-bottom{
-position:absolute;
-left:0;
-bottom:0;
-width:100%;
-height:58%;
-background:linear-gradient(145deg,#2a1d07,#070504);
-clip-path:polygon(0 100%,50% 0,100% 100%);
-z-index:4;
-}
-
-#envelopeScene.open .env-flap{animation:flapOpen 1.5s ease forwards}
-#envelopeScene.open .env-letter{animation:letterRise 1.9s ease forwards .7s}
-#envelopeScene.open .envelope{animation:envOut 1s ease forwards 2.7s}
-
-@keyframes envIn{
-from{opacity:0;transform:translateY(90px) scale(.9)}
-to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-@keyframes flapOpen{
-to{transform:rotateX(180deg)}
-}
-
-@keyframes letterRise{
-to{transform:translateY(-175px);opacity:0}
-}
-
-@keyframes envOut{
-to{opacity:0;transform:scale(.88)}
-}
-
-/* MAIN CREDIT FLOW */
+/* MAIN INVITATION */
 #main{
 display:none;
 height:100vh;
-overflow:hidden;
-position:relative;
+overflow-y:auto;
+scroll-snap-type:y mandatory;
 }
 
-.frame{
-height:100vh;
+.page{
+min-height:100vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 padding:24px;
+scroll-snap-align:start;
 }
 
 .card{
 width:100%;
 max-width:420px;
-height:84vh;
-border:1px solid rgba(201,169,110,.65);
-background:rgba(0,0,0,.55);
+min-height:82vh;
+border:1px solid rgba(201,169,110,.7);
+background:rgba(0,0,0,.62);
 backdrop-filter:blur(5px);
+padding:38px 24px;
+display:flex;
+justify-content:center;
+align-items:center;
 position:relative;
-overflow:hidden;
-box-shadow:0 0 45px rgba(201,169,110,.2);
+box-shadow:0 0 45px rgba(201,169,110,.22);
 }
 
 .card::before{
 content:"";
 position:absolute;
 inset:13px;
-border:1px solid rgba(201,169,110,.25);
-z-index:4;
+border:1px solid rgba(201,169,110,.28);
 pointer-events:none;
 }
 
-.credits{
-position:absolute;
-left:28px;
-right:28px;
-bottom:-120%;
-animation:rollCredits 54s linear forwards;
-}
-
-.scene{
-height:66vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px 0;
+.content{
+position:relative;
+z-index:2;
+width:100%;
 opacity:0;
-animation:fadeScene 9s ease-in-out forwards;
+transform:translateY(120px);
+transition:opacity 2.5s ease, transform 2.5s cubic-bezier(.16,.84,.44,1);
 }
 
-.scene:nth-child(1){animation-delay:0s}
-.scene:nth-child(2){animation-delay:9s}
-.scene:nth-child(3){animation-delay:18s}
-.scene:nth-child(4){animation-delay:27s}
-.scene:nth-child(5){animation-delay:36s}
-
-@keyframes rollCredits{
-from{transform:translateY(0)}
-to{transform:translateY(-208%)}
-}
-
-@keyframes fadeScene{
-0%{opacity:0;transform:translateY(120px)}
-24%{opacity:1;transform:translateY(0)}
-76%{opacity:1;transform:translateY(0)}
-100%{opacity:0;transform:translateY(-85px)}
+.content.show{
+opacity:1;
+transform:translateY(0);
 }
 
 h1{
 font-family:'Dancing Script',cursive;
-font-size:clamp(42px,12vw,58px);
+font-size:clamp(42px,12vw,60px);
 line-height:1.05;
 color:#f7e5bd;
+text-shadow:0 0 25px rgba(201,169,110,.35);
 }
 
 h2{
@@ -362,57 +266,57 @@ margin-bottom:18px;
 p{
 font-size:15px;
 line-height:1.85;
+color:#fff7df;
 }
 
 .detail{
-width:100%;
-border:1px solid rgba(201,169,110,.35);
+border:1px solid rgba(201,169,110,.4);
+background:rgba(255,255,255,.07);
 border-radius:16px;
 padding:16px;
-margin:10px 0;
-background:rgba(255,255,255,.055);
+margin:12px 0;
 }
 
-.detail .label{
+.detail-label{
 font-size:10px;
-letter-spacing:.2em;
+letter-spacing:.22em;
 text-transform:uppercase;
 color:#c9a96e;
 margin-bottom:6px;
 }
 
-.cd{
+.countdown{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:8px;
-width:100%;
-margin-top:20px;
+margin-top:22px;
 }
 
-.cd-box{
-border:1px solid rgba(201,169,110,.4);
+.count-box{
+border:1px solid rgba(201,169,110,.45);
+background:rgba(255,255,255,.07);
 border-radius:12px;
 padding:10px 4px;
-background:rgba(255,255,255,.06);
 }
 
-.cd-box strong{
+.count-box strong{
 display:block;
-font-size:20px;
-color:#c9a96e;
 font-family:'Cormorant Garamond',serif;
+font-size:22px;
+color:#c9a96e;
 }
 
-.cd-box span{
+.count-box span{
 font-size:9px;
 letter-spacing:.12em;
+color:#fff;
 }
+
+a{text-decoration:none;}
 
 .action-btn{
 display:block;
 margin:12px auto;
-max-width:290px;
-text-decoration:none;
 }
 
 .music{
@@ -428,7 +332,7 @@ display:none;
 font-size:18px;
 }
 
-/* particles */
+/* gold particles */
 .particle{
 position:fixed;
 width:4px;
@@ -440,22 +344,30 @@ z-index:3;
 animation:floatUp 8s linear infinite;
 }
 
-.particle:nth-child(1){left:12%;animation-delay:0s}
-.particle:nth-child(2){left:32%;animation-delay:2s}
-.particle:nth-child(3){left:52%;animation-delay:4s}
-.particle:nth-child(4){left:72%;animation-delay:1s}
-.particle:nth-child(5){left:88%;animation-delay:3s}
+.particle:nth-child(1){left:12%;animation-delay:0s;}
+.particle:nth-child(2){left:32%;animation-delay:2s;}
+.particle:nth-child(3){left:52%;animation-delay:4s;}
+.particle:nth-child(4){left:72%;animation-delay:1s;}
+.particle:nth-child(5){left:88%;animation-delay:3s;}
 
 @keyframes floatUp{
-0%{bottom:-10px;opacity:0}
-30%{opacity:.6}
-100%{bottom:105vh;opacity:0}
+0%{bottom:-10px;opacity:0;}
+30%{opacity:.6;}
+100%{bottom:105vh;opacity:0;}
 }
 
 @media(max-width:480px){
-.intro-card,.card{height:86vh}
-p{font-size:14px}
-button{width:86%;max-width:285px}
+.open-card,.card{
+min-height:84vh;
+padding:34px 22px;
+}
+
+p{font-size:14px;}
+
+button{
+width:86%;
+max-width:285px;
+}
 }
 </style>
 </head>
@@ -474,78 +386,103 @@ button{width:86%;max-width:285px}
 
 <button class="music" id="musicBtn" onclick="toggleMusic()">♪</button>
 
-<div id="intro">
-  <div class="intro-card">
-    <div class="intro-inner">
+<div id="doorScreen">
+  <div class="door leftDoor"></div>
+  <div class="door rightDoor"></div>
+
+  <div class="open-card">
+    <div class="open-inner">
       <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
       <div class="small gold" id="introEvent"></div>
       <div class="names" id="introNames"></div>
       <div class="divider"></div>
-      <div class="serif gold" id="introDate"></div>
-      <button onclick="startInvitation()">Buka Jemputan</button>
+      <p class="serif gold" id="introDate"></p>
+      <button onclick="openInvitation()">Buka Jemputan</button>
     </div>
-  </div>
-</div>
-
-<div id="envelopeScene">
-  <div class="envelope">
-    <div class="env-back"></div>
-    <div class="env-letter">You're Invited</div>
-    <div class="env-flap"></div>
-    <div class="env-left"></div>
-    <div class="env-right"></div>
-    <div class="env-bottom"></div>
   </div>
 </div>
 
 <main id="main">
-  <div class="frame">
-    <div class="card">
-      <div class="credits">
 
-        <section class="scene">
-          <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-          <div class="small gold">THE WEDDING OF</div>
-          <h1 id="names"></h1>
-          <div class="divider"></div>
-          <p class="script gold" style="font-size:34px" id="tagline"></p>
-          <p id="date"></p>
-          <div class="cd" id="countdown"></div>
-        </section>
+<section class="page">
+  <div class="card">
+    <div class="content reveal">
+      <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+      <div class="small gold">THE WEDDING OF</div>
+      <h1 id="names"></h1>
+      <div class="divider"></div>
+      <p class="script gold" style="font-size:34px" id="tagline"></p>
+      <p id="date"></p>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </div>
+</section>
 
-        <section class="scene">
-          <h2 id="eventType"></h2>
-          <div class="divider"></div>
-          <p id="host"></p>
-          <br>
-          <p id="message"></p>
-        </section>
+<section class="page">
+  <div class="card">
+    <div class="content reveal">
+      <h2 id="eventType"></h2>
+      <div class="divider"></div>
+      <p id="host"></p>
+      <br>
+      <p id="message"></p>
+    </div>
+  </div>
+</section>
 
-        <section class="scene">
-          <h2>Butiran Majlis</h2>
-          <div class="detail"><div class="label">Tarikh</div><p id="date2"></p></div>
-          <div class="detail"><div class="label">Masa</div><p id="time"></p></div>
-          <div class="detail"><div class="label">Lokasi</div><p id="venue"></p><small id="address"></small></div>
-        </section>
+<section class="page">
+  <div class="card">
+    <div class="content reveal">
+      <h2>Butiran Majlis</h2>
 
-        <section class="scene">
-          <h2>Lokasi & RSVP</h2>
-          <div class="divider"></div>
-          <a id="mapLink" target="_blank" class="action-btn"><button>📍 Lihat Lokasi</button></a>
-          <a id="waLink" target="_blank" class="action-btn"><button>💬 RSVP WhatsApp</button></a>
-        </section>
+      <div class="detail">
+        <div class="detail-label">Tarikh</div>
+        <p id="date2"></p>
+      </div>
 
-        <section class="scene">
-          <h2 class="script" style="font-size:44px">Terima Kasih</h2>
-          <div class="divider"></div>
-          <p id="closing"></p>
-          <br>
-          <div class="small gold" id="closingNames"></div>
-        </section>
+      <div class="detail">
+        <div class="detail-label">Masa</div>
+        <p id="time"></p>
+      </div>
 
+      <div class="detail">
+        <div class="detail-label">Lokasi</div>
+        <p id="venue"></p>
+        <p style="font-size:12px;opacity:.7" id="address"></p>
       </div>
     </div>
   </div>
+</section>
+
+<section class="page">
+  <div class="card">
+    <div class="content reveal">
+      <h2>Lokasi & RSVP</h2>
+      <div class="divider"></div>
+
+      <a id="mapLink" target="_blank" class="action-btn">
+        <button>📍 Lihat Lokasi</button>
+      </a>
+
+      <a id="waLink" target="_blank" class="action-btn">
+        <button>💬 RSVP WhatsApp</button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="card">
+    <div class="content reveal">
+      <h2 class="script" style="font-size:44px">Terima Kasih</h2>
+      <div class="divider"></div>
+      <p id="closing"></p>
+      <br>
+      <div class="small gold" id="closingNames"></div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <script>
@@ -573,26 +510,28 @@ document.getElementById("mapLink").href=K.mapsURL;
 document.getElementById("waLink").href="https://wa.me/"+K.waNumber+"?text="+encodeURIComponent(K.waMessage);
 }
 
-function startInvitation(){
-document.getElementById("intro").style.display="none";
-
-const env=document.getElementById("envelopeScene");
-env.style.display="flex";
-
-setTimeout(()=>env.classList.add("open"),250);
+function openInvitation(){
+const door=document.getElementById("doorScreen");
+door.classList.add("open");
 
 document.getElementById("musicBtn").style.display="block";
-const music=document.getElementById("bgMusic");
 
+const music=document.getElementById("bgMusic");
 music.play().then(()=>{
 musicPlaying=true;
 document.getElementById("musicBtn").innerText="♪";
-}).catch(()=>{ musicPlaying=false; });
+}).catch(()=>{musicPlaying=false;});
 
 setTimeout(()=>{
-env.style.display="none";
+door.style.display="none";
 document.getElementById("main").style.display="block";
-},3600);
+document.body.style.overflow="auto";
+
+setTimeout(()=>{
+document.querySelectorAll(".reveal")[0].classList.add("show");
+},400);
+
+},1900);
 }
 
 function toggleMusic(){
@@ -610,6 +549,18 @@ musicPlaying=true;
 }
 }
 
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+setTimeout(()=>{
+entry.target.classList.add("show");
+},300);
+}
+});
+},{threshold:.45});
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
 function countdown(){
 const target=new Date(K.eventDateISO);
 
@@ -622,10 +573,10 @@ const m=Math.max(0,Math.floor((diff/(1000*60))%60));
 const s=Math.max(0,Math.floor((diff/1000)%60));
 
 document.getElementById("countdown").innerHTML=`
-<div class="cd-box"><strong>${d}</strong><span>HARI</span></div>
-<div class="cd-box"><strong>${h}</strong><span>JAM</span></div>
-<div class="cd-box"><strong>${m}</strong><span>MINIT</span></div>
-<div class="cd-box"><strong>${s}</strong><span>SAAT</span></div>
+<div class="count-box"><strong>${d}</strong><span>HARI</span></div>
+<div class="count-box"><strong>${h}</strong><span>JAM</span></div>
+<div class="count-box"><strong>${m}</strong><span>MINIT</span></div>
+<div class="count-box"><strong>${s}</strong><span>SAAT</span></div>
 `;
 },1000);
 }
