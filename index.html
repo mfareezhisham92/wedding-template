@@ -33,20 +33,67 @@ pointer-events:none;
 z-index:-1;
 }
 
-/* OPENING */
+/* OPENING SCREEN */
 #openingScreen{
 position:fixed;
 inset:0;
-background:
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.9)),
-url("cover.jpg");
-background-size:cover;
-background-position:center;
+background:#030303;
 z-index:9999;
 display:flex;
 justify-content:center;
 align-items:center;
 padding:22px;
+overflow:hidden;
+}
+
+#openingScreen::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.9)),
+url("cover.jpg");
+background-size:cover;
+background-position:center;
+z-index:0;
+}
+
+/* CURTAIN EFFECT */
+.curtain{
+position:absolute;
+top:0;
+width:50%;
+height:100%;
+background:
+linear-gradient(
+90deg,
+#050505,
+#1a1305,
+#2b2108,
+#1a1305,
+#050505
+);
+z-index:1;
+transition:1.8s ease-in-out;
+box-shadow:0 0 35px rgba(212,175,55,.18);
+}
+
+.left-curtain{
+left:0;
+border-right:1px solid rgba(212,175,55,.45);
+}
+
+.right-curtain{
+right:0;
+border-left:1px solid rgba(212,175,55,.45);
+}
+
+#openingScreen.open .left-curtain{
+transform:translateX(-100%);
+}
+
+#openingScreen.open .right-curtain{
+transform:translateX(100%);
 }
 
 .opening-card,.card{
@@ -66,6 +113,16 @@ box-shadow:
 0 0 35px rgba(212,175,55,.18),
 inset 0 0 25px rgba(212,175,55,.05);
 overflow:hidden;
+}
+
+.opening-card{
+z-index:2;
+transition:1s ease;
+}
+
+#openingScreen.open .opening-card{
+opacity:0;
+transform:scale(.92);
 }
 
 .opening-card::before,.card::before{
@@ -319,6 +376,10 @@ button{width:86%;max-width:285px;}
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
 
 <div id="openingScreen">
+
+  <div class="curtain left-curtain"></div>
+  <div class="curtain right-curtain"></div>
+
   <div class="opening-card">
     <div class="content show">
       <p class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
@@ -329,6 +390,7 @@ button{width:86%;max-width:285px;}
       <button onclick="openInvitation()">Buka Jemputan</button>
     </div>
   </div>
+
 </div>
 
 <main class="story" id="story">
@@ -427,10 +489,17 @@ button{width:86%;max-width:285px;}
 let musicPlaying = false;
 
 function openInvitation(){
-document.getElementById("openingScreen").style.display="none";
+
+const opening = document.getElementById("openingScreen");
+opening.classList.add("open");
+
+setTimeout(() => {
+opening.style.display="none";
+
 document.getElementById("musicBtn").style.display="block";
 
 const music = document.getElementById("bgMusic");
+
 music.play().then(() => {
 musicPlaying = true;
 document.getElementById("musicBtn").innerText = "♪";
@@ -438,9 +507,10 @@ document.getElementById("musicBtn").innerText = "♪";
 musicPlaying = false;
 });
 
-setTimeout(() => {
 document.querySelectorAll(".reveal")[0].classList.add("show");
-},300);
+
+},1800);
+
 }
 
 function toggleMusic(){
