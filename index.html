@@ -162,20 +162,33 @@ margin-bottom:26px;
 
 .names{
 font-family:'Dancing Script',cursive;
-font-size:clamp(40px,12vw,58px);
+font-size:clamp(52px,13vw,72px);
 line-height:1.05;
 color:#f7e5bd;
-margin:18px 0;
+margin:20px 0;
+
+text-shadow:
+0 0 15px rgba(201,169,110,.25),
+0 0 35px rgba(201,169,110,.15);
 }
+
 
 .amp{
 display:block;
-font-family:'Nunito',sans-serif;
-font-size:13px;
-letter-spacing:.25em;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:20px;
+
+font-style:italic;
+
+letter-spacing:.2em;
+
 color:#c9a96e;
-margin:8px 0;
+
+margin:10px 0;
 }
+
 
 button{
 border:none;
@@ -392,10 +405,28 @@ max-width:285px;
 
   <div class="open-card">
     <div class="open-inner">
+
+  <p class="serif gold"
+     style="
+     font-size:36px;
+     font-style:italic;
+     margin-bottom:20px;
+     color:#c9a96e;
+     text-shadow:0 0 15px rgba(201,169,110,.25);
+     ">
+     Walimatul Urus
+  </p>
+
   <div class="names" id="introNames"></div>
+
   <div class="divider"></div>
-  <button onclick="openInvitation()">Tekan Untuk Buka</button>
+
+  <button onclick="openInvitation()">
+    Tekan Untuk Buka
+  </button>
+
 </div>
+
   </div>
 </div>
 
