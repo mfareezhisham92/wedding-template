@@ -33,7 +33,6 @@ pointer-events:none;
 z-index:-1;
 }
 
-/* OPENING SCREEN */
 #openingScreen{
 position:fixed;
 inset:0;
@@ -58,21 +57,12 @@ background-position:center;
 z-index:0;
 }
 
-/* CURTAIN EFFECT */
 .curtain{
 position:absolute;
 top:0;
 width:50%;
 height:100%;
-background:
-linear-gradient(
-90deg,
-#050505,
-#1a1305,
-#2b2108,
-#1a1305,
-#050505
-);
+background:linear-gradient(90deg,#050505,#1a1305,#2b2108,#1a1305,#050505);
 z-index:1;
 transition:1.8s ease-in-out;
 box-shadow:0 0 35px rgba(212,175,55,.18);
@@ -143,7 +133,6 @@ color:#d4af37;
 font-size:20px;
 }
 
-/* STORY */
 .story{
 scroll-snap-type:y mandatory;
 overflow-y:auto;
@@ -175,15 +164,35 @@ background:radial-gradient(circle,transparent 45%,rgba(0,0,0,.65));
 .content{
 position:relative;
 z-index:2;
-opacity:0;
-transform:translateY(28px) scale(.98);
-transition:1.35s ease;
 width:100%;
+opacity:0;
+transform:translateY(120px) scale(.95);
+transition:
+opacity 3s ease,
+transform 3s cubic-bezier(.16,.84,.44,1);
 }
 
 .content.show{
 opacity:1;
 transform:translateY(0) scale(1);
+}
+
+.content.show .main-title{
+animation:goldGlow 4s ease-in-out infinite;
+}
+
+@keyframes goldGlow{
+0%{
+text-shadow:0 0 10px rgba(212,175,55,.2);
+}
+50%{
+text-shadow:
+0 0 25px rgba(212,175,55,.6),
+0 0 40px rgba(212,175,55,.3);
+}
+100%{
+text-shadow:0 0 10px rgba(212,175,55,.2);
+}
 }
 
 .bismillah{
@@ -308,7 +317,6 @@ z-index:3;
 50%{transform:translateY(8px);}
 }
 
-/* GOLD PARTICLES */
 .particle{
 position:fixed;
 width:4px;
@@ -332,7 +340,6 @@ animation:floatUp 8s linear infinite;
 100%{bottom:105vh;opacity:0;}
 }
 
-/* MUSIC */
 .music-btn{
 position:fixed;
 right:18px;
@@ -346,7 +353,6 @@ font-size:18px;
 display:none;
 }
 
-/* MOBILE */
 @media(max-width:480px){
 .opening-card,.card{
 min-height:84vh;
@@ -507,7 +513,9 @@ document.getElementById("musicBtn").innerText = "♪";
 musicPlaying = false;
 });
 
+setTimeout(() => {
 document.querySelectorAll(".reveal")[0].classList.add("show");
+},600);
 
 },1800);
 
@@ -529,12 +537,20 @@ musicPlaying = true;
 }
 
 const observer = new IntersectionObserver(entries => {
+
 entries.forEach(entry => {
+
 if(entry.isIntersecting){
+
+setTimeout(() => {
 entry.target.classList.add("show");
+},400);
+
 }
+
 });
-},{threshold:0.45});
+
+},{threshold:0.4});
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
