@@ -1,650 +1,506 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Jemputan Digital Premium</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>Walimatul Urus</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<script>
-const K = {
-  groomName: "Faris",
-  brideName: "Aisyah",
-  eventType: "Walimatul Urus",
-
-  eventDateISO: "2027-01-12T11:00:00+08:00",
-  dateDisplay: "Selasa, 12 Januari 2027",
-  timeDisplay: "11.00 pagi – 4.00 petang",
-
-  hostName: "Dr Rosli bin Ahmad & Dr Aina binti Rashid",
-  venueName: "DPB",
-  venueAddress: "Dewan Perdana Ballroom",
-
-  mapsURL: "https://maps.google.com",
-  waNumber: "60123456789",
-  waMessage: "Assalamualaikum, saya ingin mengesahkan kehadiran ke majlis. Terima kasih.",
-
-  tagline: "Dua Jiwa Satu Cinta",
-  customMsg: "Dengan penuh kesyukuran, kami menjemput Tuan/Puan hadir bersama menyerikan majlis kami.",
-  closingMsg: "Kehadiran dan doa restu anda amat kami hargai."
-};
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box}
 
 html,body{
+width:100%;
 height:100%;
-font-family:'Nunito',sans-serif;
-background:#060403;
-color:#fff;
-overflow:hidden;
-text-align:center;
-}
-
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.9)),
-url("cover.jpg");
-background-size:cover;
-background-position:center;
-z-index:-2;
-}
-
-body::after{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top,rgba(201,169,110,.24),transparent 35%),
-radial-gradient(circle at bottom,rgba(201,169,110,.12),transparent 45%);
-z-index:-1;
-}
-
-.gold{color:#c9a96e;}
-.script{font-family:'Dancing Script',cursive;}
-.serif{font-family:'Cormorant Garamond',serif;}
-
-.small{
-font-size:10px;
-letter-spacing:.28em;
-text-transform:uppercase;
-}
-
-.divider{
-width:90px;
-height:1px;
-background:linear-gradient(90deg,transparent,#c9a96e,transparent);
-margin:22px auto;
-}
-
-/* OPENING DOORS */
-#doorScreen{
-position:fixed;
-inset:0;
-z-index:50;
+background:#050302;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#050302;
+font-family:'Cormorant Garamond',serif;
 overflow:hidden;
 }
 
-.door{
-position:absolute;
-top:0;
-width:50%;
-height:100%;
-background:
-linear-gradient(90deg,#050302,#241805,#4a3510,#241805,#050302);
-z-index:1;
-transition:1.8s ease-in-out;
-}
-
-.leftDoor{
-left:0;
-border-right:1px solid rgba(201,169,110,.5);
-}
-
-.rightDoor{
-right:0;
-border-left:1px solid rgba(201,169,110,.5);
-}
-
-#doorScreen.open .leftDoor{
-transform:translateX(-100%);
-}
-
-#doorScreen.open .rightDoor{
-transform:translateX(100%);
-}
-
-.open-card{
-z-index:2;
-width:88%;
+#shell{
+width:100%;
 max-width:390px;
-height:82vh;
-border:1px solid rgba(201,169,110,.7);
-background:rgba(0,0,0,.58);
-backdrop-filter:blur(5px);
+height:100dvh;
+background:radial-gradient(ellipse at top,#1c1408 0%,#0b0905 65%);
+position:relative;
+overflow:hidden;
+}
+
+@media(min-width:500px){
+#shell{
+height:820px;
+border-radius:42px;
+box-shadow:
+0 0 0 2px #c9983b,
+0 0 0 10px #0d0905,
+0 0 80px rgba(201,152,59,.18);
+}
+}
+
+#dust{
+position:absolute;
+inset:0;
+z-index:1;
+pointer-events:none;
+}
+
+/* Gate */
+#gate{
+position:absolute;
+inset:0;
+z-index:10;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:32px 24px;
-position:relative;
-box-shadow:0 0 45px rgba(201,169,110,.25);
-transition:1s ease;
+text-align:center;
+padding:2rem;
+transition:opacity .9s ease,transform .9s ease;
 }
 
-.open-card::before{
-content:"";
-position:absolute;
-inset:13px;
-border:1px solid rgba(201,169,110,.28);
-}
-
-.open-inner{
-position:relative;
-z-index:3;
-}
-
-.bismillah{
-font-size:23px;
-line-height:2;
-color:#f7e5bd;
-margin-bottom:26px;
-}
-
-.names{
-font-family:'Cormorant Garamond',serif;
-
-font-size:clamp(38px,7vw,52px);
-
-font-weight:600;
-
-line-height:1.35;
-
-color:#f5e6bf;
-
-margin-bottom:40px;
-
-text-transform:uppercase;
-
-letter-spacing:.06em;
-
-text-shadow:
-0 0 8px rgba(201,169,110,.12);
-}
-
-
-.amp{
-display:block;
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:22px;
-
-font-style:italic;
-
-color:#c9a96e;
-
-margin:6px 0;
-}
-
-
-button{
-border:none;
-
-background:
-linear-gradient(
-135deg,
-#f6e3a6,
-#c9a96e
-);
-
-color:#1b1306;
-
-padding:16px 40px;
-
-font-size:13px;
-
-font-weight:700;
-
-letter-spacing:.15em;
-
-border-radius:999px;
-
-cursor:pointer;
-
-box-shadow:
-0 10px 30px rgba(201,169,110,.28);
-
-transition:.3s;
-}
-
-button:hover{
-transform:translateY(-2px);
-}
-
-#doorScreen.open .open-card{
+#gate.out{
 opacity:0;
-transform:scale(.92);
-}
-
-/* MAIN INVITATION */
-#main{
-display:none;
-height:100vh;
-overflow-y:auto;
-scroll-snap-type:y mandatory;
-}
-
-.page{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:24px;
-scroll-snap-align:start;
-}
-
-.card{
-width:100%;
-max-width:420px;
-min-height:82vh;
-border:1px solid rgba(201,169,110,.7);
-background:rgba(0,0,0,.62);
-backdrop-filter:blur(5px);
-padding:38px 24px;
-display:flex;
-justify-content:center;
-align-items:center;
-position:relative;
-box-shadow:0 0 45px rgba(201,169,110,.22);
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:13px;
-border:1px solid rgba(201,169,110,.28);
+transform:scale(1.04);
 pointer-events:none;
 }
 
-.content{
-position:relative;
-z-index:2;
-width:100%;
-opacity:0;
-transform:translateY(120px);
-transition:opacity 2.5s ease, transform 2.5s cubic-bezier(.16,.84,.44,1);
+.arabic{
+font-family:'EB Garamond',serif;
+font-size:1.18rem;
+line-height:2;
+color:#c9983b;
+letter-spacing:.05em;
+margin-bottom:1.6rem;
 }
 
-.content.show{
+.walima{
+font-family:'Cormorant Garamond',serif;
+font-style:italic;
+font-size:1.6rem;
+color:#c9983b;
+margin-bottom:1.6rem;
+}
+
+.names{
+font-family:'Cinzel',serif;
+font-size:2.55rem;
+font-weight:500;
+letter-spacing:.08em;
+line-height:1.15;
+}
+
+.gold{
+background:linear-gradient(110deg,#8a5f10,#c9983b,#fff4b8,#c9983b,#8a5f10);
+background-size:300% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shimmer 5s linear infinite;
+}
+
+.amp{
+font-family:'Cormorant Garamond',serif;
+font-style:italic;
+font-size:2rem;
+color:#c9983b;
+margin:.5rem 0;
+}
+
+.line{
+width:52%;
+height:1px;
+background:linear-gradient(90deg,transparent,#c9983b,transparent);
+margin:1.3rem auto;
+}
+
+.open-btn{
+margin-top:1.4rem;
+background:transparent;
+border:1px solid #c9983b;
+color:#c9983b;
+font-family:'Cinzel',serif;
+font-size:.6rem;
+letter-spacing:.32em;
+padding:.82rem 2.4rem;
+cursor:pointer;
+animation:pulse 2.4s infinite;
+}
+
+/* Page */
+#page{
+display:none;
+height:100%;
+overflow-y:auto;
+scroll-behavior:smooth;
+position:relative;
+z-index:2;
+}
+
+section{
+min-height:100dvh;
+padding:3rem 1.5rem;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+border-top:.5px solid rgba(201,152,59,.12);
+}
+
+.reveal{
+opacity:0;
+transform:translateY(36px);
+transition:opacity .9s ease,transform .9s ease;
+}
+
+.reveal.in{
 opacity:1;
 transform:translateY(0);
 }
 
-h1{
-font-family:'Dancing Script',cursive;
-font-size:clamp(42px,12vw,60px);
-line-height:1.05;
-color:#f7e5bd;
-text-shadow:0 0 25px rgba(201,169,110,.35);
+h1,h2,h3{
+font-family:'Cinzel',serif;
+font-weight:500;
 }
 
-h2{
+.hero-title{
+font-size:2rem;
+line-height:1.25;
+letter-spacing:.07em;
+}
+
+.script{
 font-family:'Cormorant Garamond',serif;
 font-style:italic;
-font-size:32px;
-color:#c9a96e;
-margin-bottom:18px;
+color:#c9983b;
 }
 
-p{
-font-size:15px;
-line-height:1.85;
-color:#fff7df;
+.text{
+font-size:1rem;
+line-height:2;
+color:#bca47b;
+max-width:320px;
 }
 
-.detail{
-border:1px solid rgba(201,169,110,.4);
-background:rgba(255,255,255,.07);
-border-radius:16px;
-padding:16px;
-margin:12px 0;
+.card{
+width:100%;
+max-width:340px;
+border:1px solid rgba(201,152,59,.35);
+padding:1.2rem;
+margin:.5rem 0;
+background:rgba(255,255,255,.035);
 }
 
-.detail-label{
-font-size:10px;
-letter-spacing:.22em;
+.label{
+font-family:'Cinzel',serif;
+font-size:.55rem;
+letter-spacing:.25em;
+color:#c9983b88;
 text-transform:uppercase;
-color:#c9a96e;
-margin-bottom:6px;
+margin-bottom:.35rem;
 }
 
-.countdown{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-top:22px;
+.value{
+font-size:1.05rem;
+color:#ddc890;
 }
 
-.count-box{
-border:1px solid rgba(201,169,110,.45);
-background:rgba(255,255,255,.07);
-border-radius:12px;
-padding:10px 4px;
-}
-
-.count-box strong{
+.btn{
 display:block;
-font-family:'Cormorant Garamond',serif;
-font-size:22px;
-color:#c9a96e;
+width:100%;
+max-width:300px;
+margin:.5rem auto;
+padding:.8rem 1rem;
+border:1px solid #c9983b66;
+color:#c9983b;
+text-decoration:none;
+font-family:'Cinzel',serif;
+font-size:.6rem;
+letter-spacing:.22em;
 }
 
-.count-box span{
-font-size:9px;
-letter-spacing:.12em;
-color:#fff;
-}
-
-a{text-decoration:none;}
-
-.action-btn{
-display:block;
-margin:12px auto;
-}
-
-.music{
+#mus{
 position:fixed;
-right:18px;
-bottom:18px;
-z-index:40;
-width:48px;
-height:48px;
-border-radius:50%;
-padding:0;
+bottom:16px;
+right:14px;
+z-index:20;
+background:#120d05ee;
+border:1px solid #c9983b66;
+color:#c9983b;
+font-size:.65rem;
+padding:.45rem .7rem;
 display:none;
-font-size:18px;
 }
 
-/* gold particles */
-.particle{
-position:fixed;
-width:4px;
-height:4px;
-background:#c9a96e;
-border-radius:50%;
-opacity:.55;
-z-index:3;
-animation:floatUp 8s linear infinite;
+/* Animations */
+@keyframes shimmer{
+0%{background-position:200% center}
+100%{background-position:-200% center}
 }
 
-.particle:nth-child(1){left:12%;animation-delay:0s;}
-.particle:nth-child(2){left:32%;animation-delay:2s;}
-.particle:nth-child(3){left:52%;animation-delay:4s;}
-.particle:nth-child(4){left:72%;animation-delay:1s;}
-.particle:nth-child(5){left:88%;animation-delay:3s;}
-
-@keyframes floatUp{
-0%{bottom:-10px;opacity:0;}
-30%{opacity:.6;}
-100%{bottom:105vh;opacity:0;}
-}
-
-@media(max-width:480px){
-.open-card,.card{
-min-height:84vh;
-padding:34px 22px;
-}
-
-p{font-size:14px;}
-
-button{
-width:86%;
-max-width:285px;
-}
+@keyframes pulse{
+0%,100%{opacity:.45}
+50%{opacity:1}
 }
 </style>
 </head>
 
 <body>
 
-<div class="particle"></div>
-<div class="particle"></div>
-<div class="particle"></div>
-<div class="particle"></div>
-<div class="particle"></div>
-
-<audio id="bgMusic" loop>
+<audio id="bgm" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music" id="musicBtn" onclick="toggleMusic()">♪</button>
+<div id="shell">
+<canvas id="dust"></canvas>
 
-<div id="doorScreen">
-  <div class="door leftDoor"></div>
-  <div class="door rightDoor"></div>
+<!-- FIRST PAGE -->
+<div id="gate">
 
-  <div class="open-card">
-    <div class="open-inner">
-
-  <div class="open-inner">
-
-  <div class="bismillah">
+  <p class="arabic">
     بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
-  </div>
-
-  <p class="serif gold"
-     style="
-     font-size:30px;
-     font-style:italic;
-     font-weight:400;
-     margin-bottom:30px;
-     letter-spacing:.04em;
-     ">
-     Walimatul Urus
   </p>
 
-  <div class="names" id="introNames"></div>
+  <p class="walima">
+    Walimatul Urus
+  </p>
 
-  <button onclick="openInvitation()">
+  <h1 class="names gold">ADAM</h1>
+
+  <div class="amp">&amp;</div>
+
+  <h1 class="names gold">HAWA</h1>
+
+  <div class="line"></div>
+
+  <button class="open-btn" id="gateBtn">
     BUKA JEMPUTAN
   </button>
 
 </div>
 
+<!-- INVITATION CONTENT -->
+<div id="page">
+
+<section>
+  <p class="arabic reveal">
+    بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+  </p>
+
+  <p class="label reveal">Walimatul Urus</p>
+
+  <h1 class="hero-title gold reveal">
+    MUHAMMAD ADAM<br>
+    <span class="amp">&amp;</span>
+    NUR HAWA
+  </h1>
+
+  <div class="line reveal"></div>
+
+  <p class="script reveal">
+    Dua Jiwa, Satu Cinta
+  </p>
+</section>
+
+<section>
+  <h2 class="gold reveal">Jemputan Majlis</h2>
+  <div class="line reveal"></div>
+
+  <p class="text reveal">
+    Dengan penuh kesyukuran, kami menjemput
+    Dato’ / Datin / Tuan / Puan / Encik / Cik
+    ke majlis perkahwinan putera dan puteri kami.
+  </p>
+</section>
+
+<section>
+  <h2 class="gold reveal">Butiran Majlis</h2>
+  <div class="line reveal"></div>
+
+  <div class="card reveal">
+    <p class="label">Tarikh</p>
+    <p class="value">Ahad, 12 Julai 2026</p>
   </div>
+
+  <div class="card reveal">
+    <p class="label">Masa</p>
+    <p class="value">11.00 Pagi – 4.00 Petang</p>
+  </div>
+
+  <div class="card reveal">
+    <p class="label">Lokasi</p>
+    <p class="value">Dewan Seri Kenanga<br>Shah Alam, Selangor</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="gold reveal">Kiraan Masa</h2>
+  <div class="line reveal"></div>
+
+  <div class="card reveal">
+    <p class="label">Hari</p>
+    <p class="value" id="days">00</p>
+  </div>
+
+  <div class="card reveal">
+    <p class="label">Jam</p>
+    <p class="value" id="hours">00</p>
+  </div>
+
+  <div class="card reveal">
+    <p class="label">Minit</p>
+    <p class="value" id="minutes">00</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="gold reveal">Lokasi & RSVP</h2>
+  <div class="line reveal"></div>
+
+  <a class="btn reveal" href="https://maps.google.com" target="_blank">
+    LIHAT LOKASI
+  </a>
+
+  <a class="btn reveal" href="https://wa.me/60123456789" target="_blank">
+    RSVP WHATSAPP
+  </a>
+</section>
+
+<section>
+  <h2 class="gold reveal">Terima Kasih</h2>
+  <div class="line reveal"></div>
+
+  <p class="text reveal">
+    Kehadiran dan doa restu anda amat kami hargai.
+    Semoga Allah SWT memberkati majlis ini.
+  </p>
+
+  <h3 class="gold reveal" style="margin-top:1.5rem;">
+    ADAM &amp; HAWA
+  </h3>
+</section>
+
+</div>
 </div>
 
-<main id="main">
-
-<section class="page">
-  <div class="card">
-    <div class="content reveal">
-      <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-      <div class="small gold">THE WEDDING OF</div>
-      <h1 id="names"></h1>
-      <div class="divider"></div>
-      <p class="script gold" style="font-size:34px" id="tagline"></p>
-      <p id="date"></p>
-      <div class="countdown" id="countdown"></div>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="card">
-    <div class="content reveal">
-      <h2 id="eventType"></h2>
-      <div class="divider"></div>
-      <p id="host"></p>
-      <br>
-      <p id="message"></p>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="card">
-    <div class="content reveal">
-      <h2>Butiran Majlis</h2>
-
-      <div class="detail">
-        <div class="detail-label">Tarikh</div>
-        <p id="date2"></p>
-      </div>
-
-      <div class="detail">
-        <div class="detail-label">Masa</div>
-        <p id="time"></p>
-      </div>
-
-      <div class="detail">
-        <div class="detail-label">Lokasi</div>
-        <p id="venue"></p>
-        <p style="font-size:12px;opacity:.7" id="address"></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="card">
-    <div class="content reveal">
-      <h2>Lokasi & RSVP</h2>
-      <div class="divider"></div>
-
-      <a id="mapLink" target="_blank" class="action-btn">
-        <button>📍 Lihat Lokasi</button>
-      </a>
-
-      <a id="waLink" target="_blank" class="action-btn">
-        <button>💬 RSVP WhatsApp</button>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="card">
-    <div class="content reveal">
-      <h2 class="script" style="font-size:44px">Terima Kasih</h2>
-      <div class="divider"></div>
-      <p id="closing"></p>
-      <br>
-      <div class="small gold" id="closingNames"></div>
-    </div>
-  </div>
-</section>
-
-</main>
+<button id="mus" onclick="toggleMusic()">♫ MUZIK</button>
 
 <script>
-let musicPlaying=false;
+const gate=document.getElementById("gate");
+const page=document.getElementById("page");
+const btn=document.getElementById("gateBtn");
+const mus=document.getElementById("mus");
+const bgm=document.getElementById("bgm");
 
-function fillData(){
+let musicOn=false;
 
-document.getElementById("introNames").innerHTML=K.groomName+'<span class="amp">&</span>'+K.brideName;
+btn.addEventListener("click",()=>{
+  gate.classList.add("out");
 
+  setTimeout(()=>{
+    gate.style.display="none";
+    page.style.display="block";
+    mus.style.display="block";
+    document.body.style.overflow="hidden";
+    initReveal();
 
-document.getElementById("names").innerHTML=K.groomName+'<span class="amp">&</span>'+K.brideName;
-document.getElementById("tagline").innerText=K.tagline;
-document.getElementById("date").innerText=K.dateDisplay;
-document.getElementById("eventType").innerText=K.eventType;
-document.getElementById("host").innerText=K.hostName;
-document.getElementById("message").innerText=K.customMsg;
-document.getElementById("date2").innerText=K.dateDisplay;
-document.getElementById("time").innerText=K.timeDisplay;
-document.getElementById("venue").innerText=K.venueName;
-document.getElementById("address").innerText=K.venueAddress;
-document.getElementById("closing").innerText=K.closingMsg;
-document.getElementById("closingNames").innerText=K.groomName+" & "+K.brideName;
-
-document.getElementById("mapLink").href=K.mapsURL;
-document.getElementById("waLink").href="https://wa.me/"+K.waNumber+"?text="+encodeURIComponent(K.waMessage);
-}
-
-function openInvitation(){
-const door=document.getElementById("doorScreen");
-door.classList.add("open");
-
-document.getElementById("musicBtn").style.display="block";
-
-const music=document.getElementById("bgMusic");
-music.play().then(()=>{
-musicPlaying=true;
-document.getElementById("musicBtn").innerText="♪";
-}).catch(()=>{musicPlaying=false;});
-
-setTimeout(()=>{
-door.style.display="none";
-document.getElementById("main").style.display="block";
-document.body.style.overflow="auto";
-
-setTimeout(()=>{
-document.querySelectorAll(".reveal")[0].classList.add("show");
-},400);
-
-},1900);
-}
+    bgm.play().then(()=>{
+      musicOn=true;
+      updateMusic();
+    }).catch(()=>{});
+  },900);
+});
 
 function toggleMusic(){
-const music=document.getElementById("bgMusic");
-const btn=document.getElementById("musicBtn");
-
-if(musicPlaying){
-music.pause();
-btn.innerText="×";
-musicPlaying=false;
-}else{
-music.play();
-btn.innerText="♪";
-musicPlaying=true;
-}
+  if(musicOn){
+    bgm.pause();
+    musicOn=false;
+  }else{
+    bgm.play().catch(()=>{});
+    musicOn=true;
+  }
+  updateMusic();
 }
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-setTimeout(()=>{
-entry.target.classList.add("show");
-},300);
-}
-});
-},{threshold:.45});
-
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-function countdown(){
-const target=new Date(K.eventDateISO);
-
-setInterval(()=>{
-const diff=target-new Date();
-
-const d=Math.max(0,Math.floor(diff/(1000*60*60*24)));
-const h=Math.max(0,Math.floor((diff/(1000*60*60))%24));
-const m=Math.max(0,Math.floor((diff/(1000*60))%60));
-const s=Math.max(0,Math.floor((diff/1000)%60));
-
-document.getElementById("countdown").innerHTML=`
-<div class="count-box"><strong>${d}</strong><span>HARI</span></div>
-<div class="count-box"><strong>${h}</strong><span>JAM</span></div>
-<div class="count-box"><strong>${m}</strong><span>MINIT</span></div>
-<div class="count-box"><strong>${s}</strong><span>SAAT</span></div>
-`;
-},1000);
+function updateMusic(){
+  mus.innerHTML=musicOn ? "♫ MUZIK" : "♪ MUZIK";
+  mus.style.opacity=musicOn ? "1" : ".45";
 }
 
-fillData();
-countdown();
+function initReveal(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      }
+    });
+  },{root:page,threshold:.12});
+
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+}
+
+/* Countdown */
+const weddingDate=new Date("2026-07-12T11:00:00+08:00");
+
+function tick(){
+  const diff=weddingDate-new Date();
+
+  if(diff<=0)return;
+
+  document.getElementById("days").textContent=
+  String(Math.floor(diff/86400000)).padStart(2,"0");
+
+  document.getElementById("hours").textContent=
+  String(Math.floor((diff%86400000)/3600000)).padStart(2,"0");
+
+  document.getElementById("minutes").textContent=
+  String(Math.floor((diff%3600000)/60000)).padStart(2,"0");
+}
+
+tick();
+setInterval(tick,1000);
+
+/* Gold dust */
+const canvas=document.getElementById("dust");
+const ctx=canvas.getContext("2d");
+const shell=document.getElementById("shell");
+
+function resize(){
+  canvas.width=shell.offsetWidth;
+  canvas.height=shell.offsetHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+const particles=Array.from({length:90},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*1.4+.3,
+  vy:-Math.random()*.35-.08,
+  a:Math.random()*.5+.15
+}));
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    p.y+=p.vy;
+    if(p.y<0)p.y=canvas.height;
+
+    ctx.globalAlpha=p.a;
+    ctx.fillStyle="#c9983b";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
