@@ -392,13 +392,10 @@ max-width:285px;
 
   <div class="open-card">
     <div class="open-inner">
-      <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-      <div class="small gold" id="introEvent"></div>
-      <div class="names" id="introNames"></div>
-      <div class="divider"></div>
-      <p class="serif gold" id="introDate"></p>
-      <button onclick="openInvitation()">Buka Jemputan</button>
-    </div>
+  <div class="names" id="introNames"></div>
+  <div class="divider"></div>
+  <button onclick="openInvitation()">Tekan Untuk Buka</button>
+</div>
   </div>
 </div>
 
@@ -489,9 +486,9 @@ max-width:285px;
 let musicPlaying=false;
 
 function fillData(){
-document.getElementById("introEvent").innerText=K.eventType;
+
 document.getElementById("introNames").innerHTML=K.groomName+'<span class="amp">&</span>'+K.brideName;
-document.getElementById("introDate").innerText=K.dateDisplay;
+
 
 document.getElementById("names").innerHTML=K.groomName+'<span class="amp">&</span>'+K.brideName;
 document.getElementById("tagline").innerText=K.tagline;
