@@ -9,15 +9,15 @@
 
 <script>
 const K = {
-  groomName: "Ahmad Faris",
-  brideName: "Siti Aisyah",
+  groomName: "Faris",
+  brideName: "Aisyah",
   eventType: "Walimatul Urus",
 
   eventDateISO: "2027-01-12T11:00:00+08:00",
   dateDisplay: "Selasa, 12 Januari 2027",
   timeDisplay: "11.00 pagi – 4.00 petang",
 
-  hostName: "Dr R & Dr A",
+  hostName: "Dr Rosli bin Ahmad & Dr Aina binti Rashid",
   venueName: "DPB",
   venueAddress: "Dewan Perdana Ballroom",
 
@@ -161,44 +161,64 @@ margin-bottom:26px;
 }
 
 .names{
-font-family:'Dancing Script',cursive;
-font-size:clamp(52px,13vw,72px);
-line-height:1.05;
-color:#f7e5bd;
-margin:20px 0;
+font-family:'Cormorant Garamond',serif;
+
+font-size:clamp(42px,8vw,58px);
+
+font-weight:600;
+
+line-height:1.25;
+
+color:#f4dfb0;
+
+margin:25px 0;
 
 text-shadow:
-0 0 15px rgba(201,169,110,.25),
-0 0 35px rgba(201,169,110,.15);
+0 0 8px rgba(201,169,110,.12);
+
+letter-spacing:.02em;
 }
 
 
 .amp{
 display:block;
 
-font-family:'Cormorant Garamond',serif;
+font-size:26px;
 
-font-size:20px;
+font-family:'Cormorant Garamond',serif;
 
 font-style:italic;
 
-letter-spacing:.2em;
-
 color:#c9a96e;
 
-margin:10px 0;
+margin:6px 0;
 }
 
 
 button{
-border:none;
-background:linear-gradient(135deg,#f7df9b,#b88a2c);
-color:#1d1306;
-font-weight:700;
-padding:14px 32px;
+background:
+linear-gradient(
+135deg,
+#f3d995,
+#c9a96e
+);
+
+padding:16px 38px;
+
+font-size:14px;
+
+letter-spacing:.08em;
+
 border-radius:999px;
-box-shadow:0 10px 30px rgba(201,169,110,.35);
-cursor:pointer;
+
+box-shadow:
+0 8px 25px rgba(201,169,110,.25);
+
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
 }
 
 #doorScreen.open .open-card{
@@ -407,15 +427,16 @@ max-width:285px;
     <div class="open-inner">
 
   <p class="serif gold"
-     style="
-     font-size:36px;
-     font-style:italic;
-     margin-bottom:20px;
-     color:#c9a96e;
-     text-shadow:0 0 15px rgba(201,169,110,.25);
-     ">
-     Walimatul Urus
-  </p>
+style="
+font-size:28px;
+font-style:italic;
+font-weight:400;
+letter-spacing:.04em;
+margin-bottom:25px;
+opacity:.9;
+">
+Walimatul Urus
+</p>
 
   <div class="names" id="introNames"></div>
 
