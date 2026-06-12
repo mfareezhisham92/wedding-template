@@ -163,29 +163,31 @@ margin-bottom:26px;
 .names{
 font-family:'Cormorant Garamond',serif;
 
-font-size:clamp(42px,8vw,58px);
+font-size:clamp(38px,7vw,52px);
 
 font-weight:600;
 
-line-height:1.25;
+line-height:1.35;
 
-color:#f4dfb0;
+color:#f5e6bf;
 
-margin:25px 0;
+margin-bottom:40px;
+
+text-transform:uppercase;
+
+letter-spacing:.06em;
 
 text-shadow:
 0 0 8px rgba(201,169,110,.12);
-
-letter-spacing:.02em;
 }
 
 
 .amp{
 display:block;
 
-font-size:26px;
-
 font-family:'Cormorant Garamond',serif;
+
+font-size:22px;
 
 font-style:italic;
 
@@ -196,23 +198,31 @@ margin:6px 0;
 
 
 button{
+border:none;
+
 background:
 linear-gradient(
 135deg,
-#f3d995,
+#f6e3a6,
 #c9a96e
 );
 
-padding:16px 38px;
+color:#1b1306;
 
-font-size:14px;
+padding:16px 40px;
 
-letter-spacing:.08em;
+font-size:13px;
+
+font-weight:700;
+
+letter-spacing:.15em;
 
 border-radius:999px;
 
+cursor:pointer;
+
 box-shadow:
-0 8px 25px rgba(201,169,110,.25);
+0 10px 30px rgba(201,169,110,.28);
 
 transition:.3s;
 }
@@ -426,24 +436,27 @@ max-width:285px;
   <div class="open-card">
     <div class="open-inner">
 
+  <div class="open-inner">
+
+  <div class="bismillah">
+    بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+  </div>
+
   <p class="serif gold"
-style="
-font-size:28px;
-font-style:italic;
-font-weight:400;
-letter-spacing:.04em;
-margin-bottom:25px;
-opacity:.9;
-">
-Walimatul Urus
-</p>
+     style="
+     font-size:30px;
+     font-style:italic;
+     font-weight:400;
+     margin-bottom:30px;
+     letter-spacing:.04em;
+     ">
+     Walimatul Urus
+  </p>
 
   <div class="names" id="introNames"></div>
 
-  <div class="divider"></div>
-
   <button onclick="openInvitation()">
-    Tekan Untuk Buka
+    BUKA JEMPUTAN
   </button>
 
 </div>
