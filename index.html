@@ -3,721 +3,552 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>Walimatul Urus - Adam & Hawa</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
-
+<title>Walimatul Urus - Adam &amp; Hawa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#0a0804;display:flex;align-items:flex-start;justify-content:center;overflow-x:hidden}
+body{padding:0}
 
-html,body{
-width:100%;
-height:100%;
-background:#050302;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-font-family:'Cormorant Garamond',serif;
-}
-
+/* ── PHONE FRAME SHELL ── */
 #shell{
-width:100%;
-max-width:390px;
-height:100dvh;
-position:relative;
-background:#0b0905;
-overflow:hidden;
+  width:100%;
+  max-width:390px;
+  min-height:100dvh;
+  position:relative;
+  background:#0b0905;
+  overflow:hidden;
 }
 
+/* On wider screens: show phone frame */
 @media(min-width:500px){
-#shell{
-height:820px;
-border-radius:44px;
-box-shadow:
-0 0 0 2px #c9983b,
-0 0 0 10px #0d0905,
-0 0 80px rgba(201,152,59,.2);
-}
+  body{
+    background:#050302;
+    min-height:100dvh;
+    align-items:center;
+    padding:2rem 0;
+  }
+  #shell{
+    min-height:auto;
+    height:820px;
+    border-radius:44px;
+    overflow:hidden;
+    box-shadow:
+      0 0 0 2px #c9983b,
+      0 0 0 10px #0d0905,
+      0 0 0 13px #c9983b55,
+      0 0 0 22px #0a0804,
+      0 0 0 24px #c9983b22,
+      0 0 80px #c9983b20,
+      0 40px 100px rgba(0,0,0,.95);
+  }
+  /* Notch */
+  #shell::before{
+    content:'';
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:110px;height:30px;
+    background:#080604;
+    border-radius:0 0 18px 18px;
+    z-index:200;
+  }
+  /* Side buttons */
+  #shell::after{
+    content:'';
+    position:absolute;top:100px;right:-3px;
+    width:3px;height:60px;
+    background:#c9983b22;
+    border-radius:0 2px 2px 0;
+    box-shadow:0 80px 0 #c9983b22;
+  }
+  #scroll-inner{
+    height:820px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  #scroll-inner::-webkit-scrollbar{display:none}
 }
 
+/* On mobile: full screen, no frame */
+@media(max-width:499px){
+  #scroll-inner{
+    height:100dvh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  #scroll-inner::-webkit-scrollbar{display:none}
+}
+
+/* ── CANVAS DUST ── */
 #dust{
-position:absolute;
-inset:0;
-pointer-events:none;
-z-index:1;
+  position:absolute;inset:0;
+  pointer-events:none;z-index:1;
 }
 
-/* COMMON */
+/* ── ANIMATIONS ── */
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes fadeScale{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
 .gs{
-background:linear-gradient(110deg,#8a5f10,#c9983b,#f0d878,#fffbe0,#f0d060,#c9983b,#8a5f10);
-background-size:300% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shimmer 5s linear infinite;
+  background:linear-gradient(110deg,#8a5f10 0%,#c9983b 18%,#f0d878 38%,#fffbe0 50%,#f0d060 62%,#c9983b 82%,#8a5f10 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 5s linear infinite;
 }
 
-@keyframes shimmer{
-0%{background-position:200% center}
-100%{background-position:-200% center}
+.reveal{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
 }
+.reveal.in{opacity:1;transform:translateY(0)}
 
-@keyframes floatY{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-6px)}
-}
-
-@keyframes pulse{
-0%,100%{opacity:.55}
-50%{opacity:1}
-}
-
+/* ── SHARED ELEMENTS ── */
 .lg{
-height:1px;
-background:linear-gradient(90deg,transparent,#c9983b55,#c9983b,#c9983b55,transparent);
-margin:1rem auto;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,#c9983b55,#c9983b,#c9983b55,transparent);
+  margin:.5rem 0;
+}
+.orn{text-align:center;color:#c9983b44;font-size:.9rem;letter-spacing:.5em;margin:.3rem 0}
+.sec-lbl{
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.35em;
+  color:#c9983b77;margin-bottom:.25rem;text-align:center;
 }
 
-.corn{
-position:absolute;
-inset:0;
-pointer-events:none;
-z-index:4;
-}
+/* corner SVGs */
+.corn{position:absolute;inset:0;pointer-events:none;z-index:2}
+.cc{position:absolute;width:36px;height:36px;opacity:.75}
+.cc.tl{top:14px;left:14px}
+.cc.tr{top:14px;right:14px;transform:scaleX(-1)}
+.cc.bl{bottom:14px;left:14px;transform:scaleY(-1)}
+.cc.br{bottom:14px;right:14px;transform:scale(-1,-1)}
 
-.cc{
-position:absolute;
-width:40px;
-height:40px;
-opacity:.75;
-}
-
-.cc.tl{top:16px;left:16px}
-.cc.tr{top:16px;right:16px;transform:scaleX(-1)}
-.cc.bl{bottom:16px;left:16px;transform:scaleY(-1)}
-.cc.br{bottom:16px;right:16px;transform:scale(-1,-1)}
-
-/* PREMIUM INTRO / DOOR */
+/* ── GATE ── */
 #gate{
-position:absolute;
-inset:0;
-z-index:100;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-overflow:hidden;
-background:radial-gradient(ellipse at 50% 30%,#211707 0%,#0b0905 68%);
+  position:absolute;inset:0;z-index:100;
+  background:radial-gradient(ellipse at 50% 30%,#1c1408 0%,#0b0905 70%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem 1.5rem;
+  transition:opacity .85s ease,transform .85s ease;
 }
-
-.door{
-position:absolute;
-top:0;
-width:50%;
-height:100%;
-z-index:2;
-background:
-linear-gradient(90deg,#070503,#191006,#3a260a,#191006,#070503);
-transition:transform 1.8s cubic-bezier(.76,0,.24,1);
-box-shadow:inset 0 0 45px rgba(201,152,59,.14);
-}
-
-.door.left{
-left:0;
-border-right:1px solid rgba(201,152,59,.55);
-}
-
-.door.right{
-right:0;
-border-left:1px solid rgba(201,152,59,.55);
-}
-
-#gate.open .door.left{transform:translateX(-100%)}
-#gate.open .door.right{transform:translateX(100%)}
-
-.gate-card{
-position:relative;
-z-index:5;
-width:86%;
-max-width:330px;
-min-height:560px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:2rem 1.4rem;
-border:1px solid rgba(201,152,59,.65);
-background:rgba(0,0,0,.36);
-box-shadow:
-0 0 40px rgba(201,152,59,.17),
-inset 0 0 30px rgba(201,152,59,.04);
-transition:opacity 1s ease,transform 1s ease;
-}
-
-#gate.open .gate-card{
-opacity:0;
-transform:scale(.92);
-}
-
-.gate-card::before{
-content:"";
-position:absolute;
-inset:12px;
-border:1px solid rgba(201,152,59,.25);
-pointer-events:none;
-}
+#gate.out{opacity:0;transform:scale(1.04);pointer-events:none}
 
 .g-arabic{
-font-family:'EB Garamond',serif;
-color:#c9983b;
-font-size:clamp(1rem,4.2vw,1.28rem);
-line-height:2;
-letter-spacing:.07em;
-margin-bottom:1.5rem;
+  font-family:'EB Garamond',serif;color:#c9983b;
+  font-size:clamp(1rem,4.2vw,1.3rem);line-height:2;letter-spacing:.07em;
+  margin-bottom:1.6rem;
 }
-
 .g-walima{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.45rem,6vw,1.9rem);
-color:#c9983b;
-margin-bottom:1.3rem;
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.4em;
+  color:#c9983b88;margin-bottom:1.4rem;text-transform:uppercase;
 }
-
 .g-names{
-font-family:'Cinzel',serif;
-font-size:clamp(2rem,8vw,2.75rem);
-font-weight:500;
-letter-spacing:.09em;
-line-height:1.1;
+  font-family:'Cinzel',serif;
+  font-size:clamp(2.2rem,9vw,3rem);
+  font-weight:600;letter-spacing:.06em;line-height:1.05;
+  margin:.1rem 0;
 }
-
 .g-amp{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.8rem,7vw,2.4rem);
-color:#c9983b;
-display:block;
-line-height:1.2;
-animation:floatY 4s ease-in-out infinite;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(2.2rem,9vw,3rem);
+  color:#c9983b;
+  display:block;text-align:center;line-height:1.2;
+  -webkit-text-fill-color:#c9983b;
+  animation:floatY 4s ease-in-out infinite;
+  margin:.1rem 0;
 }
-
 .g-btn{
-margin-top:2rem;
-background:transparent;
-border:1px solid #c9983b;
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.6rem;
-letter-spacing:.32em;
-padding:.82rem 2.2rem;
-cursor:pointer;
-animation:pulse 2.3s ease-in-out infinite;
+  margin-top:2.4rem;
+  background:transparent;border:1px solid #c9983b;color:#c9983b;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.35em;
+  padding:.78rem 2.6rem;cursor:pointer;border-radius:1px;
+  transition:background .3s,color .3s;
+  animation:pulse 2.3s ease-in-out infinite;
+  display:inline-block;
 }
+.g-btn:hover{background:#c9983b1a;color:#f0d060}
 
-/* PAGE */
-#scroll-inner{
-height:100%;
-overflow-y:auto;
-overflow-x:hidden;
--webkit-overflow-scrolling:touch;
-scrollbar-width:none;
-}
+/* ── PAGE ── */
+#page{position:relative;z-index:2;display:none}
 
-#scroll-inner::-webkit-scrollbar{display:none}
-
-#page{
-position:relative;
-z-index:2;
-display:none;
-}
-
+/* ── SECTIONS ── */
 section{
-min-height:100dvh;
-padding:3.5rem 1.6rem;
-position:relative;
-text-align:center;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-border-top:.5px solid #c9983b11;
+  padding:2.6rem 1.5rem;
+  position:relative;text-align:center;
+  border-top:.5px solid #c9983b11;
+}
+section:first-child{border-top:none}
+
+/* ── BISMILLAH ── */
+#bism{background:#110d07;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3.5rem 1.8rem}
+@media(min-width:500px){#bism{min-height:820px}}
+.bism-t{font-family:'EB Garamond',serif;font-size:clamp(1rem,4.2vw,1.35rem);color:#c9983b;line-height:2;letter-spacing:.08em;text-align:center}
+.bism-s{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.75rem,2.8vw,.88rem);color:#7a6040;margin-top:.3rem;text-align:center}
+.par-name{font-family:'Cinzel',serif;font-size:clamp(1rem,4vw,1.3rem);font-weight:500;letter-spacing:.05em;color:#c9983b;text-align:center;line-height:1.3}
+.par-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.4rem,5.5vw,1.9rem);color:#c9983b88;display:block;text-align:center;line-height:1.5;-webkit-text-fill-color:#c9983b88}
+.inv-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.8rem,3vw,.95rem);color:#9a8055;line-height:2.1;text-align:center}
+.inv-salute{font-family:'Cinzel',serif;font-style:normal;font-size:clamp(.5rem,1.9vw,.6rem);letter-spacing:.14em;color:#c9983b88;display:block;margin:.2rem 0}
+.child-name{font-family:'Cinzel',serif;font-size:clamp(1.3rem,5.2vw,1.7rem);font-weight:600;letter-spacing:.05em;text-align:center;line-height:1.3}
+.child-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.8rem,7vw,2.4rem);color:#c9983b;display:block;text-align:center;line-height:1.4;-webkit-text-fill-color:#c9983b;animation:floatY 4s ease-in-out infinite}
+
+/* ── PENGANTIN ── */
+#peng{background:#0b0905}
+.fcard{
+  background:linear-gradient(145deg,#181108,#100c06);
+  border:.5px solid #c9983b2a;border-radius:4px;
+  padding:1.1rem 1.3rem;margin:.45rem 0;text-align:center;
+  position:relative;overflow:hidden;
+}
+.fcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c9983b07,transparent)}
+.fc-role{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.28em;color:#c9983b55;text-transform:uppercase;margin-bottom:.3rem}
+.fc-name{font-family:'Cinzel',serif;font-size:clamp(.88rem,3.5vw,1.1rem);font-weight:600;letter-spacing:.04em;line-height:1.35}
+.fc-bin{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.7rem,2.6vw,.82rem);color:#6a5030;margin:.18rem 0 .45rem}
+.fc-plbl{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.24em;color:#c9983b3a;text-transform:uppercase;margin:.45rem 0 .2rem}
+.fc-par{font-family:'Cormorant Garamond',serif;font-size:clamp(.78rem,2.8vw,.9rem);color:#a08050;line-height:1.9}
+.and-b{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.2rem,4.5vw,1.55rem);color:#c9983b;
+  text-align:center;display:block;margin:.5rem 0;
+  animation:floatY 4.5s ease-in-out infinite;
 }
 
-@media(min-width:500px){
-section{min-height:820px}
-}
-
-/* SLOW BOTTOM TO CENTER REVEAL */
-.reveal{
-opacity:0;
-transform:translateY(120px);
-transition:
-opacity 2.4s ease,
-transform 2.4s cubic-bezier(.16,.84,.44,1);
-}
-
-.reveal.in{
-opacity:1;
-transform:translateY(0);
-}
-
-.sec-lbl{
-font-family:'Cinzel',serif;
-font-size:.52rem;
-letter-spacing:.35em;
-color:#c9983b77;
-margin-bottom:.35rem;
-}
-
-.bism-t{
-font-family:'EB Garamond',serif;
-font-size:clamp(1rem,4.2vw,1.35rem);
-color:#c9983b;
-line-height:2;
-letter-spacing:.08em;
-}
-
-.bism-s{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:.85rem;
-color:#7a6040;
-margin-top:.4rem;
-}
-
-.par-name,.child-name{
-font-family:'Cinzel',serif;
-font-size:clamp(1.15rem,4.6vw,1.55rem);
-font-weight:500;
-letter-spacing:.06em;
-color:#c9983b;
-line-height:1.35;
-}
-
-.child-name{
-font-size:clamp(1.35rem,5.4vw,1.85rem);
-}
-
-.par-amp,.child-amp{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.7rem,6vw,2.3rem);
-color:#c9983b;
-display:block;
-line-height:1.3;
-animation:floatY 4s ease-in-out infinite;
-}
-
-.inv-text{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(.84rem,3vw,.98rem);
-color:#9a8055;
-line-height:2.1;
-}
-
-.inv-salute{
-font-family:'Cinzel',serif;
-font-size:.55rem;
-letter-spacing:.14em;
-color:#c9983b88;
-display:block;
-margin:.3rem 0;
-}
-
-/* DETAILS */
-#bism{background:#110d07}
-#det{background:#0b0905}
-#ac{background:#110d07}
-#lok{background:#0b0905}
+/* ── DETAILS centred ── */
+#det{background:#110d07}
+.det-ttl{font-family:'Cinzel',serif;font-size:clamp(.9rem,3.6vw,1.1rem);font-weight:600;letter-spacing:.06em;margin:.4rem 0}
+.dct{text-align:center;padding:.55rem 0}
+.dct-lbl{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.28em;color:#c9983b55;text-transform:uppercase;margin-bottom:.2rem}
+.dct-val{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1rem,3.8vw,1.2rem);color:#e0cc99;line-height:1.5}
+.dct-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.72rem,2.6vw,.82rem);color:#6a5030}
+/* ── COUNTDOWN ── */
 #cd{background:radial-gradient(ellipse at 50% 60%,#1a1308 0%,#0b0905 70%)}
+.cd-lbl{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.32em;color:#c9983b66;margin-bottom:1rem}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin:.5rem 0}
+.cd-cell{background:linear-gradient(145deg,#1c1409,#120f06);border:.5px solid #c9983b2a;border-radius:3px;padding:.6rem .2rem;text-align:center;position:relative;overflow:hidden}
+.cd-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c9983b08,transparent)}
+.cd-num{font-family:'Cinzel',serif;font-size:clamp(1.35rem,5.5vw,1.8rem);font-weight:600;color:#c9983b;line-height:1;display:block}
+.cd-unit{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.18em;color:#c9983b44;text-transform:uppercase;margin-top:.28rem;display:block}
+.cd-done{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.9rem,3.2vw,1.1rem);color:#c9983b;display:none;margin-top:.5rem}
+/* ── AYAT ── */
 #ayat{background:#181209}
-#cls{background:radial-gradient(ellipse at 50% 100%,#1a1208 0%,#0b0905 65%)}
+.ay-ar{font-family:'EB Garamond',serif;font-size:clamp(.95rem,3.8vw,1.25rem);color:#c9983b;line-height:2.2;letter-spacing:.06em;margin:.9rem 0 .5rem}
+.ay-tr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.75rem,2.8vw,.9rem);color:#8a7050;line-height:1.95;margin-bottom:.45rem}
+.ay-ref{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.24em;color:#c9983b3a}
+/* ── ATURCARA centred ── */
+#ac{background:#0b0905}
+.ac-ttl{font-family:'Cinzel',serif;font-size:clamp(.9rem,3.5vw,1.1rem);font-weight:600;letter-spacing:.06em;margin:.4rem 0 .9rem}
+.ac-c{text-align:center;padding:.55rem 0;border-bottom:.5px solid #c9983b14}
+.ac-c:last-child{border-bottom:none}
+.ac-ct{display:block;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;color:#c9983b;margin-bottom:.18rem}
+.ac-cd{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(.88rem,3.2vw,1rem);color:#c8b070}
+/* ── LOKASI & RSVP ── */
+#lok{background:#110d07}
+.lok-ttl{font-family:'Cinzel',serif;font-size:clamp(.9rem,3.5vw,1.1rem);font-weight:600;letter-spacing:.06em;margin:.4rem 0}
+.lok-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(.9rem,3.4vw,1.05rem);color:#ddc890;line-height:1.5;margin:.28rem 0}
+.lok-addr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.72rem,2.7vw,.85rem);color:#6a5030;line-height:1.75;margin-bottom:.9rem}
+.bgrp{display:flex;flex-direction:column;gap:.35rem;margin-top:.7rem}
+.bg{display:flex;align-items:center;justify-content:center;gap:.45rem;background:linear-gradient(135deg,#1a1308,#271900);border:1px solid #c9983b44;color:#c9983b;font-family:'Cinzel',serif;font-size:.57rem;letter-spacing:.2em;padding:.65rem 1rem;border-radius:2px;cursor:pointer;text-decoration:none;transition:border-color .3s,color .3s;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c9983b18,transparent);opacity:0;transition:opacity .3s}
+.bg:hover::after,.bg:active::after{opacity:1}
+.bg:hover,.bg:active{border-color:#c9983b;color:#f0d060}
+.rsvp-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.78rem,2.9vw,.92rem);color:#8a7050;line-height:1.85;margin:.7rem 0 .45rem;text-align:center}
+/* ── CLOSING ── */
+#cls{background:radial-gradient(ellipse at 50% 100%,#1a1208 0%,#0b0905 65%);padding:3rem 1.5rem 4rem}
+.cls-big{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5.8vw,2rem);font-weight:600;letter-spacing:.06em;line-height:1.2;margin:.5rem 0}
+.cls-names{font-family:'Cinzel',serif;font-size:clamp(1.3rem,5.2vw,1.7rem);font-weight:600;letter-spacing:.06em;line-height:1.2;margin:.5rem 0}
+.cls-thanks{font-family:'Cormorant Garamond',serif;font-size:clamp(.85rem,3.2vw,1rem);color:#7a6040;line-height:1.95;margin:.55rem 0;font-style:italic}
+.cls-dt{font-family:'Cinzel',serif;font-size:clamp(.62rem,2.3vw,.75rem);letter-spacing:.2em;color:#c9983b99;margin-top:.5rem}
 
-.det-ttl,.ac-ttl,.lok-ttl,.cls-big{
-font-family:'Cinzel',serif;
-font-size:clamp(1rem,4vw,1.3rem);
-font-weight:600;
-letter-spacing:.06em;
-margin:.5rem 0;
-}
-
-.dct,.ac-c{
-text-align:center;
-padding:.7rem 0;
-}
-
-.dct-lbl,.ac-ct{
-font-family:'Cinzel',serif;
-font-size:.52rem;
-letter-spacing:.28em;
-color:#c9983b66;
-text-transform:uppercase;
-margin-bottom:.25rem;
-}
-
-.dct-val,.ac-cd,.lok-name{
-font-family:'Cormorant Garamond',serif;
-font-size:clamp(1rem,3.7vw,1.18rem);
-color:#e0cc99;
-line-height:1.5;
-}
-
-.dct-sub,.lok-addr,.rsvp-note,.cls-thanks{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:.86rem;
-color:#7a6040;
-line-height:1.9;
-}
-
-.bg{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:.45rem;
-background:linear-gradient(135deg,#1a1308,#271900);
-border:1px solid #c9983b44;
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.57rem;
-letter-spacing:.2em;
-padding:.7rem 1rem;
-margin:.4rem 0;
-text-decoration:none;
-}
-
-.cd-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:.4rem;
-width:100%;
-margin-top:1rem;
-}
-
-.cd-cell{
-background:linear-gradient(145deg,#1c1409,#120f06);
-border:.5px solid #c9983b2a;
-padding:.7rem .25rem;
-}
-
-.cd-num{
-font-family:'Cinzel',serif;
-font-size:clamp(1.35rem,5.5vw,1.8rem);
-font-weight:600;
-color:#c9983b;
-display:block;
-}
-
-.cd-unit{
-font-family:'Cinzel',serif;
-font-size:.42rem;
-letter-spacing:.18em;
-color:#c9983b66;
-text-transform:uppercase;
-}
-
-.ay-ar{
-font-family:'EB Garamond',serif;
-font-size:clamp(.95rem,3.8vw,1.25rem);
-color:#c9983b;
-line-height:2.2;
-letter-spacing:.06em;
-}
-
-.ay-tr{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:.9rem;
-color:#8a7050;
-line-height:1.95;
-}
-
-.ay-ref{
-font-family:'Cinzel',serif;
-font-size:.48rem;
-letter-spacing:.24em;
-color:#c9983b55;
-}
-
+/* ── MUSIC BTN ── */
 #mus{
-position:fixed;
-bottom:16px;
-right:14px;
-z-index:300;
-background:#120d05ee;
-border:.5px solid #c9983b44;
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.47rem;
-letter-spacing:.14em;
-padding:.35rem .65rem;
-cursor:pointer;
-backdrop-filter:blur(8px);
-display:none;
+  position:fixed;bottom:16px;right:14px;z-index:300;
+  background:#120d05ee;border:.5px solid #c9983b44;
+  color:#c9983b;font-family:'Cinzel',serif;font-size:.47rem;letter-spacing:.14em;
+  padding:.35rem .65rem;border-radius:2px;cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:color .3s,border-color .3s;
+  -webkit-tap-highlight-color:transparent;
+}
+#mus:hover{color:#f0d060;border-color:#c9983b}
+
+/* frame glow line top */
+.frame-top-line{
+  position:sticky;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,#c9983b33,#c9983b55,#c9983b33,transparent);
+  z-index:50;pointer-events:none;
 }
 </style>
 </head>
-
 <body>
-
-<audio id="bgm" loop>
-<source src="music.mp3" type="audio/mpeg"/>
-</audio>
+<audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"/></audio>
 
 <div id="shell">
-<canvas id="dust"></canvas>
+  <canvas id="dust"></canvas>
 
-<!-- INTRO GATE -->
-<div id="gate">
-
-  <div class="door left"></div>
-  <div class="door right"></div>
-
-  <div class="gate-card">
+  <!-- GATE -->
+  <div id="gate">
     <div class="corn">
-      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.2"/></svg>
-      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.2"/></svg>
-      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.2"/></svg>
-      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.2"/></svg>
+      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
     </div>
-
-    <p class="g-arabic">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-    <div class="lg" style="width:52%"></div>
+    <p class="g-arabic">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1575;&#1604;&#1604;&#1607;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1606;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1618;&#1605;&#1616;</p>
+    <div class="lg" style="width:52%;margin:.4rem auto 1.4rem"></div>
     <p class="g-walima">Walimatul Urus</p>
     <h1 class="g-names gs">ADAM</h1>
     <span class="g-amp">&amp;</span>
     <h1 class="g-names gs">HAWA</h1>
-    <div class="lg" style="width:52%"></div>
+    <div class="lg" style="width:52%;margin:1rem auto 0"></div>
     <button class="g-btn" id="gate-btn">BUKA JEMPUTAN</button>
   </div>
-</div>
 
-<div id="scroll-inner">
-<div id="page">
+  <!-- SCROLL WRAPPER -->
+  <div id="scroll-inner">
+    <div class="frame-top-line"></div>
+    <div id="page">
 
-<section id="bism">
-  <p class="bism-t reveal">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-  <p class="bism-s reveal">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang</p>
-  <div class="lg reveal" style="width:55%"></div>
+      <!-- BISMILLAH + JEMPUTAN -->
+      <section id="bism">
+        <div class="corn">
+          <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+        </div>
 
-  <p class="par-name reveal">Ahmad Bin Abdullah</p>
-  <span class="par-amp reveal">&amp;</span>
-  <p class="par-name reveal">Fatimah Binti Abu</p>
+        <p class="bism-t reveal">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1575;&#1604;&#1604;&#1607;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1606;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1618;&#1605;&#1616;</p>
+        <p class="bism-s reveal">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang</p>
 
-  <div class="lg reveal" style="width:55%"></div>
+        <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
 
-  <p class="inv-text reveal">
-    Dengan penuh kesyukuran, kami mempersilakan<br>
-    <span class="inv-salute">Dato' | Datin | Tuan | Puan | Encik | Cik</span>
-    seisi keluarga hadir ke majlis perkahwinan anakanda kami
-  </p>
+        <p class="par-name reveal">Ahmad Bin Abdullah</p>
+        <span class="par-amp reveal">&amp;</span>
+        <p class="par-name reveal">Fatimah Binti Abu</p>
 
-  <div class="lg reveal" style="width:55%"></div>
+        <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
 
-  <p class="child-name gs reveal">Noradam Bin Ahmad</p>
-  <span class="child-amp reveal">&amp;</span>
-  <p class="child-name gs reveal">Nur Hawa Binti Ali</p>
-</section>
+        <p class="inv-text reveal">Dengan penuh kesyukuran, kami mempersilakan<br><span class="inv-salute">Dato' &nbsp;|&nbsp; Datin &nbsp;|&nbsp; Tuan &nbsp;|&nbsp; Puan &nbsp;|&nbsp; Encik &nbsp;|&nbsp; Cik</span><br>seisi keluarga hadir ke majlis perkahwinan anakanda kami</p>
 
-<section id="det">
-  <p class="sec-lbl reveal">— Butiran Majlis —</p>
-  <div class="lg reveal"></div>
-  <p class="det-ttl gs reveal">Majlis Perkahwinan</p>
+        <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
 
-  <div class="dct reveal">
-    <p class="dct-lbl">Tarikh</p>
-    <p class="dct-val">Ahad, 12 Julai 2026</p>
-    <p class="dct-sub">27 Muharram 1448H</p>
-  </div>
+        <p class="child-name gs reveal">Noradam Bin Ahmad</p>
+        <span class="child-amp reveal">&amp;</span>
+        <p class="child-name gs reveal">Nur Hawa Binti Ali</p>
 
-  <div class="lg reveal" style="width:40%"></div>
+      </section>
 
-  <div class="dct reveal">
-    <p class="dct-lbl">Masa</p>
-    <p class="dct-val">11:00 Pagi — 4:00 Petang</p>
-    <p class="dct-sub">Majlis Makan Tengah Hari</p>
-  </div>
+      <!-- DETAILS -->
+      <section id="det">
+        <p class="sec-lbl reveal">&#8212; Butiran Majlis &#8212;</p>
+        <div class="lg reveal"></div>
+        <p class="det-ttl gs reveal">Majlis Perkahwinan</p>
 
-  <div class="lg reveal" style="width:40%"></div>
+        <div class="dct reveal">
+          <p class="dct-lbl">Tarikh</p>
+          <p class="dct-val">Ahad, 12 Julai 2026</p>
+          <p class="dct-sub">27 Muharram 1448H</p>
+        </div>
+        <div class="lg reveal" style="width:40%;margin:.5rem auto"></div>
+        <div class="dct reveal">
+          <p class="dct-lbl">Masa</p>
+          <p class="dct-val">11:00 Pagi &#8212; 4:00 Petang</p>
+          <p class="dct-sub">Majlis Makan Tengah Hari</p>
+        </div>
+        <div class="lg reveal" style="width:40%;margin:.5rem auto"></div>
+        <div class="dct reveal">
+          <p class="dct-lbl">Lokasi</p>
+          <p class="dct-val">Dewan Seri Kenanga</p>
+          <p class="dct-sub">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
+        </div>
+      </section>
 
-  <div class="dct reveal">
-    <p class="dct-lbl">Lokasi</p>
-    <p class="dct-val">Dewan Seri Kenanga</p>
-    <p class="dct-sub">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
-  </div>
-</section>
+      <!-- ATURCARA -->
+      <section id="ac">
+        <p class="sec-lbl reveal">&#8212; Aturcara Majlis &#8212;</p>
+        <div class="lg reveal"></div>
+        <p class="ac-ttl gs reveal">Perjalanan Majlis</p>
 
-<section id="ac">
-  <p class="sec-lbl reveal">— Aturcara Majlis —</p>
-  <div class="lg reveal"></div>
-  <p class="ac-ttl gs reveal">Perjalanan Majlis</p>
+        <div class="ac-c reveal"><span class="ac-ct">10:30 am</span><span class="ac-cd">Ketibaan Tetamu Jemputan</span></div>
+        <div class="ac-c reveal"><span class="ac-ct">11:00 am</span><span class="ac-cd">Bersanding Pengantin</span></div>
+        <div class="ac-c reveal"><span class="ac-ct">12:00 pm</span><span class="ac-cd">Makan Tengah Hari Dihidangkan</span></div>
+        <div class="ac-c reveal"><span class="ac-ct">1:30 pm</span><span class="ac-cd">Hiburan &amp; Persembahan</span></div>
+        <div class="ac-c reveal"><span class="ac-ct">3:30 pm</span><span class="ac-cd">Majlis Bersurai</span></div>
+      </section>
 
-  <div class="ac-c reveal"><span class="ac-ct">10:30 am</span><span class="ac-cd">Ketibaan Tetamu Jemputan</span></div>
-  <div class="ac-c reveal"><span class="ac-ct">11:00 am</span><span class="ac-cd">Bersanding Pengantin</span></div>
-  <div class="ac-c reveal"><span class="ac-ct">12:00 pm</span><span class="ac-cd">Makan Tengah Hari Dihidangkan</span></div>
-  <div class="ac-c reveal"><span class="ac-ct">3:30 pm</span><span class="ac-cd">Majlis Bersurai</span></div>
-</section>
+      <!-- LOKASI & RSVP -->
+      <section id="lok">
+        <p class="sec-lbl reveal">&#8212; Lokasi &amp; RSVP &#8212;</p>
+        <div class="lg reveal"></div>
+        <p class="lok-ttl gs reveal">Tempat Majlis</p>
+        <p class="lok-name reveal">Dewan Seri Kenanga</p>
+        <p class="lok-addr reveal">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
+        <div class="bgrp reveal">
+          <a class="bg" href="https://maps.google.com/?q=Dewan+Seri+Kenanga+Shah+Alam" target="_blank" rel="noopener">&#128205; &nbsp; LIHAT LOKASI</a>
+          <a class="bg" href="https://waze.com/ul?q=Dewan+Seri+Kenanga+Shah+Alam" target="_blank" rel="noopener">&#128506; &nbsp; BUKA DI WAZE</a>
+        </div>
+        <div class="lg reveal" style="margin-top:1.3rem"></div>
+        <p class="lok-ttl gs reveal" style="margin-top:.9rem">RSVP</p>
+        <p class="rsvp-note reveal">Sila sahkan kehadiran anda</p>
+        <div class="bgrp reveal">
+          <a class="bg" href="https://wa.me/60123456789?text=Assalamualaikum%2C+saya+akan+hadir+ke+majlis+Adam+%26+Hawa+insyaAllah." target="_blank" rel="noopener">&#10003; &nbsp; YA, SAYA HADIR</a>
+        </div>
+      </section>
 
-<section id="lok">
-  <p class="sec-lbl reveal">— Lokasi & RSVP —</p>
-  <div class="lg reveal"></div>
-  <p class="lok-ttl gs reveal">Tempat Majlis</p>
-  <p class="lok-name reveal">Dewan Seri Kenanga</p>
-  <p class="lok-addr reveal">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
+      <!-- COUNTDOWN -->
+      <section id="cd">
+        <p class="sec-lbl reveal">&#8212; Kiraan Masa &#8212;</p>
+        <div class="lg reveal"></div>
+        <p class="cd-lbl reveal">Hari Bahagia Menjelang Tiba</p>
+        <div class="cd-grid reveal" id="cd-grid">
+          <div class="cd-cell"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">Hari</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">Jam</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">Minit</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">Saat</span></div>
+        </div>
+        <p class="cd-done" id="cd-done">Alhamdulillah &#8212; Hari yang dinantikan telah tiba!</p>
+      </section>
 
-  <a class="bg reveal" href="https://maps.google.com" target="_blank">📍 LIHAT LOKASI</a>
-  <a class="bg reveal" href="https://wa.me/60123456789" target="_blank">✓ YA, SAYA HADIR</a>
-</section>
+      <!-- AYAT -->
+      <section id="ayat">
+        <div class="orn reveal">&#8212; &#10022; &#8212;</div>
+        <p class="ay-ar reveal">&#1608;&#1614;&#1605;&#1616;&#1606;&#1618; &#1570;&#1610;&#1614;&#1575;&#1578;&#1616;&#1607;&#1616; &#1571;&#1614;&#1606;&#1618; &#1582;&#1614;&#1604;&#1614;&#1602;&#1614; &#1604;&#1614;&#1603;&#1615;&#1605; &#1605;&#1616;&#1617;&#1606;&#1618; &#1571;&#1614;&#1606;&#1618;&#1601;&#1615;&#1587;&#1616;&#1603;&#1615;&#1605;&#1618; &#1571;&#1614;&#1586;&#1618;&#1608;&#1614;&#1575;&#1580;&#1611;&#1575; &#1604;&#1616;&#1617;&#1578;&#1614;&#1587;&#1618;&#1603;&#1615;&#1606;&#1615;&#1608;&#1575; &#1573;&#1604;&#1614;&#1610;&#1618;&#1607;&#1614;&#1575;</p>
+        <p class="ay-tr reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."</p>
+        <p class="ay-ref reveal">&#8212; Surah Ar-Rum, Ayat 21 &#8212;</p>
+      </section>
 
-<section id="cd">
-  <p class="sec-lbl reveal">— Kiraan Masa —</p>
-  <div class="lg reveal"></div>
+      <!-- CLOSING -->
+      <section id="cls">
+        <div class="corn">
+          <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+          <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".5"/></svg>
+        </div>
+        <div class="orn reveal" style="font-size:1.4rem">&#10022;</div>
+        <p class="sec-lbl reveal" style="margin-top:.4rem">&#8212; Ucapan Penutup &#8212;</p>
+        <div class="lg reveal"></div>
+        <h2 class="cls-big gs reveal">Terima Kasih</h2>
+        <p class="cls-thanks reveal">Kehadiran, doa dan restu anda<br>adalah hadiah terbesar buat kami.<br>Semoga Allah SWT membalas budi anda<br>dengan kebaikan yang berlipat ganda.</p>
+        <div class="lg reveal" style="width:52%;margin:1.1rem auto"></div>
+        <h3 class="cls-names gs reveal">Adam &amp; Hawa</h3>
+        <p class="cls-dt reveal">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026 &nbsp;&#183;&nbsp; Shah Alam</p>
+        <div class="orn reveal" style="margin-top:1rem">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+      </section>
 
-  <div class="cd-grid reveal" id="cd-grid">
-    <div class="cd-cell"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">Hari</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">Jam</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">Minit</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">Saat</span></div>
-  </div>
-</section>
+    </div><!-- end #page -->
+  </div><!-- end #scroll-inner -->
 
-<section id="ayat">
-  <p class="ay-ar reveal">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنْفُسِكُمْ أَزْوَاجًا</p>
-  <p class="ay-tr reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu..."</p>
-  <p class="ay-ref reveal">— Surah Ar-Rum, Ayat 21 —</p>
-</section>
+</div><!-- end #shell -->
 
-<section id="cls">
-  <h2 class="cls-big gs reveal">Terima Kasih</h2>
-  <p class="cls-thanks reveal">
-    Kehadiran, doa dan restu anda<br>
-    adalah hadiah terbesar buat kami.
-  </p>
-  <div class="lg reveal" style="width:52%"></div>
-  <h3 class="cls-big gs reveal">Adam & Hawa</h3>
-</section>
-
-</div>
-</div>
-</div>
-
-<button id="mus" onclick="toggleAudio()">♫ MUZIK</button>
+<button id="mus" onclick="toggleAudio()">&#9834; MUZIK</button>
 
 <script>
+/* ── GATE ── */
 const gate=document.getElementById('gate');
 const page=document.getElementById('page');
 const bgm=document.getElementById('bgm');
-const mus=document.getElementById('mus');
 let musicOn=false;
 
 document.getElementById('gate-btn').addEventListener('click',openGate);
 
 function openGate(){
-gate.classList.add('open');
-
-setTimeout(()=>{
-gate.style.display='none';
-page.style.display='block';
-mus.style.display='block';
-initReveal();
-
-bgm.play().then(()=>{
-musicOn=true;
-updateMus();
-}).catch(()=>{});
-},1850);
+  gate.classList.add('out');
+  setTimeout(()=>{
+    gate.style.display='none';
+    page.style.display='block';
+    initReveal();
+    bgm.play().then(()=>{musicOn=true;updateMus();}).catch(()=>{});
+  },900);
 }
 
+/* ── AUDIO ── */
 function toggleAudio(){
-if(musicOn){
-bgm.pause();
-musicOn=false;
-}else{
-bgm.play().catch(()=>{});
-musicOn=true;
+  if(musicOn){bgm.pause();musicOn=false;}
+  else{bgm.play().catch(()=>{});musicOn=true;}
+  updateMus();
 }
-updateMus();
-}
-
 function updateMus(){
-mus.innerHTML=musicOn?'♫ MUZIK':'♪ MUZIK';
-mus.style.opacity=musicOn?'1':'.5';
+  const b=document.getElementById('mus');
+  b.innerHTML=musicOn?'&#9835; MUZIK':'&#9834; MUZIK';
+  b.style.opacity=musicOn?'1':'.5';
 }
 
+/* ── SCROLL REVEAL ── */
 function initReveal(){
-const root=document.getElementById('scroll-inner');
-const io=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-setTimeout(()=>{
-e.target.classList.add('in');
-},250);
-io.unobserve(e.target);
-}
-});
-},{root:root,threshold:.12});
-
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const root=document.getElementById('scroll-inner');
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{root:root,threshold:.1,rootMargin:'0px 0px -10px 0px'});
+  els.forEach(el=>io.observe(el));
 }
 
-/* Countdown */
+/* ── COUNTDOWN ── */
 const wDate=new Date('2026-07-12T11:00:00+08:00');
-
 function pad(n){return String(Math.max(0,n)).padStart(2,'0');}
-
 function tick(){
-const diff=wDate-new Date();
-
-document.getElementById('cd-d').textContent=pad(Math.floor(diff/864e5));
-document.getElementById('cd-h').textContent=pad(Math.floor((diff%864e5)/36e5));
-document.getElementById('cd-m').textContent=pad(Math.floor((diff%36e5)/6e4));
-document.getElementById('cd-s').textContent=pad(Math.floor((diff%6e4)/1e3));
+  const diff=wDate-new Date();
+  if(diff<=0){
+    document.getElementById('cd-grid').style.display='none';
+    document.getElementById('cd-done').style.display='block';
+    return;
+  }
+  document.getElementById('cd-d').textContent=pad(Math.floor(diff/864e5));
+  document.getElementById('cd-h').textContent=pad(Math.floor((diff%864e5)/36e5));
+  document.getElementById('cd-m').textContent=pad(Math.floor((diff%36e5)/6e4));
+  document.getElementById('cd-s').textContent=pad(Math.floor((diff%6e4)/1e3));
 }
+tick();setInterval(tick,1000);
 
-tick();
-setInterval(tick,1000);
-
-/* Gold dust */
+/* ── GOLD DUST ── */
 const canvas=document.getElementById('dust');
 const ctx=canvas.getContext('2d');
 const shell=document.getElementById('shell');
-
-function resize(){
-canvas.width=shell.offsetWidth;
-canvas.height=shell.offsetHeight;
+function rsz(){canvas.width=shell.offsetWidth;canvas.height=shell.offsetHeight;}
+rsz();window.addEventListener('resize',rsz);
+function mkP(b){
+  return{
+    x:Math.random()*canvas.width,
+    y:b?canvas.height+20:Math.random()*canvas.height,
+    vx:(Math.random()-.5)*.28,vy:-Math.random()*.48-.1,
+    r:Math.random()*1.5+.3,a:Math.random()*.6+.18,
+    dec:Math.random()*.003+.0007,
+    sh:Math.random()*Math.PI*2,ss:Math.random()*.04+.012,
+    gold:Math.random()<.72,sp:Math.random()<.14
+  };
 }
-
-resize();
-window.addEventListener('resize',resize);
-
-const pts=Array.from({length:100},()=>({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*1.5+.3,
-vy:-Math.random()*.45-.1,
-a:Math.random()*.55+.15
-}));
-
+const pts=Array.from({length:100},()=>mkP(false));
 function frame(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-pts.forEach(p=>{
-p.y+=p.vy;
-if(p.y<0)p.y=canvas.height;
-ctx.globalAlpha=p.a;
-ctx.fillStyle='#c9983b';
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-});
-
-requestAnimationFrame(frame);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(const p of pts){
+    p.sh+=p.ss;p.x+=p.vx+Math.sin(p.sh)*.14;p.y+=p.vy;p.a-=p.dec;
+    if(p.a<=0||p.y<-8){Object.assign(p,mkP(true));continue;}
+    const s=.5+.5*Math.sin(p.sh);
+    if(p.sp){
+      const z=p.r*2.6;ctx.save();ctx.globalAlpha=Math.min(p.a*s*1.2,1);
+      ctx.strokeStyle=p.gold?`hsl(${42+s*10},80%,${60+s*22}%)`:'rgba(255,252,220,.8)';
+      ctx.lineWidth=.5;ctx.translate(p.x,p.y);
+      ctx.beginPath();ctx.moveTo(-z,0);ctx.lineTo(z,0);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(0,-z);ctx.lineTo(0,z);ctx.stroke();
+      ctx.restore();
+    }else{
+      ctx.globalAlpha=Math.min(p.a*s,.88);
+      ctx.fillStyle=p.gold?`hsl(${40+s*14},74%,${56+s*24}%)`:'hsl(48,26%,88%)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+    }
+  }
+  requestAnimationFrame(frame);
 }
-
 frame();
 </script>
-
 </body>
 </html>
