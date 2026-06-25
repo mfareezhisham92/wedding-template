@@ -583,7 +583,7 @@ display:none;
       <div class="seal">A</div>
     </div>
 
-    <button class="open-btn" id="openBtn" onclick="openInvitation()">BUKA JEMPUTAN</button>
+    <button class="open-btn" id="openBtn">BUKA JEMPUTAN</button>
   </div>
 </div>
 
@@ -712,8 +712,6 @@ display:none;
 <button id="mus" onclick="toggleAudio()">♫ MUZIK</button>
 
 <script>
-window.addEventListener("DOMContentLoaded", function(){
-
 document.title = DATA.eventTitle + " - " + DATA.groomShort + " & " + DATA.brideShort;
 
 document.getElementById("gateTitle").textContent = DATA.eventTitle;
@@ -751,61 +749,61 @@ programList.innerHTML += `
 </div>`;
 });
 
-document.getElementById("openBtn").onclick = openInvitation;
-
-tick();
-setInterval(tick,1000);
-startDust();
-
-});
-
-let musicOn = false;
-
-function openInvitation(){
 const intro = document.getElementById("intro");
 const page = document.getElementById("page");
-const mus = document.getElementById("mus");
 const bgm = document.getElementById("bgm");
+const mus = document.getElementById("mus");
+let musicOn = false;
 
+document.getElementById("openBtn").addEventListener("click",openInvitation);
+
+function openInvitation(){
 intro.classList.add("open");
 
 setTimeout(()=>{
-intro.style.display = "none";
-page.style.display = "block";
-mus.style.display = "block";
-
-document.querySelectorAll(".reveal").forEach((el,index)=>{
-setTimeout(()=>{
-el.classList.add("in");
-}, index * 120);
-});
+intro.style.display="none";
+page.style.display="block";
+mus.style.display="block";
+initReveal();
 
 bgm.play().then(()=>{
-musicOn = true;
+musicOn=true;
 updateMus();
 }).catch(()=>{});
-
-},3000);
+},3200);
 }
 
 function toggleAudio(){
-const bgm = document.getElementById("bgm");
-
 if(musicOn){
 bgm.pause();
-musicOn = false;
+musicOn=false;
 }else{
 bgm.play().catch(()=>{});
-musicOn = true;
+musicOn=true;
 }
-
 updateMus();
 }
 
 function updateMus(){
-const mus = document.getElementById("mus");
 mus.innerHTML = musicOn ? "♫ MUZIK" : "♪ MUZIK";
 mus.style.opacity = musicOn ? "1" : ".5";
+}
+
+function initReveal(){
+const root=document.getElementById("scroll-inner");
+
+const io=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+setTimeout(()=>{
+e.target.classList.add("in");
+},200);
+io.unobserve(e.target);
+}
+});
+},{root:root,threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 }
 
 const wDate = new Date(DATA.dateISO);
@@ -823,20 +821,23 @@ document.getElementById("cd-m").textContent = pad(Math.floor((diff%36e5)/6e4));
 document.getElementById("cd-s").textContent = pad(Math.floor((diff%6e4)/1e3));
 }
 
-function startDust(){
-const canvas = document.getElementById("dust");
-const ctx = canvas.getContext("2d");
-const shell = document.getElementById("shell");
+tick();
+setInterval(tick,1000);
+
+/* gold dust */
+const canvas=document.getElementById("dust");
+const ctx=canvas.getContext("2d");
+const shell=document.getElementById("shell");
 
 function resize(){
-canvas.width = shell.offsetWidth;
-canvas.height = shell.offsetHeight;
+canvas.width=shell.offsetWidth;
+canvas.height=shell.offsetHeight;
 }
 
 resize();
 window.addEventListener("resize",resize);
 
-const pts = Array.from({length:100},()=>({
+const pts=Array.from({length:100},()=>({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*1.5+.3,
@@ -849,15 +850,15 @@ function frame(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 pts.forEach(p=>{
-p.y += p.vy;
-p.x += p.vx;
+p.y+=p.vy;
+p.x+=p.vx;
 
-if(p.y < 0) p.y = canvas.height;
-if(p.x < 0) p.x = canvas.width;
-if(p.x > canvas.width) p.x = 0;
+if(p.y<0)p.y=canvas.height;
+if(p.x<0)p.x=canvas.width;
+if(p.x>canvas.width)p.x=0;
 
-ctx.globalAlpha = p.a;
-ctx.fillStyle = "#c9983b";
+ctx.globalAlpha=p.a;
+ctx.fillStyle="#c9983b";
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
 ctx.fill();
@@ -867,7 +868,6 @@ requestAnimationFrame(frame);
 }
 
 frame();
-}
 </script>
 
 </body>
