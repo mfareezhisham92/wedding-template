@@ -551,6 +551,16 @@ padding:.35rem .65rem;
 cursor:pointer;
 display:none;
 }
+.tap-layer{
+position:absolute;
+inset:0;
+z-index:20;
+cursor:pointer;
+}
+
+.open-btn{
+z-index:30;
+}  
 </style>
 </head>
 
@@ -564,6 +574,7 @@ display:none;
 <canvas id="dust"></canvas>
 
 <div id="intro">
+  <div class="tap-layer" onclick="openInvitation()"></div>
   <div class="intro-card">
     <p class="g-arabic">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
     <p class="g-walima" id="gateTitle"></p>
@@ -758,19 +769,35 @@ let musicOn = false;
 document.getElementById("openBtn").addEventListener("click",openInvitation);
 
 function openInvitation(){
+
+if(window.invitationOpened) return;
+window.invitationOpened = true;
+
+const intro = document.getElementById("intro");
+const page = document.getElementById("page");
+const mus = document.getElementById("mus");
+const bgm = document.getElementById("bgm");
+
 intro.classList.add("open");
 
 setTimeout(()=>{
-intro.style.display="none";
-page.style.display="block";
-mus.style.display="block";
-initReveal();
+intro.style.display = "none";
+page.style.display = "block";
+mus.style.display = "block";
+
+document.querySelectorAll(".reveal").forEach((el,index)=>{
+setTimeout(()=>{
+el.classList.add("in");
+}, index * 120);
+});
 
 bgm.play().then(()=>{
-musicOn=true;
+musicOn = true;
 updateMus();
 }).catch(()=>{});
-},3200);
+
+},1800);
+
 }
 
 function toggleAudio(){
