@@ -102,121 +102,227 @@ body{display:flex;justify-content:center;background:#060402}
 }
 
 /* ════════════════════════
-   COVER — content splits with panels
+   COVER — premium cinematic
 ════════════════════════ */
 #cover{
-  position:absolute;top:0;left:0;right:0;
-  height:100%;
-  z-index:100;pointer-events:all;
-}
-@media(min-width:500px){#cover{height:820px}}
-
-/* Each panel clips its own half of the content */
-#cvl,#cvr{
-  position:absolute;top:0;bottom:0;width:50%;
+  position:absolute;
+  inset:0;
+  z-index:100;
   overflow:hidden;
-  transition:transform 2s cubic-bezier(.76,0,.24,1);
-}
-#cvl{ left:0; }
-#cvr{ right:0; }
-
-/* Shared dark background for both panels */
-#cvl::before,#cvr::before{
-  content:'';
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 40%,#1e1509 0%,#0e0904 75%);
-  z-index:0;
+  pointer-events:all;
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(201,152,59,.32),transparent 35%),
+    radial-gradient(ellipse at 50% 100%,rgba(201,152,59,.12),transparent 45%),
+    linear-gradient(180deg,#080503 0%,#151006 48%,#070503 100%);
 }
 
-/* Seam line — invisible by default, appears only on click */
-#cvl::after{
-  content:'';
-  position:absolute;top:0;right:0;bottom:0;
-  width:0.5px;
-  background:transparent;
-  transition:background .2s ease;
-  z-index:10;
+#cover.gone{
+  opacity:0;
+  transform:scale(1.04);
+  transition:opacity 1s ease,transform 1s ease;
   pointer-events:none;
 }
-#cover.opening #cvl::after{
-  background:linear-gradient(180deg,
+
+.cover-light{
+  position:absolute;
+  top:-12%;
+  left:50%;
+  width:260px;
+  height:430px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(255,214,112,.38),transparent 68%);
+  filter:blur(20px);
+  animation:lightBreath 4.5s ease-in-out infinite;
+}
+
+.cover-dust::before,
+.cover-dust::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,220,120,.75) 1px,transparent 1px),
+    radial-gradient(circle,rgba(255,220,120,.35) 1px,transparent 1px);
+  background-size:48px 48px,78px 78px;
+  background-position:0 0,22px 28px;
+  animation:coverDust 16s linear infinite;
+  opacity:.35;
+}
+
+.cover-dust::after{
+  animation-duration:24s;
+  filter:blur(1px);
+  opacity:.22;
+}
+
+.cover-sweep{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    115deg,
     transparent 0%,
-    #c9983b66 20%,
-    #c9983b   50%,
-    #c9983b66 80%,
-    transparent 100%);
-}
-
-/* Mandala ornament sits inside each panel */
-.pnl-svg{
-  position:absolute;inset:0;width:200%;
-  height:100%;opacity:.07;pointer-events:none;z-index:1;
-}
-#cvl .pnl-svg{ left:0; }
-#cvr .pnl-svg{ left:-100%; } /* mirror to show right half of same mandala */
-
-/* Content layer inside EACH panel — full width, absolutely placed */
-/* Each panel clips to its half so they share one visual */
-.cvi-wrap{
-  position:absolute;top:0;bottom:0;
-  width:200%; /* full card width inside each 50% panel */
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:2rem 0;
+    transparent 42%,
+    rgba(255,229,157,.55) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  transform:translateX(-120%);
+  opacity:0;
   pointer-events:none;
+}
+
+#cover.opening .cover-sweep{
+  animation:goldSweep 1.15s ease forwards;
+}
+
+#cvi{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem 1.6rem;
+}
+
+#cvi::before{
+  content:"";
+  position:absolute;
+  width:84%;
+  max-width:330px;
+  height:82vh;
+  max-height:680px;
+  border:1px solid rgba(201,152,59,.75);
+  box-shadow:
+    0 0 42px rgba(201,152,59,.18),
+    inset 0 0 35px rgba(201,152,59,.05);
+  animation:coverFloat 5s ease-in-out infinite;
+}
+
+#cvi::after{
+  content:"";
+  position:absolute;
+  width:76%;
+  max-width:300px;
+  height:76vh;
+  max-height:620px;
+  border:1px solid rgba(201,152,59,.25);
+  pointer-events:none;
+}
+
+.cv-ar{
+  font-family:'EB Garamond',serif;
+  color:#c9983b;
+  font-size:clamp(.9rem,3.8vw,1.15rem);
+  line-height:1.9;
+  letter-spacing:.07em;
+  margin-bottom:.9rem;
   z-index:2;
 }
-#cvl .cvi-wrap{ left:0; }
-#cvr .cvi-wrap{ left:-100%; } /* shift so right panel shows right half */
 
-/* Slide panels when open */
-#cover.open #cvl{ transform:translateX(-100%); }
-#cover.open #cvr{ transform:translateX(100%); }
-
-/* Gate dissolves after panels clear */
-#cover.gone{
-  opacity:0;transition:opacity .5s ease;pointer-events:none;
+.cover-line{
+  width:48%;
+  max-width:180px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#c9983b,#transparent);
+  background:linear-gradient(90deg,transparent,#c9983b,transparent);
+  margin:.4rem auto 1rem;
+  box-shadow:0 0 14px rgba(201,152,59,.45);
+  z-index:2;
 }
 
-/* Corner ornaments on left panel only */
-#cvl .corn .cc{ opacity:.6; }
-#cvl .corn .cc.tr,
-#cvl .corn .cc.br{ display:none; }
-#cvr .corn .cc.tl,
-#cvr .corn .cc.bl{ display:none; }
-#cvr .corn .cc{ opacity:.6; }
-
-/* PAGE reveals slowly */
-#page{
-  opacity:0;
-  transform:translateY(40px);
-  transition:opacity 1.4s ease, transform 1.6s cubic-bezier(.16,1,.3,1);
+.cv-lbl{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1.55rem,6vw,2rem);
+  color:#d9b75f;
+  margin-bottom:1.2rem;
+  text-shadow:0 0 18px rgba(201,152,59,.32);
+  z-index:2;
 }
-#page.show{ opacity:1; transform:translateY(0); }
 
-/* SCROLL REVEAL — cinematic slow rise */
-.reveal{
-  opacity:0;
-  transform:translateY(60px);
-  transition:opacity 1.6s cubic-bezier(.16,1,.3,1), transform 1.6s cubic-bezier(.16,1,.3,1);
+.cv-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,7vw,2.35rem);
+  font-weight:500;
+  line-height:1.18;
+  letter-spacing:.12em;
+  margin:.05rem 0;
+  z-index:2;
+  filter:drop-shadow(0 0 12px rgba(201,152,59,.35));
 }
-.reveal.in{ opacity:1; transform:translateY(0); }
 
-/* cover text — shared styles used in .cvi-wrap */
+.cv-amp{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1.4rem,5.5vw,1.8rem);
+  color:#c9983b;
+  display:block;
+  line-height:1.4;
+  animation:floatY 4s ease-in-out infinite;
+  z-index:2;
+}
+
+.cv-date{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1rem,4vw,1.25rem);
+  color:#d8bd75;
+  margin:1.6rem 0 1.3rem;
+  z-index:2;
+}
+
 #buka-btn{
   pointer-events:all;
-  margin-top:1.6rem;
-  background:transparent;border:1px solid #c9983b;color:#c9983bdd;
-  font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.28em;
-  padding:.78rem 2.4rem;cursor:pointer;border-radius:1px;
-  animation:pulse 2.3s ease-in-out infinite;
-  transition:background .3s;-webkit-tap-highlight-color:transparent;
+  z-index:4;
+  background:rgba(0,0,0,.22);
+  border:1px solid #c9983b;
+  color:#f0d060;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,4.5vw,1.2rem);
+  letter-spacing:.08em;
+  padding:.72rem 1.8rem;
+  border-radius:16px;
+  cursor:pointer;
+  animation:btnBreath 2.6s ease-in-out infinite;
+  -webkit-tap-highlight-color:transparent;
 }
-#buka-btn:hover,#buka-btn:active{background:#c9983b1a}
-.cv-lbl{font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;letter-spacing:.32em;color:#c9983bcc;margin-bottom:.9rem;text-transform:uppercase}
-.cv-name{font-family:'Dancing Script',cursive;font-size:clamp(2.7rem,11vw,3.6rem);font-weight:700;line-height:1.1;margin:.05rem 0;letter-spacing:.02em}
-.cv-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.9rem,8vw,2.5rem);color:#c9983b;display:block;line-height:1.5;-webkit-text-fill-color:#c9983b;animation:floatY 4s ease-in-out infinite}
-.cv-date{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.22em;color:#c9983bbb;margin:.7rem 0 .1rem}
+
+@keyframes coverFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+
+@keyframes coverDust{
+  from{background-position:0 0,22px 28px}
+  to{background-position:0 -280px,22px -330px}
+}
+
+@keyframes lightBreath{
+  0%,100%{opacity:.4;transform:translateX(-50%) scale(1)}
+  50%{opacity:.78;transform:translateX(-50%) scale(1.08)}
+}
+
+@keyframes goldSweep{
+  0%{opacity:0;transform:translateX(-120%)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translateX(120%)}
+}
+
+@keyframes btnBreath{
+  0%,100%{
+    box-shadow:
+      0 0 14px rgba(201,152,59,.25),
+      inset 0 0 12px rgba(201,152,59,.08);
+  }
+  50%{
+    box-shadow:
+      0 0 32px rgba(201,152,59,.65),
+      inset 0 0 22px rgba(201,152,59,.18);
+  }
+}
 
 /* ════════════════════════
    SECTIONS
@@ -322,65 +428,28 @@ section:first-child{border-top:none}
 <div id="shell">
 <canvas id="dust"></canvas>
 
-<!-- COVER — content lives inside BOTH panels so it physically tears in two -->
+<!-- COVER -->
 <div id="cover">
-  <!-- LEFT PANEL — clips left half of content -->
-  <div id="cvl">
-    <svg class="pnl-svg" viewBox="0 0 420 844" preserveAspectRatio="xMidYMid slice">
-      <g transform="translate(210,422)">
-        <circle r="280" fill="none" stroke="#c9983b" stroke-width=".6"/>
-        <circle r="200" fill="none" stroke="#c9983b" stroke-width=".4"/>
-        <circle r="120" fill="none" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="0" y1="-300" x2="0" y2="300" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="-300" y1="0" x2="300" y2="0" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="-210" y1="-210" x2="210" y2="210" stroke="#c9983b" stroke-width=".22"/>
-        <line x1="210" y1="-210" x2="-210" y2="210" stroke="#c9983b" stroke-width=".22"/>
-      </g>
-    </svg>
-    <div class="corn">
-      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
-      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
-    </div>
-    <div class="cvi-wrap">
-      <p class="cv-lbl">Walimatul Urus</p>
-      <p class="cv-name gs">Noradam</p>
-      <span class="cv-amp">&amp;</span>
-      <p class="cv-name gs">Nur Hawa</p>
-      <p class="cv-date">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026</p>
-      <div class="lg" style="width:50%;margin:1rem auto 0"></div>
-      <button id="buka-btn">BUKA JEMPUTAN</button>
-    </div>
-  </div>
+  <div class="cover-dust"></div>
+  <div class="cover-light"></div>
+  <div class="cover-sweep"></div>
 
-  <!-- RIGHT PANEL — clips right half of identical content -->
-  <div id="cvr">
-    <svg class="pnl-svg" viewBox="0 0 420 844" preserveAspectRatio="xMidYMid slice">
-      <g transform="translate(210,422)">
-        <circle r="280" fill="none" stroke="#c9983b" stroke-width=".6"/>
-        <circle r="200" fill="none" stroke="#c9983b" stroke-width=".4"/>
-        <circle r="120" fill="none" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="0" y1="-300" x2="0" y2="300" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="-300" y1="0" x2="300" y2="0" stroke="#c9983b" stroke-width=".3"/>
-        <line x1="-210" y1="-210" x2="210" y2="210" stroke="#c9983b" stroke-width=".22"/>
-        <line x1="210" y1="-210" x2="-210" y2="210" stroke="#c9983b" stroke-width=".22"/>
-      </g>
-    </svg>
-    <div class="corn">
-      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
-      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
-    </div>
-    <div class="cvi-wrap">
-      <p class="cv-lbl">Walimatul Urus</p>
-      <p class="cv-name gs">Noradam</p>
-      <span class="cv-amp">&amp;</span>
-      <p class="cv-name gs">Nur Hawa</p>
-      <p class="cv-date">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026</p>
-      <div class="lg" style="width:50%;margin:1rem auto 0"></div>
-      <button style="pointer-events:none;opacity:0;margin-top:1.6rem;padding:.78rem 2.4rem;font-size:.72rem" aria-hidden="true">BUKA JEMPUTAN</button>
-    </div>
+  <div id="cvi">
+    <p class="cv-ar">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+
+    <div class="cover-line"></div>
+
+    <p class="cv-lbl">Walimatul Urus</p>
+
+    <p class="cv-name gs">Noradam</p>
+    <span class="cv-amp">&amp;</span>
+    <p class="cv-name gs">Nur Hawa</p>
+
+    <p class="cv-date">Ahad &nbsp;•&nbsp; 12 Julai 2026</p>
+
+    <button id="buka-btn">BUKA JEMPUTAN</button>
   </div>
 </div>
-
 <!-- SCROLL WRAPPER -->
 <div id="scroll-inner">
   <div class="ftl"></div>
@@ -548,26 +617,35 @@ let dustOn   = false;
 
 /* ── COVER SPLIT ── */
 document.getElementById('buka-btn').addEventListener('click', function(){
-  cover.classList.add('opening');           /* seam glows */
-  setTimeout(()=>{ cover.classList.add('open'); }, 180); /* panels slide + cvi drifts up */
 
-  /* burst gold dust the moment panels start parting */
-  setTimeout(()=>{ burstDust(); }, 200);
+  cover.classList.add('opening');
 
-  /* Show page just as panels finish (1.5s transition) */
   setTimeout(()=>{
     page.style.display = 'block';
     dust.classList.add('show');
     startDust();
     initReveal();
-    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ page.classList.add('show'); }); });
-  }, 1450);
 
-  /* Remove cover fully after page is visible */
-  setTimeout(()=>{ cover.classList.add('gone'); }, 1600);
-  setTimeout(()=>{ cover.style.display = 'none'; }, 2200);
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        page.classList.add('show');
+      });
+    });
+  }, 650);
 
-  bgm.play().then(()=>{ musicOn=true; updateMus(); }).catch(()=>{});
+  setTimeout(()=>{
+    cover.classList.add('gone');
+  }, 900);
+
+  setTimeout(()=>{
+    cover.style.display = 'none';
+  }, 1800);
+
+  bgm.play().then(()=>{
+    musicOn=true;
+    updateMus();
+  }).catch(()=>{});
+
 });
 
 /* ── AUDIO ── */
