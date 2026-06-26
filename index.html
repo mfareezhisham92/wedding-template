@@ -561,6 +561,100 @@ cursor:pointer;
 .open-btn{
 z-index:30;
 }  
+#intro{
+position:absolute;
+inset:0;
+z-index:100;
+background:
+radial-gradient(ellipse at center,#221605 0%,#0b0905 70%);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+text-align:center;
+}
+
+.intro-panel{
+width:86%;
+max-width:330px;
+min-height:620px;
+border:1px solid rgba(201,152,59,.75);
+background:rgba(0,0,0,.28);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:2rem 1.5rem;
+box-shadow:
+0 0 45px rgba(201,152,59,.18),
+inset 0 0 30px rgba(201,152,59,.05);
+transition:1.2s ease;
+}
+
+.intro-panel::before{
+content:"";
+position:absolute;
+width:76%;
+max-width:300px;
+height:570px;
+border:1px solid rgba(201,152,59,.25);
+pointer-events:none;
+}
+
+.intro-title{
+font-family:'Cormorant Garamond',serif;
+font-style:italic;
+font-size:30px;
+color:#c9983b;
+margin-bottom:70px;
+}
+
+.intro-names{
+font-family:'Cinzel',serif;
+font-size:48px;
+font-weight:600;
+letter-spacing:.08em;
+line-height:1.2;
+color:#f3d57b;
+text-shadow:0 0 20px rgba(201,152,59,.3);
+margin-bottom:70px;
+}
+
+.intro-names span{
+display:block;
+font-family:'Cormorant Garamond',serif;
+font-style:italic;
+font-size:32px;
+color:#c9983b;
+margin:8px 0;
+}
+
+.intro-date{
+font-family:'Cormorant Garamond',serif;
+font-size:22px;
+color:#d8bd75;
+margin-bottom:35px;
+}
+
+.intro-btn{
+background:transparent;
+border:1px solid #c9983b;
+color:#c9983b;
+font-family:'Cormorant Garamond',serif;
+font-size:18px;
+padding:.65rem 1.8rem;
+cursor:pointer;
+transition:.3s;
+}
+
+.intro-btn:hover{
+background:rgba(201,152,59,.15);
+}
+
+#intro.open .intro-panel{
+opacity:0;
+transform:translateY(-30px) scale(.96);
+}
 </style>
 </head>
 
@@ -574,27 +668,22 @@ z-index:30;
 <canvas id="dust"></canvas>
 
 <div id="intro">
-  <div class="tap-layer" onclick="openInvitation()"></div>
-  <div class="intro-card">
-    <p class="g-arabic">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-    <p class="g-walima" id="gateTitle"></p>
-    <h1 class="g-names gs" id="gateGroom"></h1>
-    <span class="g-amp">&amp;</span>
-    <h1 class="g-names gs" id="gateBride"></h1>
-  </div>
+  <div class="intro-panel">
 
-  <div class="envelope-wrap">
-    <div class="envelope">
-      <div class="env-back"></div>
-      <div class="env-letter">YOU ARE INVITED</div>
-      <div class="env-flap"></div>
-      <div class="env-left"></div>
-      <div class="env-right"></div>
-      <div class="env-bottom"></div>
-      <div class="seal">A</div>
+    <p class="intro-title">Walimatul Urus</p>
+
+    <div class="intro-names">
+      <div id="gateGroom">ADAM</div>
+      <span>&amp;</span>
+      <div id="gateBride">HAWA</div>
     </div>
 
-    <button class="open-btn" id="openBtn">BUKA JEMPUTAN</button>
+    <p class="intro-date">Ahad&nbsp;&nbsp;12 Julai 2026</p>
+
+    <button class="intro-btn" id="openBtn" onclick="openInvitation()">
+      Buka Jemputan
+    </button>
+
   </div>
 </div>
 
@@ -770,9 +859,6 @@ document.getElementById("openBtn").addEventListener("click",openInvitation);
 
 function openInvitation(){
 
-if(window.invitationOpened) return;
-window.invitationOpened = true;
-
 const intro = document.getElementById("intro");
 const page = document.getElementById("page");
 const mus = document.getElementById("mus");
@@ -796,7 +882,7 @@ musicOn = true;
 updateMus();
 }).catch(()=>{});
 
-},1800);
+},1000);
 
 }
 
