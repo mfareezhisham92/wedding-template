@@ -1,525 +1,716 @@
 <!DOCTYPE html>
-
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Walimatul Urus</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond&display=swap" rel="stylesheet">
-
-<script>
-const DATA = {
-  eventTitle: "Walimatul Urus",
-  groomShort: "ADAM",
-  brideShort: "HAWA",
-
-  groomFull: "Noradam Bin Ahmad",
-  brideFull: "Nur Hawa Binti Ali",
-
-  parent1: "Ahmad Bin Abdullah",
-  parent2: "Fatimah Binti Abu",
-
-  date: "Ahad, 12 Julai 2026",
-  dateISO: "2026-07-12T11:00:00+08:00",
-  hijri: "27 Muharram 1448H",
-  time: "11:00 Pagi — 4:00 Petang",
-
-  venue: "Dewan Seri Kenanga",
-  address: "No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor",
-
-  maps: "https://maps.google.com",
-  waze: "https://waze.com",
-  whatsapp: "https://wa.me/60123456789"
-};
-</script>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>Walimatul Urus — Noradam & Nur Hawa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%;background:#060402;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{display:flex;justify-content:center;background:#060402}
 
-html,body{
-width:100%;
-height:100%;
-background:#050302;
-font-family:'Cormorant Garamond',serif;
-color:#e8d6a8;
-overflow:hidden;
-}
-
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
+/* SHELL */
 #shell{
-width:100%;
-max-width:390px;
-height:100dvh;
-background:#0b0905;
-position:relative;
-overflow:hidden;
+  width:100%;max-width:420px;
+  position:relative;background:#0b0905;
+  overflow:hidden;
 }
-
 @media(min-width:500px){
-#shell{
-height:820px;
-border-radius:40px;
-box-shadow:0 0 80px rgba(201,152,59,.25);
-}
-}
-
-/* INTRO */
-#intro{
-position:absolute;
-inset:0;
-z-index:50;
-display:flex;
-align-items:center;
-justify-content:center;
-background:
-radial-gradient(circle at top,rgba(201,152,59,.22),transparent 32%),
-linear-gradient(180deg,#0b0905,#160d03,#0b0905);
-transition:opacity 1s ease,transform 1s ease;
+  body{align-items:flex-start;padding:2.5rem 0;min-height:100dvh}
+  #shell{
+    border-radius:44px;
+    box-shadow:
+      0 0 0 2px #c9983b,
+      0 0 0 10px #0c0905,
+      0 0 0 12px #c9983b44,
+      0 0 0 22px #0a0804,
+      0 0 60px #c9983b18,
+      0 40px 100px rgba(0,0,0,.95);
+  }
+  #shell::before{
+    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:100px;height:28px;background:#080604;
+    border-radius:0 0 16px 16px;z-index:300;pointer-events:none;
+  }
 }
 
-#intro.hide{
-opacity:0;
-transform:scale(1.04);
-pointer-events:none;
+/* SCROLL INNER - this is what scrolls */
+#scroll-inner{
+  width:100%;
+  height:100dvh;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+}
+#scroll-inner::-webkit-scrollbar{display:none}
+@media(min-width:500px){
+  #scroll-inner{height:820px}
 }
 
-.intro-card{
-width:84%;
-max-width:320px;
-height:82vh;
-max-height:680px;
-border:1px solid rgba(201,152,59,.7);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:30px 22px;
-position:relative;
-animation:floatCard 5s ease-in-out infinite;
+/* DUST CANVAS - fixed within shell */
+#dust{
+  position:absolute;inset:0;
+  pointer-events:none;z-index:10;
+  opacity:0;transition:opacity 1s ease;
+}
+#dust.show{opacity:1}
+
+/* ANIMATIONS */
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spinR{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+
+/* GOLD SHIMMER TEXT */
+.gs{
+  background:linear-gradient(110deg,#8a5c10 0%,#c9983b 18%,#f0d878 38%,#fffbe0 50%,#f0d060 62%,#c9983b 82%,#8a5c10 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 5s linear infinite;
 }
 
-.intro-card::before{
-content:"";
-position:absolute;
-inset:12px;
-border:1px solid rgba(201,152,59,.25);
-pointer-events:none;
-}
-
-.intro-card::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(120deg,transparent 35%,rgba(255,230,160,.18) 50%,transparent 65%);
-transform:translateX(-120%);
-animation:shine 5s ease-in-out infinite;
-pointer-events:none;
-}
-
-.intro-small{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(28px,8vw,38px);
-color:#d6a84a;
-margin-bottom:42px;
-text-shadow:0 0 18px rgba(201,152,59,.35);
-}
-
-.intro-names{
-font-family:'Cinzel',serif;
-font-size:clamp(34px,9vw,48px);
-font-weight:500;
-letter-spacing:.12em;
-line-height:1.2;
-background:linear-gradient(110deg,#9d6d16,#d6a84a,#fff1b0,#d6a84a,#9d6d16);
-background-size:300% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:goldMove 5s linear infinite;
-filter:drop-shadow(0 0 12px rgba(201,152,59,.32));
-}
-
-.intro-names span{
-display:block;
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(24px,7vw,34px);
-letter-spacing:0;
-margin:8px 0;
-}
-
-.intro-date{
-font-size:clamp(19px,5vw,24px);
-font-style:italic;
-color:#e0c27a;
-margin:44px 0 34px;
-}
-
-.intro-btn{
-background:rgba(0,0,0,.18);
-border:1px solid #d6a84a;
-color:#f3d57b;
-font-family:'Cormorant Garamond',serif;
-font-size:clamp(20px,5vw,25px);
-padding:12px 36px;
-border-radius:16px;
-cursor:pointer;
-animation:btnGlow 2.5s ease-in-out infinite;
-}
-
-.dust{
-position:absolute;
-inset:0;
-pointer-events:none;
-background-image:radial-gradient(circle,rgba(255,221,130,.7) 1px,transparent 1px);
-background-size:46px 46px;
-animation:dustMove 14s linear infinite;
-opacity:.32;
-}
-
-/* MAIN */
-#main{
-display:none;
-height:100%;
-overflow-y:auto;
-scroll-behavior:smooth;
-}
-
-section{
-min-height:100dvh;
-padding:48px 24px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:#110d07;
-border-top:1px solid rgba(201,152,59,.12);
-}
-
-section:nth-child(even){
-background:#0b0905;
-}
-
+/* SCROLL REVEAL — cinematic slow rise from below */
 .reveal{
-opacity:0;
-transform:translateY(70px);
-transition:opacity 1.8s ease,transform 1.8s cubic-bezier(.16,.84,.44,1);
+  opacity:0;
+  transform:translateY(60px);
+  transition:opacity 1.6s cubic-bezier(.16,1,.3,1), transform 1.6s cubic-bezier(.16,1,.3,1);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* SHARED */
+.lg{width:100%;height:1px;background:linear-gradient(90deg,transparent,#c9983b55,#c9983b,#c9983b55,transparent);margin:.5rem 0}
+.orn{text-align:center;color:#c9983b44;font-size:.9rem;letter-spacing:.5em;margin:.3rem 0}
+.sec-lbl{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.32em;color:#c9983b77;margin-bottom:.25rem;text-align:center}
+.corn{position:absolute;inset:0;pointer-events:none;z-index:2}
+.cc{position:absolute;width:28px;height:28px;opacity:.5}
+.cc.tl{top:12px;left:12px}
+.cc.tr{top:12px;right:12px;transform:scaleX(-1)}
+.cc.bl{bottom:12px;left:12px;transform:scaleY(-1)}
+.cc.br{bottom:12px;right:12px;transform:scale(-1,-1)}
+
+/* TOP LINE */
+.ftl{
+  position:sticky;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,#c9983b33,#c9983b55,#c9983b33,transparent);
+  z-index:50;pointer-events:none;flex-shrink:0;
 }
 
-.reveal.show{
-opacity:1;
-transform:translateY(0);
+/* ════════════════════════
+   COVER — content splits with panels
+════════════════════════ */
+#cover{
+  position:absolute;top:0;left:0;right:0;
+  height:100%;
+  z-index:100;pointer-events:all;
+}
+@media(min-width:500px){#cover{height:820px}}
+
+/* Each panel clips its own half of the content */
+#cvl,#cvr{
+  position:absolute;top:0;bottom:0;width:50%;
+  overflow:hidden;
+  transition:transform 2s cubic-bezier(.76,0,.24,1);
+}
+#cvl{ left:0; }
+#cvr{ right:0; }
+
+/* Shared dark background for both panels */
+#cvl::before,#cvr::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,#1e1509 0%,#0e0904 75%);
+  z-index:0;
 }
 
-h2{
-font-family:'Cinzel',serif;
-font-size:24px;
-letter-spacing:.08em;
-color:#d6a84a;
-margin-bottom:18px;
+/* Seam line — invisible by default, appears only on click */
+#cvl::after{
+  content:'';
+  position:absolute;top:0;right:0;bottom:0;
+  width:0.5px;
+  background:transparent;
+  transition:background .2s ease;
+  z-index:10;
+  pointer-events:none;
+}
+#cover.opening #cvl::after{
+  background:linear-gradient(180deg,
+    transparent 0%,
+    #c9983b66 20%,
+    #c9983b   50%,
+    #c9983b66 80%,
+    transparent 100%);
 }
 
-.gold{
-color:#d6a84a;
+/* Mandala ornament sits inside each panel */
+.pnl-svg{
+  position:absolute;inset:0;width:200%;
+  height:100%;opacity:.07;pointer-events:none;z-index:1;
+}
+#cvl .pnl-svg{ left:0; }
+#cvr .pnl-svg{ left:-100%; } /* mirror to show right half of same mandala */
+
+/* Content layer inside EACH panel — full width, absolutely placed */
+/* Each panel clips to its half so they share one visual */
+.cvi-wrap{
+  position:absolute;top:0;bottom:0;
+  width:200%; /* full card width inside each 50% panel */
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:2rem 0;
+  pointer-events:none;
+  z-index:2;
+}
+#cvl .cvi-wrap{ left:0; }
+#cvr .cvi-wrap{ left:-100%; } /* shift so right panel shows right half */
+
+/* Slide panels when open */
+#cover.open #cvl{ transform:translateX(-100%); }
+#cover.open #cvr{ transform:translateX(100%); }
+
+/* Gate dissolves after panels clear */
+#cover.gone{
+  opacity:0;transition:opacity .5s ease;pointer-events:none;
 }
 
-.line{
-width:160px;
-height:1px;
-background:linear-gradient(90deg,transparent,#d6a84a,transparent);
-margin:18px auto;
-}
+/* Corner ornaments on left panel only */
+#cvl .corn .cc{ opacity:.6; }
+#cvl .corn .cc.tr,
+#cvl .corn .cc.br{ display:none; }
+#cvr .corn .cc.tl,
+#cvr .corn .cc.bl{ display:none; }
+#cvr .corn .cc{ opacity:.6; }
 
-p{
-font-size:17px;
-line-height:1.9;
-color:#d8c08a;
+/* PAGE reveals slowly */
+#page{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity 1.4s ease, transform 1.6s cubic-bezier(.16,1,.3,1);
 }
+#page.show{ opacity:1; transform:translateY(0); }
 
-.names-main{
-font-family:'Cinzel',serif;
-font-size:28px;
-letter-spacing:.08em;
-color:#d6a84a;
-line-height:1.5;
+/* SCROLL REVEAL — cinematic slow rise */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:opacity 1.6s cubic-bezier(.16,1,.3,1), transform 1.6s cubic-bezier(.16,1,.3,1);
 }
+.reveal.in{ opacity:1; transform:translateY(0); }
 
-.detail{
-width:100%;
-border:1px solid rgba(201,152,59,.28);
-padding:18px;
-margin:10px 0;
-background:rgba(255,255,255,.03);
+/* cover text — shared styles used in .cvi-wrap */
+#buka-btn{
+  pointer-events:all;
+  margin-top:1.6rem;
+  background:transparent;border:1px solid #c9983b;color:#c9983bdd;
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.28em;
+  padding:.78rem 2.4rem;cursor:pointer;border-radius:1px;
+  animation:pulse 2.3s ease-in-out infinite;
+  transition:background .3s;-webkit-tap-highlight-color:transparent;
 }
+#buka-btn:hover,#buka-btn:active{background:#c9983b1a}
+.cv-lbl{font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;letter-spacing:.32em;color:#c9983bcc;margin-bottom:.9rem;text-transform:uppercase}
+.cv-name{font-family:'Dancing Script',cursive;font-size:clamp(2.7rem,11vw,3.6rem);font-weight:700;line-height:1.1;margin:.05rem 0;letter-spacing:.02em}
+.cv-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.9rem,8vw,2.5rem);color:#c9983b;display:block;line-height:1.5;-webkit-text-fill-color:#c9983b;animation:floatY 4s ease-in-out infinite}
+.cv-date{font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.22em;color:#c9983bbb;margin:.7rem 0 .1rem}
 
-.label{
-font-family:'Cinzel',serif;
-font-size:11px;
-letter-spacing:.22em;
-color:#c9983b99;
-margin-bottom:6px;
+/* ════════════════════════
+   SECTIONS
+════════════════════════ */
+section{
+  padding:2.8rem 1.6rem;
+  position:relative;text-align:center;
+  border-top:.5px solid #c9983b0d;
 }
+section:first-child{border-top:none}
 
-.btn{
-display:block;
-width:100%;
-max-width:280px;
-text-decoration:none;
-border:1px solid rgba(201,152,59,.45);
-color:#d6a84a;
-padding:13px 16px;
-margin:10px auto;
-font-family:'Cinzel',serif;
-font-size:12px;
-letter-spacing:.16em;
+/* S1 BISMILLAH */
+#s-bism{
+  background:radial-gradient(ellipse at 50% 0%,#1c1408 0%,#0b0905 65%);
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
+@media(min-width:500px){#s-bism{min-height:820px}}
+.bism-ar{font-family:'EB Garamond',serif;font-size:clamp(1rem,4vw,1.3rem);color:#c9983b;line-height:2;letter-spacing:.07em}
+.bism-tr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.75rem,2.7vw,.88rem);color:#7a6040;margin-top:.3rem}
+.par-name{font-family:'Cinzel',serif;font-size:clamp(.92rem,3.5vw,1.1rem);font-weight:500;letter-spacing:.04em;color:#c9983b;text-align:center;line-height:1.35}
+.par-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.2rem,4.8vw,1.6rem);display:block;text-align:center;line-height:1.5;color:#c9983b77;-webkit-text-fill-color:#c9983b88}
+.inv-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.8rem,3vw,.95rem);color:#9a8055;line-height:2.1;text-align:center}
+.inv-sal{font-family:'Cinzel',serif;font-style:normal;font-size:clamp(.5rem,1.8vw,.58rem);letter-spacing:.14em;color:#c9983b88;display:block;margin:.2rem 0}
+.child-name{font-family:'Dancing Script',cursive;font-size:clamp(1.4rem,5.5vw,1.9rem);font-weight:700;text-align:center;line-height:1.2}
+.child-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.6rem,6.5vw,2.1rem);color:#c9983b;display:block;text-align:center;line-height:1.3;-webkit-text-fill-color:#c9983b;animation:floatY 4.5s ease-in-out infinite}
+.hint{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.28em;color:#c9983b33;animation:pulse 2.5s ease-in-out infinite;margin-top:1.5rem}
 
-.countdown{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-width:100%;
-margin-top:20px;
-}
+/* S2 BUTIRAN */
+#s-det{background:#0f0c07}
+.det-ttl{font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,4.2vw,1.5rem);font-weight:700;color:#e8c86a;margin:.3rem 0}
+.dct{text-align:center;padding:.6rem 0}
+.dct-lbl{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.26em;color:#c9983b55;text-transform:uppercase;margin-bottom:.2rem}
+.dct-val{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1rem,3.8vw,1.2rem);color:#e0cc99;line-height:1.5}
+.dct-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.7rem,2.6vw,.82rem);color:#6a5030}
 
-.count-box{
-border:1px solid rgba(201,152,59,.28);
-padding:12px 4px;
-}
+/* S3 ATURCARA */
+#s-ac{background:#0b0905}
+.ac-ttl{font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,4.2vw,1.5rem);font-weight:700;color:#e8c86a;margin:.3rem 0}
+.ac-row{text-align:center;padding:.56rem 0;border-bottom:.5px solid #c9983b14}
+.ac-row:last-child{border-bottom:none}
+.ac-t{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;color:#c9983b;display:block;margin-bottom:.15rem}
+.ac-e{font-family:'Cormorant Garamond',serif;font-size:clamp(.88rem,3.2vw,1rem);color:#c8b070}
 
-.count-box strong{
-display:block;
-font-family:'Cinzel',serif;
-font-size:22px;
-color:#d6a84a;
+/* S4 LOKASI */
+#s-lok{background:#0f0c07}
+.lok-ttl{font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,4.2vw,1.5rem);font-weight:700;color:#e8c86a;margin:.3rem 0}
+.lok-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(.92rem,3.5vw,1.08rem);color:#e0cc99;line-height:1.5;margin:.28rem 0}
+.lok-addr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.72rem,2.6vw,.84rem);color:#6a5030;line-height:1.75;margin-bottom:.9rem}
+.bgrp{display:flex;flex-direction:column;gap:.35rem;margin-top:.7rem}
+.bg{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  background:linear-gradient(135deg,#1a1308,#271900);
+  border:1px solid #c9983b44;color:#c9983b;
+  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.18em;
+  padding:.68rem 1rem;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:border-color .3s,color .3s;position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
 }
+.bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c9983b18,transparent);opacity:0;transition:opacity .3s}
+.bg:hover::after,.bg:active::after{opacity:1}
+.bg:hover,.bg:active{border-color:#c9983b;color:#f0d060}
+.rsvp-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.78rem,2.9vw,.92rem);color:#7a6040;line-height:1.85;margin:.7rem 0 .5rem;text-align:center}
 
-.count-box span{
-font-size:10px;
-letter-spacing:.12em;
-}
+/* S5 COUNTDOWN */
+#s-cd{background:radial-gradient(ellipse at 50% 60%,#1a1308 0%,#0b0905 70%)}
+.cd-ttl{font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,4.2vw,1.5rem);font-weight:700;color:#e8c86a;margin:.3rem 0}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.42rem;margin:.6rem 0}
+.cd-cell{background:linear-gradient(145deg,#1c1409,#120f06);border:.5px solid #c9983b2a;border-radius:3px;padding:.65rem .2rem;text-align:center;position:relative;overflow:hidden}
+.cd-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c9983b08,transparent)}
+.cd-num{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5.5vw,1.9rem);font-weight:600;color:#c9983b;line-height:1;display:block}
+.cd-unit{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.17em;color:#c9983b55;text-transform:uppercase;margin-top:.28rem;display:block}
+.cd-done{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.95rem,3.5vw,1.1rem);color:#c9983b;display:none;margin:.5rem 0}
 
-#musicBtn{
-position:fixed;
-right:16px;
-bottom:16px;
-z-index:60;
-display:none;
-background:#120d05;
-border:1px solid rgba(201,152,59,.4);
-color:#d6a84a;
-padding:8px 12px;
-font-size:12px;
-}
+/* S6 AYAT */
+#s-ayat{background:#100d07}
+.ay-ar{font-family:'EB Garamond',serif;font-size:clamp(.95rem,3.8vw,1.25rem);color:#c9983b;line-height:2.3;letter-spacing:.05em;margin:.9rem 0 .6rem}
+.ay-tr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.78rem,2.9vw,.92rem);color:#8a7050;line-height:1.95;margin-bottom:.45rem}
+.ay-ref{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.22em;color:#c9983b3a}
 
-/* ANIMATION */
-@keyframes floatCard{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-7px)}
-}
+/* S7 CLOSING */
+#s-cls{background:radial-gradient(ellipse at 50% 100%,#1c1408 0%,#0b0905 65%);padding:3.2rem 1.6rem 5rem}
+.cls-big{font-family:'Cinzel',serif;font-size:clamp(1.3rem,5.5vw,1.9rem);font-weight:600;letter-spacing:.06em;line-height:1.2;margin:.5rem 0}
+.cls-thanks{font-family:'Cormorant Garamond',serif;font-size:clamp(.88rem,3.2vw,1rem);color:#7a6040;line-height:1.95;margin:.55rem 0;font-style:italic}
+.cls-names{font-family:'Dancing Script',cursive;font-size:clamp(1.4rem,5.5vw,1.9rem);font-weight:700;letter-spacing:.02em;margin:.5rem 0}
+.cls-dt{font-family:'Cinzel',serif;font-size:clamp(.58rem,2.1vw,.7rem);letter-spacing:.22em;color:#c9983b88;margin-top:.45rem}
 
-@keyframes shine{
-0%{transform:translateX(-120%)}
-45%{transform:translateX(120%)}
-100%{transform:translateX(120%)}
+/* MUSIC BTN */
+#mus{
+  position:fixed;bottom:16px;right:14px;z-index:500;
+  background:#120d05ee;border:.5px solid #c9983b44;
+  color:#c9983b;font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.14em;
+  padding:.36rem .65rem;border-radius:2px;cursor:pointer;
+  backdrop-filter:blur(8px);transition:color .3s,border-color .3s;
+  -webkit-tap-highlight-color:transparent;
 }
-
-@keyframes goldMove{
-0%{background-position:200% center}
-100%{background-position:-200% center}
-}
-
-@keyframes btnGlow{
-0%,100%{box-shadow:0 0 12px rgba(201,152,59,.25)}
-50%{box-shadow:0 0 30px rgba(201,152,59,.65)}
-}
-
-@keyframes dustMove{
-from{background-position:0 0}
-to{background-position:0 -260px}
-}
+#mus:hover{color:#f0d060;border-color:#c9983b}
 </style>
-
 </head>
-
 <body>
-
-<audio id="bgm" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"/></audio>
 
 <div id="shell">
+<canvas id="dust"></canvas>
 
-<div id="intro">
-  <div class="dust"></div>
-
-  <div class="intro-card">
-    <div class="intro-small" id="introTitle"></div>
-
-```
-<div class="intro-names">
-  <div id="introGroom"></div>
-  <span>&amp;</span>
-  <div id="introBride"></div>
-</div>
-
-<div class="intro-date" id="introDate"></div>
-
-<button class="intro-btn" onclick="openInvitation()">
-  Buka Jemputan
-</button>
-```
-
-  </div>
-</div>
-
-<div id="main">
-
-<section>
-  <div class="reveal">
-    <p class="gold">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-    <div class="line"></div>
-    <p>Dengan penuh kesyukuran, kami mempersilakan kehadiran anda ke majlis perkahwinan anakanda kami</p>
-    <div class="line"></div>
-    <div class="names-main" id="mainNames"></div>
-  </div>
-</section>
-
-<section>
-  <div class="reveal">
-    <h2>Butiran Majlis</h2>
-
-```
-<div class="detail">
-  <div class="label">TARIKH</div>
-  <p id="dateText"></p>
-  <p id="hijriText"></p>
-</div>
-
-<div class="detail">
-  <div class="label">MASA</div>
-  <p id="timeText"></p>
-</div>
-
-<div class="detail">
-  <div class="label">LOKASI</div>
-  <p id="venueText"></p>
-  <p id="addressText"></p>
-</div>
-```
-
-  </div>
-</section>
-
-<section>
-  <div class="reveal">
-    <h2>Kiraan Masa</h2>
-    <div class="countdown">
-      <div class="count-box"><strong id="d">00</strong><span>HARI</span></div>
-      <div class="count-box"><strong id="h">00</strong><span>JAM</span></div>
-      <div class="count-box"><strong id="m">00</strong><span>MINIT</span></div>
-      <div class="count-box"><strong id="s">00</strong><span>SAAT</span></div>
+<!-- COVER — content lives inside BOTH panels so it physically tears in two -->
+<div id="cover">
+  <!-- LEFT PANEL — clips left half of content -->
+  <div id="cvl">
+    <svg class="pnl-svg" viewBox="0 0 420 844" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(210,422)">
+        <circle r="280" fill="none" stroke="#c9983b" stroke-width=".6"/>
+        <circle r="200" fill="none" stroke="#c9983b" stroke-width=".4"/>
+        <circle r="120" fill="none" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="0" y1="-300" x2="0" y2="300" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="-300" y1="0" x2="300" y2="0" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="-210" y1="-210" x2="210" y2="210" stroke="#c9983b" stroke-width=".22"/>
+        <line x1="210" y1="-210" x2="-210" y2="210" stroke="#c9983b" stroke-width=".22"/>
+      </g>
+    </svg>
+    <div class="corn">
+      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+    </div>
+    <div class="cvi-wrap">
+      <p class="cv-lbl">Walimatul Urus</p>
+      <p class="cv-name gs">Noradam</p>
+      <span class="cv-amp">&amp;</span>
+      <p class="cv-name gs">Nur Hawa</p>
+      <p class="cv-date">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026</p>
+      <div class="lg" style="width:50%;margin:1rem auto 0"></div>
+      <button id="buka-btn">BUKA JEMPUTAN</button>
     </div>
   </div>
-</section>
 
-<section>
-  <div class="reveal">
-    <h2>Lokasi & RSVP</h2>
-    <a class="btn" id="mapsBtn" target="_blank">LIHAT LOKASI</a>
-    <a class="btn" id="wazeBtn" target="_blank">BUKA DI WAZE</a>
-    <a class="btn" id="rsvpBtn" target="_blank">RSVP WHATSAPP</a>
+  <!-- RIGHT PANEL — clips right half of identical content -->
+  <div id="cvr">
+    <svg class="pnl-svg" viewBox="0 0 420 844" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(210,422)">
+        <circle r="280" fill="none" stroke="#c9983b" stroke-width=".6"/>
+        <circle r="200" fill="none" stroke="#c9983b" stroke-width=".4"/>
+        <circle r="120" fill="none" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="0" y1="-300" x2="0" y2="300" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="-300" y1="0" x2="300" y2="0" stroke="#c9983b" stroke-width=".3"/>
+        <line x1="-210" y1="-210" x2="210" y2="210" stroke="#c9983b" stroke-width=".22"/>
+        <line x1="210" y1="-210" x2="-210" y2="210" stroke="#c9983b" stroke-width=".22"/>
+      </g>
+    </svg>
+    <div class="corn">
+      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width="1.5"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width="1"/></svg>
+    </div>
+    <div class="cvi-wrap">
+      <p class="cv-lbl">Walimatul Urus</p>
+      <p class="cv-name gs">Noradam</p>
+      <span class="cv-amp">&amp;</span>
+      <p class="cv-name gs">Nur Hawa</p>
+      <p class="cv-date">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026</p>
+      <div class="lg" style="width:50%;margin:1rem auto 0"></div>
+      <button style="pointer-events:none;opacity:0;margin-top:1.6rem;padding:.78rem 2.4rem;font-size:.72rem" aria-hidden="true">BUKA JEMPUTAN</button>
+    </div>
   </div>
-</section>
-
-<section>
-  <div class="reveal">
-    <h2>Terima Kasih</h2>
-    <p>Kehadiran dan doa restu anda amat kami hargai.</p>
-    <div class="line"></div>
-    <p class="gold" id="closingNames"></p>
-  </div>
-</section>
-
 </div>
 
-</div>
+<!-- SCROLL WRAPPER -->
+<div id="scroll-inner">
+  <div class="ftl"></div>
+  <div id="page" style="display:none">
 
-<button id="musicBtn" onclick="toggleMusic()">♫ Muzik</button>
+  <!-- S1 BISMILLAH -->
+  <section id="s-bism">
+    <div class="corn">
+      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+    </div>
+    <!-- spinning mandala bg -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.05" viewBox="0 0 420 700" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(210,350)">
+        <g style="animation:spin 80s linear infinite;transform-origin:0 0">
+          <circle r="280" fill="none" stroke="#c9983b" stroke-width=".7"/>
+          <circle r="220" fill="none" stroke="#c9983b" stroke-width=".5"/>
+          <line x1="0" y1="-290" x2="0" y2="290" stroke="#c9983b" stroke-width=".4"/>
+          <line x1="-290" y1="0" x2="290" y2="0" stroke="#c9983b" stroke-width=".4"/>
+          <line x1="-205" y1="-205" x2="205" y2="205" stroke="#c9983b" stroke-width=".3"/>
+          <line x1="205" y1="-205" x2="-205" y2="205" stroke="#c9983b" stroke-width=".3"/>
+        </g>
+        <g style="animation:spinR 50s linear infinite;transform-origin:0 0">
+          <circle r="130" fill="none" stroke="#c9983b" stroke-width=".4" stroke-dasharray="4 6"/>
+          <circle r="75" fill="none" stroke="#c9983b" stroke-width=".3" stroke-dasharray="3 5"/>
+        </g>
+      </g>
+    </svg>
+
+    <p class="bism-ar reveal">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1575;&#1604;&#1604;&#1607;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1606;&#1616; &#1575;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1618;&#1605;&#1616;</p>
+    <p class="bism-tr reveal">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang</p>
+    <div class="lg reveal" style="width:55%;margin:1.1rem auto"></div>
+
+    <p class="par-name reveal">Ahmad Bin Abdullah</p>
+    <span class="par-amp reveal">&amp;</span>
+    <p class="par-name reveal">Fatimah Binti Abu</p>
+    <div class="lg reveal" style="width:55%;margin:1.1rem auto"></div>
+
+    <p class="inv-body reveal">Dengan penuh kesyukuran, kami mempersilakan<br>
+      <span class="inv-sal">Dato&#x27;&nbsp;|&nbsp;Datin&nbsp;|&nbsp;Tuan&nbsp;|&nbsp;Puan&nbsp;|&nbsp;Encik&nbsp;|&nbsp;Cik</span>
+      seisi keluarga hadir ke majlis perkahwinan anakanda kami
+    </p>
+    <div class="lg reveal" style="width:55%;margin:1.1rem auto"></div>
+
+    <p class="child-name gs reveal">Noradam Bin Ahmad</p>
+    <span class="child-amp reveal">&amp;</span>
+    <p class="child-name gs reveal">Nur Hawa Binti Ali</p>
+    <p class="hint reveal">&#8595; &nbsp; SCROLL &nbsp; &#8595;</p>
+  </section>
+
+  <!-- S2 BUTIRAN -->
+  <section id="s-det">
+    <p class="sec-lbl reveal">&#8212; Butiran Majlis &#8212;</p>
+    <div class="lg reveal"></div>
+    <p class="det-ttl gs reveal">Majlis Perkahwinan</p>
+    <div class="dct reveal">
+      <p class="dct-lbl">&#128197; Tarikh</p>
+      <p class="dct-val">Ahad, 12 Julai 2026</p>
+      <p class="dct-sub">27 Muharram 1448H</p>
+    </div>
+    <div class="lg reveal" style="width:38%;margin:.5rem auto"></div>
+    <div class="dct reveal">
+      <p class="dct-lbl">&#128336; Masa</p>
+      <p class="dct-val">11:00 Pagi &#8212; 4:00 Petang</p>
+      <p class="dct-sub">Majlis Makan Tengah Hari</p>
+    </div>
+    <div class="lg reveal" style="width:38%;margin:.5rem auto"></div>
+    <div class="dct reveal">
+      <p class="dct-lbl">&#128205; Lokasi</p>
+      <p class="dct-val">Dewan Seri Kenanga</p>
+      <p class="dct-sub">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
+    </div>
+  </section>
+
+  <!-- S3 ATURCARA -->
+  <section id="s-ac">
+    <p class="sec-lbl reveal">&#8212; Aturcara Majlis &#8212;</p>
+    <div class="lg reveal"></div>
+    <p class="ac-ttl gs reveal">Perjalanan Majlis</p>
+    <div class="ac-row reveal"><span class="ac-t">10:30 am</span><span class="ac-e">Ketibaan Tetamu Jemputan</span></div>
+    <div class="ac-row reveal"><span class="ac-t">11:00 am</span><span class="ac-e">Bersanding Pengantin</span></div>
+    <div class="ac-row reveal"><span class="ac-t">12:00 pm</span><span class="ac-e">Makan Tengah Hari Dihidangkan</span></div>
+    <div class="ac-row reveal"><span class="ac-t">1:30 pm</span><span class="ac-e">Hiburan &amp; Persembahan</span></div>
+    <div class="ac-row reveal"><span class="ac-t">3:30 pm</span><span class="ac-e">Majlis Bersurai</span></div>
+  </section>
+
+  <!-- S4 LOKASI & RSVP -->
+  <section id="s-lok">
+    <p class="sec-lbl reveal">&#8212; Lokasi &amp; RSVP &#8212;</p>
+    <div class="lg reveal"></div>
+    <p class="lok-ttl gs reveal">Tempat Majlis</p>
+    <p class="lok-name reveal">Dewan Seri Kenanga</p>
+    <p class="lok-addr reveal">No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor</p>
+    <div class="bgrp reveal">
+      <a class="bg" href="https://maps.google.com/?q=Dewan+Seri+Kenanga+Shah+Alam" target="_blank" rel="noopener">&#128205; &nbsp; LIHAT LOKASI</a>
+      <a class="bg" href="https://waze.com/ul?q=Dewan+Seri+Kenanga+Shah+Alam" target="_blank" rel="noopener">&#128506; &nbsp; BUKA DI WAZE</a>
+    </div>
+    <div class="lg reveal" style="margin-top:1.3rem"></div>
+    <p class="lok-ttl gs reveal" style="margin-top:.8rem">RSVP</p>
+    <p class="rsvp-note reveal">Sila sahkan kehadiran anda</p>
+    <div class="bgrp reveal">
+      <a class="bg" href="https://wa.me/60123456789?text=Assalamualaikum%2C+saya+akan+hadir+ke+majlis+Noradam+%26+Nur+Hawa+insyaAllah." target="_blank" rel="noopener">&#10003; &nbsp; YA, SAYA HADIR</a>
+    </div>
+  </section>
+
+  <!-- S5 COUNTDOWN -->
+  <section id="s-cd">
+    <p class="sec-lbl reveal">&#8212; Kiraan Masa &#8212;</p>
+    <div class="lg reveal"></div>
+    <p class="cd-ttl gs reveal">Hari Bahagia Menjelang Tiba</p>
+    <div class="cd-grid reveal" id="cd-grid">
+      <div class="cd-cell"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">Hari</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">Jam</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">Minit</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">Saat</span></div>
+    </div>
+    <p class="cd-done" id="cd-done">Alhamdulillah &#8212; Hari yang dinantikan telah tiba!</p>
+  </section>
+
+  <!-- S6 AYAT -->
+  <section id="s-ayat">
+    <div class="orn reveal">&#8212; &#10022; &#8212;</div>
+    <p class="ay-ar reveal">&#1608;&#1614;&#1605;&#1616;&#1606;&#1618; &#1570;&#1610;&#1614;&#1575;&#1578;&#1616;&#1607;&#1616; &#1571;&#1614;&#1606;&#1618; &#1582;&#1614;&#1604;&#1614;&#1602;&#1614; &#1604;&#1614;&#1603;&#1615;&#1605; &#1605;&#1616;&#1617;&#1606;&#1618; &#1571;&#1614;&#1606;&#1618;&#1601;&#1615;&#1587;&#1616;&#1603;&#1615;&#1605;&#1618; &#1571;&#1614;&#1586;&#1618;&#1608;&#1614;&#1575;&#1580;&#1611;&#1575; &#1604;&#1616;&#1617;&#1578;&#1614;&#1587;&#1618;&#1603;&#1615;&#1606;&#1615;&#1608;&#1575; &#1573;&#1604;&#1614;&#1610;&#1618;&#1607;&#1614;&#1575;</p>
+    <p class="ay-tr reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."</p>
+    <p class="ay-ref reveal">&#8212; Surah Ar-Rum, Ayat 21 &#8212;</p>
+  </section>
+
+  <!-- S7 CLOSING -->
+  <section id="s-cls">
+    <div class="corn">
+      <svg class="cc tl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc tr" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc bl" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+      <svg class="cc br" viewBox="0 0 32 32" fill="none"><path d="M2 30V2h30" stroke="#c9983b" stroke-width=".8"/><path d="M2 10 10 2" stroke="#c9983b" stroke-width=".6"/></svg>
+    </div>
+    <div class="orn reveal" style="font-size:1.4rem">&#10022;</div>
+    <p class="sec-lbl reveal" style="margin-top:.4rem">&#8212; Ucapan Penutup &#8212;</p>
+    <div class="lg reveal"></div>
+    <h2 class="cls-big gs reveal">Terima Kasih</h2>
+    <p class="cls-thanks reveal">Kehadiran, doa dan restu anda<br>adalah hadiah terbesar buat kami.<br>Semoga Allah SWT membalas budi anda<br>dengan kebaikan yang berlipat ganda.</p>
+    <div class="lg reveal" style="width:50%;margin:1rem auto"></div>
+    <p class="cls-names gs reveal">Noradam &amp; Nur Hawa</p>
+    <p class="cls-dt reveal">Ahad &nbsp;&#183;&nbsp; 12 Julai 2026 &nbsp;&#183;&nbsp; Shah Alam</p>
+    <div class="orn reveal" style="margin-top:1rem">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+  </section>
+
+  </div><!-- end #page -->
+</div><!-- end #scroll-inner -->
+
+</div><!-- end #shell -->
+
+<button id="mus" onclick="toggleAudio()">&#9834; MUZIK</button>
 
 <script>
-document.getElementById("introTitle").textContent = DATA.eventTitle;
-document.getElementById("introGroom").textContent = DATA.groomShort;
-document.getElementById("introBride").textContent = DATA.brideShort;
-document.getElementById("introDate").textContent = DATA.date;
+const shell  = document.getElementById('shell');
+const cover  = document.getElementById('cover');
+const page   = document.getElementById('page');
+const bgm    = document.getElementById('bgm');
+const dust   = document.getElementById('dust');
+const inner  = document.getElementById('scroll-inner');
+let musicOn  = false;
+let dustOn   = false;
 
-document.getElementById("mainNames").innerHTML = DATA.groomFull + "<br>&<br>" + DATA.brideFull;
-document.getElementById("dateText").textContent = DATA.date;
-document.getElementById("hijriText").textContent = DATA.hijri;
-document.getElementById("timeText").textContent = DATA.time;
-document.getElementById("venueText").textContent = DATA.venue;
-document.getElementById("addressText").innerHTML = DATA.address;
+/* ── COVER SPLIT ── */
+document.getElementById('buka-btn').addEventListener('click', function(){
+  cover.classList.add('opening');           /* seam glows */
+  setTimeout(()=>{ cover.classList.add('open'); }, 180); /* panels slide + cvi drifts up */
 
-document.getElementById("mapsBtn").href = DATA.maps;
-document.getElementById("wazeBtn").href = DATA.waze;
-document.getElementById("rsvpBtn").href = DATA.whatsapp;
-document.getElementById("closingNames").textContent = DATA.groomShort + " & " + DATA.brideShort;
+  /* burst gold dust the moment panels start parting */
+  setTimeout(()=>{ burstDust(); }, 200);
 
-let musicOn = false;
+  /* Show page just as panels finish (1.5s transition) */
+  setTimeout(()=>{
+    page.style.display = 'block';
+    dust.classList.add('show');
+    startDust();
+    initReveal();
+    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ page.classList.add('show'); }); });
+  }, 1450);
 
-function openInvitation(){
-document.getElementById("intro").classList.add("hide");
+  /* Remove cover fully after page is visible */
+  setTimeout(()=>{ cover.classList.add('gone'); }, 1600);
+  setTimeout(()=>{ cover.style.display = 'none'; }, 2200);
 
-setTimeout(()=>{
-document.getElementById("intro").style.display = "none";
-document.getElementById("main").style.display = "block";
-document.getElementById("musicBtn").style.display = "block";
-
-document.querySelectorAll(".reveal").forEach((el,i)=>{
-setTimeout(()=>el.classList.add("show"), i * 250);
+  bgm.play().then(()=>{ musicOn=true; updateMus(); }).catch(()=>{});
 });
 
-const bgm = document.getElementById("bgm");
-bgm.play().then(()=>musicOn=true).catch(()=>{});
-},900);
+/* ── AUDIO ── */
+function toggleAudio(){
+  if(musicOn){ bgm.pause(); musicOn=false; }
+  else{ bgm.play().catch(()=>{}); musicOn=true; }
+  updateMus();
+}
+function updateMus(){
+  const b = document.getElementById('mus');
+  b.innerHTML = musicOn ? '&#9835; MUZIK' : '&#9834; MUZIK';
+  b.style.opacity = musicOn ? '1' : '.5';
 }
 
-function toggleMusic(){
-const bgm = document.getElementById("bgm");
-if(musicOn){
-bgm.pause();
-musicOn=false;
-}else{
-bgm.play().then(()=>musicOn=true).catch(()=>{});
-}
-}
-
-const target = new Date(DATA.dateISO);
-
-function updateCountdown(){
-const diff = target - new Date();
-const d = Math.max(0,Math.floor(diff/86400000));
-const h = Math.max(0,Math.floor((diff%86400000)/3600000));
-const m = Math.max(0,Math.floor((diff%3600000)/60000));
-const s = Math.max(0,Math.floor((diff%60000)/1000));
-
-document.getElementById("d").textContent = String(d).padStart(2,"0");
-document.getElementById("h").textContent = String(h).padStart(2,"0");
-document.getElementById("m").textContent = String(m).padStart(2,"0");
-document.getElementById("s").textContent = String(s).padStart(2,"0");
+/* ── SCROLL REVEAL ── */
+function initReveal(){
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { root: inner, threshold: .1, rootMargin: '0px 0px -10px 0px' });
+  els.forEach(el => io.observe(el));
 }
 
-updateCountdown();
-setInterval(updateCountdown,1000);
+/* ── COUNTDOWN ── */
+const wDate = new Date('2026-07-12T11:00:00+08:00');
+function pad(n){ return String(Math.max(0,n)).padStart(2,'0'); }
+function tick(){
+  const d = wDate - new Date();
+  if(d <= 0){
+    document.getElementById('cd-grid').style.display = 'none';
+    document.getElementById('cd-done').style.display = 'block';
+    return;
+  }
+  document.getElementById('cd-d').textContent = pad(Math.floor(d/864e5));
+  document.getElementById('cd-h').textContent = pad(Math.floor((d%864e5)/36e5));
+  document.getElementById('cd-m').textContent = pad(Math.floor((d%36e5)/6e4));
+  document.getElementById('cd-s').textContent = pad(Math.floor((d%6e4)/1e3));
+}
+tick(); setInterval(tick, 1000);
+
+/* ── GOLD DUST ── */
+const ctx = dust.getContext('2d');
+function rsz(){
+  dust.width  = shell.offsetWidth;
+  dust.height = shell.offsetHeight;
+}
+rsz(); window.addEventListener('resize', rsz);
+
+function mkP(){
+  return{
+    x: Math.random()*dust.width,
+    y: dust.height + 10 + Math.random()*20,
+    vx: (Math.random()-.5)*.3,
+    vy: -(Math.random()*.5+.1),
+    r: Math.random()*1.6+.25,
+    a: Math.random()*.6+.15,
+    dec: Math.random()*.0026+.0006,
+    sh: Math.random()*Math.PI*2,
+    ss: Math.random()*.04+.011,
+    gold: Math.random()<.75,
+    sp: Math.random()<.14
+  };
+}
+const pts = Array.from({length:90}, mkP);
+
+function drawP(p){
+  const s = .5 + .5*Math.sin(p.sh);
+  if(p.sp){
+    const z = p.r*2.8;
+    ctx.save();
+    ctx.globalAlpha = Math.min(p.a*s*1.3, 1);
+    ctx.strokeStyle = p.gold ? `hsl(${42+s*12},82%,${60+s*24}%)` : 'rgba(255,252,220,.9)';
+    ctx.lineWidth = .55;
+    ctx.translate(p.x, p.y);
+    ctx.beginPath(); ctx.moveTo(-z,0); ctx.lineTo(z,0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0,-z); ctx.lineTo(0,z); ctx.stroke();
+    ctx.restore();
+  } else {
+    ctx.globalAlpha = Math.min(p.a*s, .92);
+    ctx.fillStyle = p.gold ? `hsl(${40+s*15},76%,${56+s*26}%)` : 'hsl(48,26%,88%)';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function dustFrame(){
+  ctx.clearRect(0, 0, dust.width, dust.height);
+  /* ambient particles */
+  for(const p of pts){
+    p.sh += p.ss;
+    p.x  += p.vx + Math.sin(p.sh)*.14;
+    p.y  += p.vy;
+    p.a  -= p.dec;
+    if(p.a <= 0 || p.y < -8) Object.assign(p, mkP());
+    else drawP(p);
+  }
+  /* burst particles — gravity pulls them down */
+  for(let i = bursts.length-1; i >= 0; i--){
+    const p = bursts[i];
+    p.sh += p.ss;
+    p.x  += p.vx;
+    p.y  += p.vy;
+    p.vy += .07; /* gravity */
+    p.a  -= p.dec;
+    if(p.a <= 0){ bursts.splice(i,1); continue; }
+    drawP(p);
+  }
+  requestAnimationFrame(dustFrame);
+}
+
+/* burst particles fired from center on door open */
+const bursts = [];
+function burstDust(){
+  const cx = dust.width / 2;
+  const cy = dust.height / 2;
+  for(let i = 0; i < 120; i++){
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 5 + 1;
+    bursts.push({
+      x: cx + (Math.random()-.5)*80,
+      y: cy + (Math.random()-.5)*80,
+      vx: Math.cos(angle)*speed,
+      vy: Math.sin(angle)*speed - 2,
+      r: Math.random()*2.2+.4,
+      a: Math.random()*.9+.3,
+      dec: Math.random()*.014+.006,
+      sh: Math.random()*Math.PI*2,
+      ss: Math.random()*.05+.015,
+      gold: Math.random()<.82,
+      sp: Math.random()<.25
+    });
+  }
+}
+
+function startDust(){
+  if(dustOn) return;
+  dustOn = true;
+  rsz();
+  dustFrame();
+}
 </script>
-
 </body>
 </html>
