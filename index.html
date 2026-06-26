@@ -1,16 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Royal Gold Envelope Invitation</title>
+<title>Walimatul Urus</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond&display=swap" rel="stylesheet">
 
 <script>
 const DATA = {
   eventTitle: "Walimatul Urus",
-
   groomShort: "ADAM",
   brideShort: "HAWA",
 
@@ -28,17 +28,9 @@ const DATA = {
   venue: "Dewan Seri Kenanga",
   address: "No. 12, Jalan Mawar 3<br>40150 Shah Alam, Selangor",
 
-  maps: "https://maps.google.com/?q=Dewan+Seri+Kenanga+Shah+Alam",
-  waze: "https://waze.com/ul?q=Dewan+Seri+Kenanga+Shah+Alam",
-  whatsapp: "https://wa.me/60123456789?text=Assalamualaikum%2C+saya+akan+hadir+ke+majlis+Adam+%26+Hawa+insyaAllah.",
-
-  program: [
-    ["10:30 am", "Ketibaan Tetamu Jemputan"],
-    ["11:00 am", "Bersanding Pengantin"],
-    ["12:00 pm", "Makan Tengah Hari Dihidangkan"],
-    ["1:30 pm", "Hiburan & Persembahan"],
-    ["3:30 pm", "Majlis Bersurai"]
-  ]
+  maps: "https://maps.google.com",
+  waze: "https://waze.com",
+  whatsapp: "https://wa.me/60123456789"
 };
 </script>
 
@@ -49,613 +41,313 @@ html,body{
 width:100%;
 height:100%;
 background:#050302;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-overflow:hidden;
 font-family:'Cormorant Garamond',serif;
 color:#e8d6a8;
+overflow:hidden;
+}
+
+body{
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 #shell{
 width:100%;
 max-width:390px;
 height:100dvh;
-position:relative;
 background:#0b0905;
+position:relative;
 overflow:hidden;
 }
 
 @media(min-width:500px){
-body{align-items:center;padding:2rem 0}
 #shell{
 height:820px;
-border-radius:44px;
-box-shadow:
-0 0 0 2px #c9983b,
-0 0 0 10px #0d0905,
-0 0 0 14px rgba(201,152,59,.25),
-0 0 90px rgba(201,152,59,.18),
-0 40px 100px rgba(0,0,0,.9);
+border-radius:40px;
+box-shadow:0 0 80px rgba(201,152,59,.25);
 }
-#scroll-inner{height:820px}
-}
-
-#scroll-inner{
-height:100dvh;
-overflow-y:auto;
-overflow-x:hidden;
-scroll-behavior:smooth;
--webkit-overflow-scrolling:touch;
-scrollbar-width:none;
-}
-#scroll-inner::-webkit-scrollbar{display:none}
-
-#dust{
-position:absolute;
-inset:0;
-pointer-events:none;
-z-index:1;
-}
-
-.gs{
-background:linear-gradient(110deg,#8a5f10,#c9983b,#fff5b8,#f0d060,#c9983b,#8a5f10);
-background-size:300% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shimmer 5s linear infinite;
-}
-
-@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-.reveal{
-opacity:0;
-transform:translateY(95px);
-transition:opacity 2s ease,transform 2s cubic-bezier(.16,.84,.44,1);
-}
-
-.reveal.in{
-opacity:1;
-transform:translateY(0);
-}
-
-.lg{
-width:100%;
-height:1px;
-background:linear-gradient(90deg,transparent,#c9983b55,#c9983b,#c9983b55,transparent);
-margin:.8rem 0;
-}
-
-.sec-lbl{
-font-family:'Cinzel',serif;
-font-size:.52rem;
-letter-spacing:.35em;
-color:#c9983b99;
-margin-bottom:.35rem;
-text-align:center;
 }
 
 /* INTRO */
 #intro{
 position:absolute;
 inset:0;
-z-index:100;
+z-index:50;
+display:flex;
+align-items:center;
+justify-content:center;
 background:
-radial-gradient(ellipse at 50% 20%,#2b1b07,#0b0905 68%);
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-text-align:center;
-}
-
-.intro-card{
-position:absolute;
-top:8%;
-width:86%;
-max-width:330px;
-min-height:250px;
-z-index:5;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:1.5rem;
+radial-gradient(circle at top,rgba(201,152,59,.22),transparent 32%),
+linear-gradient(180deg,#0b0905,#160d03,#0b0905);
 transition:opacity 1s ease,transform 1s ease;
 }
 
-#intro.open .intro-card{
+#intro.hide{
 opacity:0;
-transform:translateY(-40px) scale(.95);
+transform:scale(1.04);
+pointer-events:none;
 }
 
-.g-arabic{
-font-family:'EB Garamond',serif;
-color:#c9983b;
-font-size:clamp(1rem,4.2vw,1.28rem);
-line-height:2;
-letter-spacing:.07em;
-}
-
-.g-walima{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.45rem,5.8vw,1.9rem);
-color:#c9983b;
-margin-top:.8rem;
-}
-
-.g-names{
-font-family:'Cinzel',serif;
-font-size:clamp(2rem,8vw,2.8rem);
-font-weight:600;
-letter-spacing:.08em;
-line-height:1.1;
-margin:.1rem 0;
-}
-
-.g-amp{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.8rem,7vw,2.4rem);
-color:#c9983b;
-display:block;
-animation:floatY 4s ease-in-out infinite;
-}
-
-/* ENVELOPE */
-.envelope-wrap{
-position:absolute;
-bottom:13%;
-width:310px;
-height:225px;
-perspective:1200px;
-z-index:6;
-}
-
-.envelope{
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-filter:drop-shadow(0 25px 45px rgba(0,0,0,.6));
-}
-
-.env-back{
-position:absolute;
-inset:0;
-background:linear-gradient(145deg,#2b1b07,#0b0804);
-border:1px solid rgba(201,152,59,.65);
-box-shadow:inset 0 0 30px rgba(201,152,59,.08);
-}
-
-.env-letter{
-position:absolute;
-left:24px;
-right:24px;
-bottom:20px;
-height:165px;
-background:linear-gradient(180deg,#fff4d7,#e6d1a5);
-border:1px solid #c9983b;
-z-index:2;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:'Cinzel',serif;
-font-size:.7rem;
-letter-spacing:.25em;
-color:#2b1b07;
-transition:transform 1.8s ease,opacity 1.2s ease;
-}
-
-.env-flap{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:58%;
-background:linear-gradient(145deg,#d9b85d,#5a3b0e);
-clip-path:polygon(0 0,100% 0,50% 100%);
-transform-origin:top;
-z-index:5;
-transition:transform 1.4s ease;
-}
-
-.env-left{
-position:absolute;
-left:0;
-bottom:0;
-width:50%;
-height:100%;
-background:linear-gradient(145deg,#1a1105,#050302);
-clip-path:polygon(0 0,100% 50%,0 100%);
-z-index:4;
-}
-
-.env-right{
-position:absolute;
-right:0;
-bottom:0;
-width:50%;
-height:100%;
-background:linear-gradient(145deg,#1a1105,#050302);
-clip-path:polygon(100% 0,0 50%,100% 100%);
-z-index:4;
-}
-
-.env-bottom{
-position:absolute;
-left:0;
-bottom:0;
-width:100%;
-height:58%;
-background:linear-gradient(145deg,#2b1b07,#080503);
-clip-path:polygon(0 100%,50% 0,100% 100%);
-z-index:4;
-}
-
-.seal{
-position:absolute;
-left:50%;
-bottom:78px;
-transform:translateX(-50%);
-width:54px;
-height:54px;
-border-radius:50%;
-background:radial-gradient(circle,#c9983b,#7a4a0d);
-border:1px solid #f0d060;
-z-index:7;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:'Cinzel',serif;
-font-size:1.1rem;
-color:#1a1005;
-box-shadow:0 0 22px rgba(201,152,59,.4);
-transition:opacity .7s ease,transform .7s ease;
-}
-
-.open-btn{
-position:absolute;
-left:50%;
-bottom:-70px;
-transform:translateX(-50%);
-background:transparent;
-border:1px solid #c9983b;
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.62rem;
-letter-spacing:.32em;
-padding:.82rem 2.2rem;
-cursor:pointer;
-animation:pulse 2.4s infinite;
-white-space:nowrap;
-z-index:9;
-}
-
-#intro.open .env-flap{
-transform:rotateX(180deg);
-}
-
-#intro.open .seal{
-opacity:0;
-transform:translateX(-50%) scale(.4);
-}
-
-#intro.open .env-letter{
-transform:translateY(-170px);
-opacity:0;
-}
-
-#intro.open .envelope-wrap{
-animation:envExit 1s ease forwards 2.2s;
-}
-
-@keyframes envExit{
-to{opacity:0;transform:translateY(90px) scale(.9)}
-}
-
-/* PAGE */
-#page{
-display:none;
-position:relative;
-z-index:2;
-}
-
-section{
-padding:3rem 1.6rem;
-position:relative;
-text-align:center;
-border-top:1px solid rgba(201,152,59,.12);
-background:#110d07;
-}
-
-section:first-child{border-top:none}
-
-#bism{
-min-height:100dvh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-background:radial-gradient(ellipse at top,#241806,#110d07 60%);
-}
-
-@media(min-width:500px){
-#bism{min-height:820px}
-}
-
-#det,#lok,#cls{background:#110d07}
-#ac,#ayat,#cd{background:#0b0905}
-
-.bism-t{
-font-family:'EB Garamond',serif;
-font-size:clamp(1rem,4.2vw,1.35rem);
-color:#c9983b;
-line-height:2;
-letter-spacing:.08em;
-}
-
-.bism-s,
-.inv-text,
-.dct-sub,
-.lok-addr,
-.rsvp-note,
-.cls-thanks{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-color:#8a7050;
-line-height:2;
-}
-
-.par-name,
-.child-name,
-.det-ttl,
-.ac-ttl,
-.lok-ttl,
-.cls-big,
-.cls-names{
-font-family:'Cinzel',serif;
-color:#c9983b;
-font-weight:600;
-letter-spacing:.06em;
-line-height:1.4;
-}
-
-.par-name{font-size:clamp(1rem,4vw,1.3rem)}
-.child-name{font-size:clamp(1.3rem,5.2vw,1.7rem)}
-
-.par-amp,
-.child-amp{
-font-family:'Cormorant Garamond',serif;
-font-style:italic;
-font-size:clamp(1.6rem,6vw,2.2rem);
-color:#c9983b;
-display:block;
-animation:floatY 4s ease-in-out infinite;
-}
-
-.inv-salute{
-font-family:'Cinzel',serif;
-font-size:.55rem;
-letter-spacing:.14em;
-color:#c9983b99;
-display:block;
-margin:.3rem 0;
-}
-
-.dct,.ac-c{
-padding:.7rem 0;
-text-align:center;
-}
-
-.dct-lbl,.ac-ct{
-font-family:'Cinzel',serif;
-font-size:.52rem;
-letter-spacing:.28em;
-color:#c9983b88;
-text-transform:uppercase;
-margin-bottom:.25rem;
-}
-
-.dct-val,.ac-cd,.lok-name{
-font-size:clamp(1rem,3.8vw,1.2rem);
-color:#e0cc99;
-line-height:1.5;
-}
-
-.bgrp{
-display:flex;
-flex-direction:column;
-gap:.45rem;
-margin-top:.8rem;
-}
-
-.bg{
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#1a1308,#271900);
-border:1px solid rgba(201,152,59,.35);
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.57rem;
-letter-spacing:.2em;
-padding:.7rem 1rem;
-text-decoration:none;
-}
-
-.cd-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:.45rem;
-margin-top:1rem;
-}
-
-.cd-cell{
-background:linear-gradient(145deg,#1c1409,#120f06);
-border:1px solid rgba(201,152,59,.25);
-padding:.7rem .2rem;
-}
-
-.cd-num{
-font-family:'Cinzel',serif;
-font-size:clamp(1.35rem,5.5vw,1.8rem);
-font-weight:600;
-color:#c9983b;
-display:block;
-}
-
-.cd-unit{
-font-family:'Cinzel',serif;
-font-size:.42rem;
-letter-spacing:.18em;
-color:#8a7050;
-text-transform:uppercase;
-}
-
-.ay-ar{
-font-family:'EB Garamond',serif;
-font-size:clamp(.95rem,3.8vw,1.25rem);
-color:#c9983b;
-line-height:2.2;
-}
-
-.ay-tr{
-font-style:italic;
-color:#8a7050;
-line-height:1.95;
-}
-
-.ay-ref{
-font-family:'Cinzel',serif;
-font-size:.48rem;
-letter-spacing:.24em;
-color:#c9983b77;
-}
-
-#mus{
-position:fixed;
-bottom:16px;
-right:14px;
-z-index:300;
-background:#120d05ee;
-border:1px solid rgba(201,152,59,.35);
-color:#c9983b;
-font-family:'Cinzel',serif;
-font-size:.47rem;
-letter-spacing:.14em;
-padding:.35rem .65rem;
-cursor:pointer;
-display:none;
-}
-.tap-layer{
-position:absolute;
-inset:0;
-z-index:20;
-cursor:pointer;
-}
-
-.open-btn{
-z-index:30;
-}  
-#intro{
-position:absolute;
-inset:0;
-z-index:100;
-background:
-radial-gradient(ellipse at center,#221605 0%,#0b0905 70%);
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-text-align:center;
-}
-
-.intro-panel{
-width:86%;
-max-width:330px;
-min-height:620px;
-border:1px solid rgba(201,152,59,.75);
-background:rgba(0,0,0,.28);
+.intro-card{
+width:84%;
+max-width:320px;
+height:82vh;
+max-height:680px;
+border:1px solid rgba(201,152,59,.7);
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:2rem 1.5rem;
-box-shadow:
-0 0 45px rgba(201,152,59,.18),
-inset 0 0 30px rgba(201,152,59,.05);
-transition:1.2s ease;
+text-align:center;
+padding:30px 22px;
+position:relative;
+animation:floatCard 5s ease-in-out infinite;
 }
 
-.intro-panel::before{
+.intro-card::before{
 content:"";
 position:absolute;
-width:76%;
-max-width:300px;
-height:570px;
+inset:12px;
 border:1px solid rgba(201,152,59,.25);
 pointer-events:none;
 }
 
-.intro-title{
+.intro-card::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent 35%,rgba(255,230,160,.18) 50%,transparent 65%);
+transform:translateX(-120%);
+animation:shine 5s ease-in-out infinite;
+pointer-events:none;
+}
+
+.intro-small{
 font-family:'Cormorant Garamond',serif;
 font-style:italic;
-font-size:30px;
-color:#c9983b;
-margin-bottom:70px;
+font-size:clamp(28px,8vw,38px);
+color:#d6a84a;
+margin-bottom:42px;
+text-shadow:0 0 18px rgba(201,152,59,.35);
 }
 
 .intro-names{
 font-family:'Cinzel',serif;
-font-size:48px;
-font-weight:600;
-letter-spacing:.08em;
+font-size:clamp(34px,9vw,48px);
+font-weight:500;
+letter-spacing:.12em;
 line-height:1.2;
-color:#f3d57b;
-text-shadow:0 0 20px rgba(201,152,59,.3);
-margin-bottom:70px;
+background:linear-gradient(110deg,#9d6d16,#d6a84a,#fff1b0,#d6a84a,#9d6d16);
+background-size:300% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:goldMove 5s linear infinite;
+filter:drop-shadow(0 0 12px rgba(201,152,59,.32));
 }
 
 .intro-names span{
 display:block;
 font-family:'Cormorant Garamond',serif;
 font-style:italic;
-font-size:32px;
-color:#c9983b;
+font-size:clamp(24px,7vw,34px);
+letter-spacing:0;
 margin:8px 0;
 }
 
 .intro-date{
-font-family:'Cormorant Garamond',serif;
-font-size:22px;
-color:#d8bd75;
-margin-bottom:35px;
+font-size:clamp(19px,5vw,24px);
+font-style:italic;
+color:#e0c27a;
+margin:44px 0 34px;
 }
 
 .intro-btn{
-background:transparent;
-border:1px solid #c9983b;
-color:#c9983b;
+background:rgba(0,0,0,.18);
+border:1px solid #d6a84a;
+color:#f3d57b;
 font-family:'Cormorant Garamond',serif;
-font-size:18px;
-padding:.65rem 1.8rem;
+font-size:clamp(20px,5vw,25px);
+padding:12px 36px;
+border-radius:16px;
 cursor:pointer;
-transition:.3s;
+animation:btnGlow 2.5s ease-in-out infinite;
 }
 
-.intro-btn:hover{
-background:rgba(201,152,59,.15);
+.dust{
+position:absolute;
+inset:0;
+pointer-events:none;
+background-image:radial-gradient(circle,rgba(255,221,130,.7) 1px,transparent 1px);
+background-size:46px 46px;
+animation:dustMove 14s linear infinite;
+opacity:.32;
 }
 
-#intro.open .intro-panel{
+/* MAIN */
+#main{
+display:none;
+height:100%;
+overflow-y:auto;
+scroll-behavior:smooth;
+}
+
+section{
+min-height:100dvh;
+padding:48px 24px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:#110d07;
+border-top:1px solid rgba(201,152,59,.12);
+}
+
+section:nth-child(even){
+background:#0b0905;
+}
+
+.reveal{
 opacity:0;
-transform:translateY(-30px) scale(.96);
+transform:translateY(70px);
+transition:opacity 1.8s ease,transform 1.8s cubic-bezier(.16,.84,.44,1);
+}
+
+.reveal.show{
+opacity:1;
+transform:translateY(0);
+}
+
+h2{
+font-family:'Cinzel',serif;
+font-size:24px;
+letter-spacing:.08em;
+color:#d6a84a;
+margin-bottom:18px;
+}
+
+.gold{
+color:#d6a84a;
+}
+
+.line{
+width:160px;
+height:1px;
+background:linear-gradient(90deg,transparent,#d6a84a,transparent);
+margin:18px auto;
+}
+
+p{
+font-size:17px;
+line-height:1.9;
+color:#d8c08a;
+}
+
+.names-main{
+font-family:'Cinzel',serif;
+font-size:28px;
+letter-spacing:.08em;
+color:#d6a84a;
+line-height:1.5;
+}
+
+.detail{
+width:100%;
+border:1px solid rgba(201,152,59,.28);
+padding:18px;
+margin:10px 0;
+background:rgba(255,255,255,.03);
+}
+
+.label{
+font-family:'Cinzel',serif;
+font-size:11px;
+letter-spacing:.22em;
+color:#c9983b99;
+margin-bottom:6px;
+}
+
+.btn{
+display:block;
+width:100%;
+max-width:280px;
+text-decoration:none;
+border:1px solid rgba(201,152,59,.45);
+color:#d6a84a;
+padding:13px 16px;
+margin:10px auto;
+font-family:'Cinzel',serif;
+font-size:12px;
+letter-spacing:.16em;
+}
+
+.countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+width:100%;
+margin-top:20px;
+}
+
+.count-box{
+border:1px solid rgba(201,152,59,.28);
+padding:12px 4px;
+}
+
+.count-box strong{
+display:block;
+font-family:'Cinzel',serif;
+font-size:22px;
+color:#d6a84a;
+}
+
+.count-box span{
+font-size:10px;
+letter-spacing:.12em;
+}
+
+#musicBtn{
+position:fixed;
+right:16px;
+bottom:16px;
+z-index:60;
+display:none;
+background:#120d05;
+border:1px solid rgba(201,152,59,.4);
+color:#d6a84a;
+padding:8px 12px;
+font-size:12px;
+}
+
+/* ANIMATION */
+@keyframes floatCard{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-7px)}
+}
+
+@keyframes shine{
+0%{transform:translateX(-120%)}
+45%{transform:translateX(120%)}
+100%{transform:translateX(120%)}
+}
+
+@keyframes goldMove{
+0%{background-position:200% center}
+100%{background-position:-200% center}
+}
+
+@keyframes btnGlow{
+0%,100%{box-shadow:0 0 12px rgba(201,152,59,.25)}
+50%{box-shadow:0 0 30px rgba(201,152,59,.65)}
+}
+
+@keyframes dustMove{
+from{background-position:0 0}
+to{background-position:0 -260px}
 }
 </style>
+
 </head>
 
 <body>
@@ -665,322 +357,168 @@ transform:translateY(-30px) scale(.96);
 </audio>
 
 <div id="shell">
-<canvas id="dust"></canvas>
 
 <div id="intro">
-  <div class="intro-panel">
+  <div class="dust"></div>
 
-    <p class="intro-title">Walimatul Urus</p>
+  <div class="intro-card">
+    <div class="intro-small" id="introTitle"></div>
 
-    <div class="intro-names">
-      <div id="gateGroom">ADAM</div>
-      <span>&amp;</span>
-      <div id="gateBride">HAWA</div>
+```
+<div class="intro-names">
+  <div id="introGroom"></div>
+  <span>&amp;</span>
+  <div id="introBride"></div>
+</div>
+
+<div class="intro-date" id="introDate"></div>
+
+<button class="intro-btn" onclick="openInvitation()">
+  Buka Jemputan
+</button>
+```
+
+  </div>
+</div>
+
+<div id="main">
+
+<section>
+  <div class="reveal">
+    <p class="gold">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <div class="line"></div>
+    <p>Dengan penuh kesyukuran, kami mempersilakan kehadiran anda ke majlis perkahwinan anakanda kami</p>
+    <div class="line"></div>
+    <div class="names-main" id="mainNames"></div>
+  </div>
+</section>
+
+<section>
+  <div class="reveal">
+    <h2>Butiran Majlis</h2>
+
+```
+<div class="detail">
+  <div class="label">TARIKH</div>
+  <p id="dateText"></p>
+  <p id="hijriText"></p>
+</div>
+
+<div class="detail">
+  <div class="label">MASA</div>
+  <p id="timeText"></p>
+</div>
+
+<div class="detail">
+  <div class="label">LOKASI</div>
+  <p id="venueText"></p>
+  <p id="addressText"></p>
+</div>
+```
+
+  </div>
+</section>
+
+<section>
+  <div class="reveal">
+    <h2>Kiraan Masa</h2>
+    <div class="countdown">
+      <div class="count-box"><strong id="d">00</strong><span>HARI</span></div>
+      <div class="count-box"><strong id="h">00</strong><span>JAM</span></div>
+      <div class="count-box"><strong id="m">00</strong><span>MINIT</span></div>
+      <div class="count-box"><strong id="s">00</strong><span>SAAT</span></div>
     </div>
-
-    <p class="intro-date">Ahad&nbsp;&nbsp;12 Julai 2026</p>
-
-    <button class="intro-btn" id="openBtn" onclick="openInvitation()">
-      Buka Jemputan
-    </button>
-
-  </div>
-</div>
-
-<div id="scroll-inner">
-<div id="page">
-
-<section id="bism">
-  <p class="bism-t reveal">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-  <p class="bism-s reveal">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang</p>
-
-  <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
-
-  <p class="par-name reveal" id="parent1"></p>
-  <span class="par-amp reveal">&amp;</span>
-  <p class="par-name reveal" id="parent2"></p>
-
-  <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
-
-  <p class="inv-text reveal">
-    Dengan penuh kesyukuran, kami mempersilakan<br>
-    <span class="inv-salute">Dato' | Datin | Tuan | Puan | Encik | Cik</span>
-    seisi keluarga hadir ke majlis perkahwinan anakanda kami
-  </p>
-
-  <div class="lg reveal" style="width:55%;margin:1.2rem auto"></div>
-
-  <p class="child-name gs reveal" id="fullGroom"></p>
-  <span class="child-amp reveal">&amp;</span>
-  <p class="child-name gs reveal" id="fullBride"></p>
-</section>
-
-<section id="det">
-  <p class="sec-lbl reveal">— Butiran Majlis —</p>
-  <div class="lg reveal"></div>
-  <p class="det-ttl gs reveal">Majlis Perkahwinan</p>
-
-  <div class="dct reveal">
-    <p class="dct-lbl">Tarikh</p>
-    <p class="dct-val" id="dateText"></p>
-    <p class="dct-sub" id="hijriText"></p>
-  </div>
-
-  <div class="lg reveal" style="width:40%;margin:.5rem auto"></div>
-
-  <div class="dct reveal">
-    <p class="dct-lbl">Masa</p>
-    <p class="dct-val" id="timeText"></p>
-    <p class="dct-sub">Majlis Makan Tengah Hari</p>
-  </div>
-
-  <div class="lg reveal" style="width:40%;margin:.5rem auto"></div>
-
-  <div class="dct reveal">
-    <p class="dct-lbl">Lokasi</p>
-    <p class="dct-val" id="venueText"></p>
-    <p class="dct-sub" id="addressText"></p>
   </div>
 </section>
 
-<section id="ac">
-  <p class="sec-lbl reveal">— Aturcara Majlis —</p>
-  <div class="lg reveal"></div>
-  <p class="ac-ttl gs reveal">Perjalanan Majlis</p>
-  <div id="programList"></div>
-</section>
-
-<section id="lok">
-  <p class="sec-lbl reveal">— Lokasi & RSVP —</p>
-  <div class="lg reveal"></div>
-
-  <p class="lok-ttl gs reveal">Tempat Majlis</p>
-  <p class="lok-name reveal" id="venueText2"></p>
-  <p class="lok-addr reveal" id="addressText2"></p>
-
-  <div class="bgrp reveal">
-    <a class="bg" id="mapsBtn" target="_blank">📍 LIHAT LOKASI</a>
-    <a class="bg" id="wazeBtn" target="_blank">🗺 BUKA DI WAZE</a>
-  </div>
-
-  <div class="lg reveal" style="margin-top:1.3rem"></div>
-
-  <p class="lok-ttl gs reveal" style="margin-top:.9rem">RSVP</p>
-  <p class="rsvp-note reveal">Sila sahkan kehadiran anda</p>
-
-  <div class="bgrp reveal">
-    <a class="bg" id="rsvpBtn" target="_blank">✓ YA, SAYA HADIR</a>
+<section>
+  <div class="reveal">
+    <h2>Lokasi & RSVP</h2>
+    <a class="btn" id="mapsBtn" target="_blank">LIHAT LOKASI</a>
+    <a class="btn" id="wazeBtn" target="_blank">BUKA DI WAZE</a>
+    <a class="btn" id="rsvpBtn" target="_blank">RSVP WHATSAPP</a>
   </div>
 </section>
 
-<section id="cd">
-  <p class="sec-lbl reveal">— Kiraan Masa —</p>
-  <div class="lg reveal"></div>
-  <p class="cd-lbl reveal">Hari Bahagia Menjelang Tiba</p>
-
-  <div class="cd-grid reveal">
-    <div class="cd-cell"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">Hari</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">Jam</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">Minit</span></div>
-    <div class="cd-cell"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">Saat</span></div>
+<section>
+  <div class="reveal">
+    <h2>Terima Kasih</h2>
+    <p>Kehadiran dan doa restu anda amat kami hargai.</p>
+    <div class="line"></div>
+    <p class="gold" id="closingNames"></p>
   </div>
-</section>
-
-<section id="ayat">
-  <p class="ay-ar reveal">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنْفُسِكُمْ أَزْوَاجًا</p>
-  <p class="ay-tr reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu..."</p>
-  <p class="ay-ref reveal">— Surah Ar-Rum, Ayat 21 —</p>
-</section>
-
-<section id="cls">
-  <h2 class="cls-big gs reveal">Terima Kasih</h2>
-  <p class="cls-thanks reveal">
-    Kehadiran, doa dan restu anda<br>
-    adalah hadiah terbesar buat kami.
-  </p>
-
-  <div class="lg reveal" style="width:52%;margin:1.1rem auto"></div>
-
-  <h3 class="cls-names gs reveal" id="closingNames"></h3>
-  <p class="cls-dt reveal" id="closingDate"></p>
 </section>
 
 </div>
-</div>
+
 </div>
 
-<button id="mus" onclick="toggleAudio()">♫ MUZIK</button>
+<button id="musicBtn" onclick="toggleMusic()">♫ Muzik</button>
 
 <script>
-document.title = DATA.eventTitle + " - " + DATA.groomShort + " & " + DATA.brideShort;
+document.getElementById("introTitle").textContent = DATA.eventTitle;
+document.getElementById("introGroom").textContent = DATA.groomShort;
+document.getElementById("introBride").textContent = DATA.brideShort;
+document.getElementById("introDate").textContent = DATA.date;
 
-document.getElementById("gateTitle").textContent = DATA.eventTitle;
-document.getElementById("gateGroom").textContent = DATA.groomShort;
-document.getElementById("gateBride").textContent = DATA.brideShort;
-document.querySelector(".seal").textContent = DATA.groomShort.charAt(0);
-
-document.getElementById("parent1").textContent = DATA.parent1;
-document.getElementById("parent2").textContent = DATA.parent2;
-document.getElementById("fullGroom").textContent = DATA.groomFull;
-document.getElementById("fullBride").textContent = DATA.brideFull;
-
+document.getElementById("mainNames").innerHTML = DATA.groomFull + "<br>&<br>" + DATA.brideFull;
 document.getElementById("dateText").textContent = DATA.date;
 document.getElementById("hijriText").textContent = DATA.hijri;
 document.getElementById("timeText").textContent = DATA.time;
 document.getElementById("venueText").textContent = DATA.venue;
 document.getElementById("addressText").innerHTML = DATA.address;
 
-document.getElementById("venueText2").textContent = DATA.venue;
-document.getElementById("addressText2").innerHTML = DATA.address;
-
 document.getElementById("mapsBtn").href = DATA.maps;
 document.getElementById("wazeBtn").href = DATA.waze;
 document.getElementById("rsvpBtn").href = DATA.whatsapp;
-
 document.getElementById("closingNames").textContent = DATA.groomShort + " & " + DATA.brideShort;
-document.getElementById("closingDate").textContent = DATA.date;
 
-const programList = document.getElementById("programList");
-DATA.program.forEach(item=>{
-programList.innerHTML += `
-<div class="ac-c reveal">
-  <span class="ac-ct">${item[0]}</span>
-  <span class="ac-cd">${item[1]}</span>
-</div>`;
-});
-
-const intro = document.getElementById("intro");
-const page = document.getElementById("page");
-const bgm = document.getElementById("bgm");
-const mus = document.getElementById("mus");
 let musicOn = false;
 
-document.getElementById("openBtn").addEventListener("click",openInvitation);
-
 function openInvitation(){
-
-const intro = document.getElementById("intro");
-const page = document.getElementById("page");
-const mus = document.getElementById("mus");
-const bgm = document.getElementById("bgm");
-
-intro.classList.add("open");
+document.getElementById("intro").classList.add("hide");
 
 setTimeout(()=>{
-intro.style.display = "none";
-page.style.display = "block";
-mus.style.display = "block";
+document.getElementById("intro").style.display = "none";
+document.getElementById("main").style.display = "block";
+document.getElementById("musicBtn").style.display = "block";
 
-document.querySelectorAll(".reveal").forEach((el,index)=>{
-setTimeout(()=>{
-el.classList.add("in");
-}, index * 120);
+document.querySelectorAll(".reveal").forEach((el,i)=>{
+setTimeout(()=>el.classList.add("show"), i * 250);
 });
 
-bgm.play().then(()=>{
-musicOn = true;
-updateMus();
-}).catch(()=>{});
-
-},1000);
-
+const bgm = document.getElementById("bgm");
+bgm.play().then(()=>musicOn=true).catch(()=>{});
+},900);
 }
 
-function toggleAudio(){
+function toggleMusic(){
+const bgm = document.getElementById("bgm");
 if(musicOn){
 bgm.pause();
 musicOn=false;
 }else{
-bgm.play().catch(()=>{});
-musicOn=true;
+bgm.play().then(()=>musicOn=true).catch(()=>{});
 }
-updateMus();
 }
 
-function updateMus(){
-mus.innerHTML = musicOn ? "♫ MUZIK" : "♪ MUZIK";
-mus.style.opacity = musicOn ? "1" : ".5";
+const target = new Date(DATA.dateISO);
+
+function updateCountdown(){
+const diff = target - new Date();
+const d = Math.max(0,Math.floor(diff/86400000));
+const h = Math.max(0,Math.floor((diff%86400000)/3600000));
+const m = Math.max(0,Math.floor((diff%3600000)/60000));
+const s = Math.max(0,Math.floor((diff%60000)/1000));
+
+document.getElementById("d").textContent = String(d).padStart(2,"0");
+document.getElementById("h").textContent = String(h).padStart(2,"0");
+document.getElementById("m").textContent = String(m).padStart(2,"0");
+document.getElementById("s").textContent = String(s).padStart(2,"0");
 }
 
-function initReveal(){
-const root=document.getElementById("scroll-inner");
-
-const io=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-setTimeout(()=>{
-e.target.classList.add("in");
-},200);
-io.unobserve(e.target);
-}
-});
-},{root:root,threshold:.12});
-
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-}
-
-const wDate = new Date(DATA.dateISO);
-
-function pad(n){
-return String(Math.max(0,n)).padStart(2,"0");
-}
-
-function tick(){
-const diff = wDate - new Date();
-
-document.getElementById("cd-d").textContent = pad(Math.floor(diff/864e5));
-document.getElementById("cd-h").textContent = pad(Math.floor((diff%864e5)/36e5));
-document.getElementById("cd-m").textContent = pad(Math.floor((diff%36e5)/6e4));
-document.getElementById("cd-s").textContent = pad(Math.floor((diff%6e4)/1e3));
-}
-
-tick();
-setInterval(tick,1000);
-
-/* gold dust */
-const canvas=document.getElementById("dust");
-const ctx=canvas.getContext("2d");
-const shell=document.getElementById("shell");
-
-function resize(){
-canvas.width=shell.offsetWidth;
-canvas.height=shell.offsetHeight;
-}
-
-resize();
-window.addEventListener("resize",resize);
-
-const pts=Array.from({length:100},()=>({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*1.5+.3,
-vy:-Math.random()*.45-.1,
-vx:(Math.random()-.5)*.2,
-a:Math.random()*.55+.15
-}));
-
-function frame(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-pts.forEach(p=>{
-p.y+=p.vy;
-p.x+=p.vx;
-
-if(p.y<0)p.y=canvas.height;
-if(p.x<0)p.x=canvas.width;
-if(p.x>canvas.width)p.x=0;
-
-ctx.globalAlpha=p.a;
-ctx.fillStyle="#c9983b";
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-});
-
-requestAnimationFrame(frame);
-}
-
-frame();
+updateCountdown();
+setInterval(updateCountdown,1000);
 </script>
 
 </body>
