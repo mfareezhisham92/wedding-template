@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reflection Engine v0.1</title>
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:#0b0905;
+color:#f3ead8;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.app{
+width:100%;
+max-width:430px;
+background:#151006;
+border:1px solid #cda85d;
+padding:28px 22px;
+border-radius:22px;
+box-shadow:0 0 40px rgba(205,168,93,.18);
+}
+
+.small{
+color:#cda85d;
+letter-spacing:.16em;
+font-size:12px;
+text-transform:uppercase;
+margin-bottom:16px;
+}
+
+h1{
+font-family:Georgia,serif;
+font-size:30px;
+line-height:1.2;
+margin-bottom:12px;
+}
+
+p{
+color:#d8c7a5;
+line-height:1.6;
+margin-bottom:20px;
+}
+
+.question{
+display:none;
+}
+
+.question.active{
+display:block;
+}
+
+label{
+display:block;
+font-size:18px;
+line-height:1.5;
+margin-bottom:14px;
+}
+
+textarea,input{
+width:100%;
+background:#0b0905;
+border:1px solid rgba(205,168,93,.5);
+color:#fff;
+padding:14px;
+border-radius:12px;
+font-size:16px;
+min-height:110px;
+}
+
+input{
+min-height:auto;
+}
+
+button{
+margin-top:18px;
+width:100%;
+padding:14px;
+border-radius:14px;
+border:1px solid #cda85d;
+background:transparent;
+color:#f4d88d;
+font-size:18px;
+cursor:pointer;
+}
+
+.result{
+display:none;
+}
+
+.result.show{
+display:block;
+}
+
+.card{
+margin-top:20px;
+padding:22px;
+border:1px solid rgba(205,168,93,.35);
+border-radius:18px;
+background:#0b0905;
+}
+
+.card h2{
+font-family:Georgia,serif;
+font-size:28px;
+margin-bottom:18px;
+color:#f4d88d;
+}
+
+.card p{
+margin-bottom:18px;
+}
+
+.highlight{
+color:#f4d88d;
+font-style:italic;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div id="formArea">
+  <div class="small">Reflection Engine v0.1</div>
+  <h1>Let’s create something meaningful.</h1>
+  <p>Answer a few thoughtful questions. Your answers will become the heart of the experience.</p>
+
+  <div class="question active">
+    <label>Who is this for?</label>
+    <input id="q1" placeholder="Example: My wife, my teacher, my parents">
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <div class="question">
+    <label>What do you want them to feel?</label>
+    <textarea id="q2" placeholder="Loved, appreciated, remembered, proud..."></textarea>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <div class="question">
+    <label>What memory should they remember?</label>
+    <textarea id="q3" placeholder="Tell one memory that matters..."></textarea>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <div class="question">
+    <label>What is one sentence you wish you had said earlier?</label>
+    <textarea id="q4" placeholder="Write from the heart..."></textarea>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <div class="question">
+    <label>How do you want the experience to end?</label>
+    <textarea id="q5" placeholder="Example: I want them to know they are appreciated."></textarea>
+    <button onclick="generateStory()">Generate Reflection</button>
+  </div>
+</div>
+
+<div class="result" id="result">
+  <div class="small">Generated Emotional Core</div>
+  <h1>Your Story Foundation</h1>
+
+  <div class="card">
+    <h2 id="rTitle"></h2>
+    <p id="rFeeling"></p>
+    <p id="rMemory"></p>
+    <p class="highlight" id="rSentence"></p>
+    <p id="rEnding"></p>
+  </div>
+
+  <button onclick="location.reload()">Start Again</button>
+</div>
+
+</div>
+
+<script>
+let current = 0;
+const questions = document.querySelectorAll(".question");
+
+function nextQuestion(){
+questions[current].classList.remove("active");
+current++;
+questions[current].classList.add("active");
+}
+
+function generateStory(){
+const q1 = document.getElementById("q1").value || "someone special";
+const q2 = document.getElementById("q2").value || "appreciated";
+const q3 = document.getElementById("q3").value || "the beautiful memories you shared";
+const q4 = document.getElementById("q4").value || "You matter more than you know.";
+const q5 = document.getElementById("q5").value || "May this remind them how much they mean to you.";
+
+document.getElementById("formArea").style.display = "none";
+document.getElementById("result").classList.add("show");
+
+document.getElementById("rTitle").innerText = "For " + q1;
+document.getElementById("rFeeling").innerText =
+"This experience should make them feel " + q2 + ".";
+
+document.getElementById("rMemory").innerText =
+"At the heart of the story is this memory: " + q3;
+
+document.getElementById("rSentence").innerText =
+"\"" + q4 + "\"";
+
+document.getElementById("rEnding").innerText =
+"The experience should end with this feeling: " + q5;
+}
+</script>
+
+</body>
+</html>
