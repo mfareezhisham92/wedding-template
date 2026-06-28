@@ -178,7 +178,8 @@ font-style:italic;
     <p id="rEnding"></p>
   </div>
 
-  <button onclick="location.reload()">Start Again</button>
+  <button onclick="copyData()">Copy Story Data</button>
+<button onclick="location.reload()">Start Again</button>
 </div>
 
 </div>
@@ -216,6 +217,19 @@ document.getElementById("rSentence").innerText =
 document.getElementById("rEnding").innerText =
 "The experience should end with this feeling: " + q5;
 }
+function copyData(){
+const data = {
+  recipient: document.getElementById("q1").value || "someone special",
+  feeling: document.getElementById("q2").value || "appreciated",
+  memory: document.getElementById("q3").value || "the beautiful memories you shared",
+  message: document.getElementById("q4").value || "You matter more than you know.",
+  ending: document.getElementById("q5").value || "May this remind them how much they mean to you."
+};
+
+navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+
+alert("Story data copied. This will later feed the Digital Feelings Box.");
+}  
 </script>
 
 </body>
