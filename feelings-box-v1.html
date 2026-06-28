@@ -145,12 +145,25 @@ color:#cbbd9d;
 <div id="box">
 <canvas id="dust"></canvas>
 
-<section class="screen active">
-<div class="small">A Digital Feelings Box</div>
-<h1>For Someone<br>Who Matters</h1>
-<div class="line"></div>
-<p>Some feelings are too precious to be sent as ordinary words.</p>
-<button onclick="next()">Open</button>
+<section class="screen active" id="setupScreen">
+<div class="small">Digital Feelings Box</div>
+<h1>Paste Your<br>Story Data</h1>
+<p>Copy the story data from Reflection Engine and paste it here.</p>
+
+<textarea id="storyInput" placeholder="Paste story data here..." style="
+width:100%;
+max-width:330px;
+height:170px;
+margin-top:20px;
+background:#080604;
+border:1px solid #cda85d;
+color:#f2e8d5;
+padding:14px;
+border-radius:14px;
+font-size:14px;
+"></textarea>
+
+<button onclick="loadStory()">Build Feelings Box</button>
 </section>
 
 <section class="screen">
@@ -246,6 +259,28 @@ ctx.fill();
 requestAnimationFrame(draw);
 }
 draw();
+let STORY = null;
+
+function loadStory(){
+try{
+STORY = JSON.parse(document.getElementById("storyInput").value);
+
+document.querySelectorAll(".screen")[1].querySelector(".small").innerText = STORY.feeling;
+document.querySelectorAll(".screen")[1].querySelector("h1").innerHTML = "For<br>" + STORY.recipient;
+document.querySelectorAll(".screen")[1].querySelector("p").innerText = STORY.message;
+
+document.querySelectorAll(".screen")[2].querySelector(".memory").innerHTML =
+"Remember this?<br><br>" + STORY.memory;
+
+document.querySelectorAll(".screen")[3].querySelector("p").innerText =
+STORY.ending;
+
+next();
+
+}catch(e){
+alert("Story data not valid. Please copy again from Reflection Engine.");
+}
+}  
 </script>
 
 </body>
