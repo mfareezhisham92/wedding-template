@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digital Feelings Box v0.1</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+width:100%;
+height:100%;
+background:#080604;
+font-family:'Inter',sans-serif;
+overflow:hidden;
+color:#f2e8d5;
+}
+
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+#box{
+width:100%;
+max-width:430px;
+height:100dvh;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at top,rgba(220,180,100,.22),transparent 35%),
+linear-gradient(180deg,#080604,#171008 55%,#080604);
+}
+
+canvas{
+position:absolute;
+inset:0;
+z-index:1;
+}
+
+.screen{
+position:absolute;
+inset:0;
+z-index:2;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:2rem;
+opacity:0;
+transform:translateY(30px);
+transition:1.4s ease;
+}
+
+.screen.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.small{
+font-size:.75rem;
+letter-spacing:.22em;
+text-transform:uppercase;
+color:#cda85d;
+margin-bottom:1.5rem;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(2.4rem,10vw,3.5rem);
+font-weight:600;
+line-height:1.05;
+margin-bottom:1.5rem;
+}
+
+p{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(1.2rem,5vw,1.55rem);
+line-height:1.6;
+color:#d8c7a5;
+max-width:320px;
+}
+
+.line{
+width:150px;
+height:1px;
+background:linear-gradient(90deg,transparent,#cda85d,transparent);
+margin:1.8rem 0;
+}
+
+button{
+margin-top:2rem;
+background:rgba(0,0,0,.22);
+border:1px solid #cda85d;
+color:#f4d88d;
+font-family:'Cormorant Garamond',serif;
+font-size:1.25rem;
+padding:.75rem 2rem;
+border-radius:16px;
+cursor:pointer;
+box-shadow:0 0 22px rgba(205,168,93,.28);
+animation:breathe 2.8s ease-in-out infinite;
+}
+
+.memory{
+font-size:1rem;
+font-family:'Inter',sans-serif;
+font-weight:300;
+line-height:1.8;
+color:#cbbd9d;
+}
+
+@keyframes breathe{
+0%,100%{box-shadow:0 0 14px rgba(205,168,93,.22)}
+50%{box-shadow:0 0 34px rgba(205,168,93,.65)}
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+<canvas id="dust"></canvas>
+
+<section class="screen active">
+<div class="small">A Digital Feelings Box</div>
+<h1>For Someone<br>Who Matters</h1>
+<div class="line"></div>
+<p>Some feelings are too precious to be sent as ordinary words.</p>
+<button onclick="next()">Open</button>
+</section>
+
+<section class="screen">
+<div class="small">Love</div>
+<h1>To the person<br>who changed my life</h1>
+<p>I may not always find the perfect words, but I hope this reminds you how much you mean to me.</p>
+<button onclick="next()">Continue</button>
+</section>
+
+<section class="screen">
+<div class="small">Memory</div>
+<p class="memory">
+Remember this moment?<br><br>
+The laughter, the small conversations, the ordinary days that quietly became our favourite memories.
+</p>
+<button onclick="next()">Continue</button>
+</section>
+
+<section class="screen">
+<div class="small">Message</div>
+<h1>Thank you</h1>
+<p>For being here. For being you. For making life feel warmer just by being part of it.</p>
+<button onclick="next()">Finish</button>
+</section>
+
+<section class="screen">
+<div class="small">From the heart</div>
+<h1>You are<br>appreciated</h1>
+<div class="line"></div>
+<p>This is not about price. This is about meaning.</p>
+</section>
+
+</div>
+
+<script>
+let current = 0;
+const screens = document.querySelectorAll(".screen");
+
+function next(){
+screens[current].classList.remove("active");
+current++;
+if(current < screens.length){
+setTimeout(()=>screens[current].classList.add("active"),300);
+}
+}
+
+/* random floating dust */
+const canvas = document.getElementById("dust");
+const ctx = canvas.getContext("2d");
+const box = document.getElementById("box");
+
+function resize(){
+canvas.width = box.offsetWidth;
+canvas.height = box.offsetHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+function particle(){
+return{
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*1.5+.3,
+vx:(Math.random()-.5)*.15,
+vy:-(Math.random()*.25+.06),
+a:Math.random()*.5+.15,
+t:Math.random()*Math.PI*2
+};
+}
+
+const particles = Array.from({length:65},particle);
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+p.x += p.vx + Math.sin(p.t)*.04;
+p.y += p.vy;
+p.t += .025;
+
+if(p.y < -10){
+Object.assign(p,particle());
+p.y = canvas.height + 10;
+}
+
+ctx.globalAlpha = p.a * (.65 + .35*Math.sin(p.t));
+ctx.fillStyle = "#d6b76a";
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+});
+
+requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
