@@ -100,5 +100,3 @@ document.getElementById("answerInput").addEventListener("keydown", (e) => {
     Conversation.next();
   }
 });
-
-Conversation.start(LUMINA);
