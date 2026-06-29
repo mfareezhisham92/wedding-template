@@ -52,9 +52,11 @@ const Conversation = {
     SceneEngine.saveScenes(story);
 
     document.getElementById("creatorArea").style.display = "none";
-    document.getElementById("resultArea").style.display = "block";
-    document.getElementById("storyOutput").innerText =
-      JSON.stringify(story, null, 2);
+document.getElementById("craftingArea").style.display = "block";
+
+setTimeout(() => {
+  window.location.href = "experience.html";
+}, 3500);
   }
 };
 
