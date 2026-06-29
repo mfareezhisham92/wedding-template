@@ -49,6 +49,7 @@ const Conversation = {
     };
 
     localStorage.setItem("luminaStory", JSON.stringify(story));
+    SceneEngine.saveScenes(story);
 
     document.getElementById("creatorArea").style.display = "none";
     document.getElementById("resultArea").style.display = "block";
