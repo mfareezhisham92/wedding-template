@@ -60,8 +60,22 @@ setTimeout(() => {
   }
 };
 
-document.getElementById("nextBtn").addEventListener("click", () => {
-  Conversation.next();
+nextBtn.addEventListener("click", () => {
+    Conversation.next();
+});
+
+document
+.getElementById("answerInput")
+.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Enter" && !e.shiftKey){
+
+        e.preventDefault();
+
+        Conversation.next();
+
+    }
+
 });
 
 Conversation.start(LUMINA);
