@@ -29,3 +29,11 @@ const Atmosphere = {
     return localStorage.getItem("luminaAtmosphere") || this.selected;
   }
 };
+function chooseAtmosphere(type){
+  Atmosphere.set(type);
+
+  document.getElementById("atmosphereArea").style.display = "none";
+  document.getElementById("creatorArea").style.display = "block";
+
+  Conversation.start(LUMINA);
+}
