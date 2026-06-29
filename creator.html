@@ -84,6 +84,29 @@ padding:16px;
 border-radius:14px;
 border:1px solid rgba(205,168,93,.35);
 }
+#craftingArea{
+display:none;
+text-align:center;
+}
+
+.craft-line{
+width:100%;
+height:1px;
+margin-top:30px;
+background:linear-gradient(90deg,transparent,#cda85d,transparent);
+animation:craftGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes craftGlow{
+0%,100%{
+opacity:.25;
+transform:scaleX(.4);
+}
+50%{
+opacity:1;
+transform:scaleX(1);
+}
+}  
 </style>
 </head>
 
@@ -99,11 +122,11 @@ border:1px solid rgba(205,168,93,.35);
   <button id="nextBtn"></button>
 </div>
 
-<div id="resultArea">
-  <div class="small">Lumina Story Data</div>
-  <h1>Experience Ready</h1>
-  <p>Your story foundation has been created.</p>
-  <pre id="storyOutput"></pre>
+<div id="craftingArea">
+  <div class="small">Lumina is crafting</div>
+  <h1>Your experience is being arranged...</h1>
+  <p>Every meaningful story deserves a thoughtful presentation.</p>
+  <div class="craft-line"></div>
 </div>
 
 </div>
