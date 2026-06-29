@@ -28,25 +28,17 @@ overflow:hidden;
 background:
 radial-gradient(circle at top,rgba(205,168,93,.22),transparent 36%),
 linear-gradient(180deg,#080604,#151006 55%,#080604);
-}
-
-.scene{
-position:absolute;
-inset:0;
-padding:34px 28px;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-opacity:0;
-transform:translateY(40px);
-transition:opacity 1.2s ease, transform 1.2s ease;
+padding:34px 28px;
 }
 
-.scene.active{
-opacity:1;
-transform:translateY(0);
+.moment{
+opacity:0;
+transform:translateY(28px);
+animation:momentIn 1.4s ease forwards;
 }
 
 .label{
@@ -54,93 +46,36 @@ color:#cda85d;
 font-size:12px;
 letter-spacing:.22em;
 text-transform:uppercase;
-margin-bottom:22px;
+margin-bottom:24px;
 }
 
 h1{
-font-size:34px;
+font-size:36px;
 line-height:1.15;
-margin-bottom:22px;
+margin-bottom:24px;
 }
 
 p{
 font-size:20px;
-line-height:1.6;
+line-height:1.65;
 color:#d8c7a5;
 max-width:340px;
 }
 
-button{
-position:absolute;
-bottom:34px;
-left:50%;
-transform:translateX(-50%);
-padding:13px 34px;
-border-radius:16px;
-border:1px solid #cda85d;
-background:rgba(0,0,0,.2);
-color:#f4d88d;
-font-size:18px;
-cursor:pointer;
+@keyframes momentIn{
+to{
+opacity:1;
+transform:translateY(0);
 }
-
-#empty{
-padding:30px;
-text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div id="stage">
-  <div id="sceneArea"></div>
-  <button id="nextBtn" onclick="nextScene()">Next</button>
-</div>
+<div id="stage"></div>
 
-<script>
-const scenes = JSON.parse(localStorage.getItem("luminaScenes") || "[]");
-const sceneArea = document.getElementById("sceneArea");
-const nextBtn = document.getElementById("nextBtn");
-let currentScene = 0;
-
-if(!scenes.length){
-  sceneArea.innerHTML = `
-    <div id="empty">
-      <h1>No experience found</h1>
-      <p>Please create a story in Lumina Creator first.</p>
-    </div>
-  `;
-  nextBtn.style.display = "none";
-}else{
-  scenes.forEach((scene,index)=>{
-    const div = document.createElement("section");
-    div.className = "scene" + (index === 0 ? " active" : "");
-    div.innerHTML = `
-      <div class="label">${scene.label}</div>
-      <h1>${scene.title}</h1>
-      <p>${scene.text}</p>
-    `;
-    sceneArea.appendChild(div);
-  });
-}
-
-function nextScene(){
-  const sceneEls = document.querySelectorAll(".scene");
-
-  if(currentScene < sceneEls.length - 1){
-    sceneEls[currentScene].classList.remove("active");
-    currentScene++;
-    sceneEls[currentScene].classList.add("active");
-
-    if(currentScene === sceneEls.length - 1){
-      nextBtn.innerText = "Finish";
-    }
-  }else{
-    nextBtn.style.display = "none";
-  }
-}
-</script>
+<script src="assets/js/player.js"></script>
 
 </body>
 </html>
