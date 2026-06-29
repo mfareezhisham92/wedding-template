@@ -132,6 +132,13 @@ animation:craftGlow 1.8s ease-in-out infinite;
 0%,100%{opacity:.25;transform:scaleX(.4)}
 50%{opacity:1;transform:scaleX(1)}
 }
+#atmosphereArea button span{
+display:block;
+font-size:14px;
+color:#d8c7a5;
+margin-top:5px;
+font-style:italic;
+}  
 </style>
 </head>
 
@@ -139,7 +146,17 @@ animation:craftGlow 1.8s ease-in-out infinite;
 
 <div class="app">
 
-<div id="creatorArea">
+<div id="atmosphereArea">
+  <div class="small">Choose the feeling</div>
+  <h1>How would you like to remember today?</h1>
+
+  <button onclick="chooseAtmosphere('calm')">🤍 Calm<br><span>A quiet moment to reflect.</span></button>
+  <button onclick="chooseAtmosphere('nostalgic')">🌙 Nostalgic<br><span>For memories that still make you smile.</span></button>
+  <button onclick="chooseAtmosphere('romantic')">❤️ Romantic<br><span>For moments that changed your life.</span></button>
+  <button onclick="chooseAtmosphere('hopeful')">🌅 Hopeful<br><span>For stories that deserve another beginning.</span></button>
+</div>
+  
+<div id="creatorArea" style="display:none;">
   <div class="small" id="progressText"></div>
   <div class="dots" id="dots"></div>
 
