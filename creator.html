@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina Creator</title>
+
+<style>
+body{
+margin:0;
+min-height:100vh;
+background:#080604;
+color:#f3ead8;
+font-family:Georgia,serif;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.app{
+width:100%;
+max-width:430px;
+border:1px solid #cda85d;
+border-radius:24px;
+padding:28px 22px;
+background:#151006;
+box-shadow:0 0 45px rgba(205,168,93,.18);
+}
+
+.small{
+font-size:12px;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:#cda85d;
+margin-bottom:18px;
+}
+
+h1{
+font-size:30px;
+line-height:1.2;
+margin-bottom:12px;
+}
+
+p{
+color:#d8c7a5;
+line-height:1.6;
+}
+
+textarea{
+width:100%;
+min-height:130px;
+margin-top:22px;
+background:#080604;
+border:1px solid rgba(205,168,93,.55);
+color:#fff;
+padding:14px;
+border-radius:14px;
+font-size:16px;
+}
+
+button{
+width:100%;
+margin-top:18px;
+padding:14px;
+border-radius:14px;
+border:1px solid #cda85d;
+background:transparent;
+color:#f4d88d;
+font-size:18px;
+cursor:pointer;
+}
+
+#resultArea{
+display:none;
+}
+
+pre{
+white-space:pre-wrap;
+font-size:13px;
+line-height:1.5;
+background:#080604;
+padding:16px;
+border-radius:14px;
+border:1px solid rgba(205,168,93,.35);
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div id="creatorArea">
+  <div class="small" id="progressText"></div>
+  <h1 id="questionTitle"></h1>
+  <p id="questionSubtitle"></p>
+  <textarea id="answerInput"></textarea>
+  <button id="nextBtn"></button>
+</div>
+
+<div id="resultArea">
+  <div class="small">Lumina Story Data</div>
+  <h1>Experience Ready</h1>
+  <p>Your story foundation has been created.</p>
+  <pre id="storyOutput"></pre>
+</div>
+
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/conversation.js"></script>
+
+</body>
+</html>
