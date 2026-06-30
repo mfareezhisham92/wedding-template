@@ -1,12 +1,10 @@
 const Renderers = {
   text(moment) {
-    return `
-      <section class="moment active">
-        <div class="label">${moment.label || ""}</div>
-        <h1>${moment.title || ""}</h1>
-        <p>${moment.text || ""}</p>
-      </section>
-    `;
+    return Components.moment(
+      Components.label(moment.label) +
+      Components.title(moment.title) +
+      Components.paragraph(moment.text)
+    );
   },
 
   hero(moment) {
@@ -30,11 +28,9 @@ const Renderers = {
   },
 
   photo(moment) {
-    return `
-      <section class="moment active photo-moment">
-        <img src="${moment.image}" alt="Memory photo">
-      </section>
-    `;
+    return Components.moment(
+      Components.photo(moment.image)
+    );
   }
 };
 
