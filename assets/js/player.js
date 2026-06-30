@@ -1,120 +1,121 @@
-const Player = {
+const Renderers = {
+  text(moment) {
+    return `
+      <section class="moment active">
+        <div class="label">${moment.label || ""}</div>
+        <h1>${moment.title || ""}</h1>
+        <p>${moment.text || ""}</p>
+      </section>
+    `;
+  },
 
-    moments: [],
-    current: 0,
-    timer: null,
+  hero(moment) {
+    return this.text(moment);
+  },
 
-    start(){
+  feeling(moment) {
+    return this.text(moment);
+  },
 
-        this.moments = JSON.parse(
-            localStorage.getItem("luminaScenes") || "[]"
-        );
+  memory(moment) {
+    return this.text(moment);
+  },
 
-        if(!this.moments.length){
+  message(moment) {
+    return this.text(moment);
+  },
 
-            document.getElementById("stage").innerHTML =
-            "<h2>No experience found.</h2>";
+  closing(moment) {
+    return this.text(moment);
+  },
 
-            return;
-
-        }
-
-        this.show();
-
-    },
-
-    show(){
-
-        const moment = this.moments[this.current];
-
-        const stage = document.getElementById("stage");
-
-        if(moment.type === "photo"){
-  stage.innerHTML = `
-    <section class="moment active">
-      <img src="${moment.image}" style="
-        width:100%;
-        max-height:72vh;
-        object-fit:cover;
-        border-radius:22px;
-        box-shadow:0 0 45px rgba(205,168,93,.22);
-      ">
-    </section>
-  `;
-}else{
-  stage.innerHTML = `
-    <section class="moment active">
-      <div class="label">${moment.label}</div>
-      <h1>${moment.title}</h1>
-      <p>${moment.text}</p>
-    </section>
-  `;
-}
-
-        clearTimeout(this.timer);
-
-        this.timer = setTimeout(()=>{
-
-    const stage = document.getElementById("stage");
-
-stage.style.opacity = ".15";
-
-setTimeout(()=>{
-
-    this.next();
-
-    stage.style.opacity="1";
-
-},800);
-
-}, moment.duration || 5000);
-
-    },
-
-    next(){
-
-        this.current++;
-
-        if(this.current >= this.moments.length){
-
-            this.finish();
-
-            return;
-
-        }
-
-        this.show();
-
-    },
-
-    finish(){
-
-        document.getElementById("stage").innerHTML = `
-
-        <section class="moment active">
-
-            <h1>
-            Thank You
-            </h1>
-
-            <p>
-
-            We hope this small experience
-            reminded you how meaningful
-            your relationship already is.
-
-            </p>
-
-        </section>
-
-        `;
-
-    }
-
+  photo(moment) {
+    return `
+      <section class="moment active photo-moment">
+        <img src="${moment.image}" alt="Memory photo">
+      </section>
+    `;
+  }
 };
 
-window.onload=()=>{
+const Player = {
+  moments: [],
+  current: 0,
+  timer: null,
 
-    Player.start();
+  start() {
+    this.moments = JSON.parse(localStorage.getItem("luminaScenes") || "[]");
 
+    if (!this.moments.length) {
+      document.getElementById("stage").innerHTML = `
+        <section class="moment active">
+          <h1>No experience found</h1>
+          <p>Please create a story in Lumina Creator first.</p>
+        </section>
+      `;
+      return;
+    }
+
+    this.show();
+  },
+
+  show() {
+    const moment = this.moments[this.current];
+    const stage = document.getElementById("stage");
+    const renderer = Renderers[moment.type] || Renderers.text;
+
+    stage.classList.add("fade-out");
+
+    setTimeout(() => {
+      stage.innerHTML = renderer.call(Renderers, moment);
+      stage.classList.remove("fade-out");
+      stage.classList.add("fade-in");
+
+      setTimeout(() => {
+        stage.classList.remove("fade-in");
+      }, 900);
+    }, 500);
+
+    clearTimeout(this.timer);
+
+    this.timer = setTimeout(() => {
+      this.next();
+    }, moment.duration || 6000);
+  },
+
+  next() {
+    this.current++;
+
+    if (this.current >= this.moments.length) {
+      this.finish();
+      return;
+    }
+
+    this.show();
+  },
+
+  finish() {
+    const stage = document.getElementById("stage");
+
+    stage.classList.add("fade-out");
+
+    setTimeout(() => {
+      stage.innerHTML = `
+        <section class="moment active">
+          <div class="label">Lumina</div>
+          <h1>Thank You</h1>
+          <p>
+            We hope this small experience reminded you how meaningful your relationship already is.
+          </p>
+        </section>
+      `;
+
+      stage.classList.remove("fade-out");
+      stage.classList.add("fade-in");
+    }, 500);
+  }
+};
+
+window.onload = () => {
+  Player.start();
 };
