@@ -1,7 +1,7 @@
 const SceneEngine = {
 
   build(storyData) {
-    const answers = storyData.answers;
+    const story = storyData;
 
     return [
       {
@@ -18,7 +18,7 @@ const SceneEngine = {
 {
   type: "hero",
   label: "From the heart",
-  title: `For ${answers.recipient}`,
+  title: `For ${story.recipient.name}`,
   text: "Some people make life feel warmer just by being part of it.",
   duration: 6500,
   transition: "fade",
@@ -41,7 +41,7 @@ const SceneEngine = {
         type: "feeling",
         label: "What matters",
         title: "This was created to make you feel",
-        text: answers.feeling,
+        text: story.emotion.feeling,
         duration: 6000,
         transition: "fade",
         background: "royal",
@@ -52,7 +52,7 @@ const SceneEngine = {
         type: "memory",
         label: "A memory worth keeping",
         title: "One moment that still stays with me",
-        text: answers.memory,
+        text: story.memory.text,
         duration: 8000,
         transition: "fade",
         background: "royal",
@@ -63,7 +63,7 @@ const SceneEngine = {
         type: "message",
         label: "From the heart",
         title: "What I want you to know",
-        text: answers.message,
+        text: story.message.text,
         duration: 8000,
         transition: "fade",
         background: "royal",
