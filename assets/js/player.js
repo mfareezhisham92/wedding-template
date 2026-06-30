@@ -51,7 +51,17 @@ const Player = {
 
         this.timer = setTimeout(()=>{
 
+    const stage = document.getElementById("stage");
+
+stage.style.opacity = ".15";
+
+setTimeout(()=>{
+
     this.next();
+
+    stage.style.opacity="1";
+
+},800);
 
 }, moment.duration || 5000);
 
