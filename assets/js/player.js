@@ -51,9 +51,9 @@ const Player = {
 
         this.timer = setTimeout(()=>{
 
-            this.next();
+    this.next();
 
-        },5000);
+}, moment.duration || 5000);
 
     },
 
