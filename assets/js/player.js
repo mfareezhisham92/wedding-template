@@ -29,23 +29,27 @@ const Player = {
 
         const stage = document.getElementById("stage");
 
-        stage.innerHTML = `
-            <section class="moment active">
-
-                <div class="label">
-                    ${moment.label}
-                </div>
-
-                <h1>
-                    ${moment.title}
-                </h1>
-
-                <p>
-                    ${moment.text}
-                </p>
-
-            </section>
-        `;
+        if(moment.type === "photo"){
+  stage.innerHTML = `
+    <section class="moment active">
+      <img src="${moment.image}" style="
+        width:100%;
+        max-height:72vh;
+        object-fit:cover;
+        border-radius:22px;
+        box-shadow:0 0 45px rgba(205,168,93,.22);
+      ">
+    </section>
+  `;
+}else{
+  stage.innerHTML = `
+    <section class="moment active">
+      <div class="label">${moment.label}</div>
+      <h1>${moment.title}</h1>
+      <p>${moment.text}</p>
+    </section>
+  `;
+}
 
         clearTimeout(this.timer);
 
