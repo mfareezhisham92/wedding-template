@@ -2,19 +2,29 @@ const Composer = {
 
   compose(story){
 
+    const answers = story.answers;
+
     return {
 
-      recipient: story.answers.recipient,
+      collection: story.collection || "royal",
 
-      feeling: story.answers.feeling,
+      atmosphere: Atmosphere.get(),
 
-      memory: story.answers.memory,
+      recipient: {
+        name: answers.recipient
+      },
 
-      message: story.answers.message,
+      emotion: {
+        feeling: answers.feeling
+      },
 
-      mood: Atmosphere.get(),
+      memory: {
+        text: answers.memory
+      },
 
-      collection: story.collection || "royal"
+      message: {
+        text: answers.message
+      }
 
     };
 
