@@ -72,26 +72,25 @@ const Conversation = {
   },
 
   finish() {
-    const story = {
-      collection: "royal",
-      createdAt: new Date().toISOString(),
-      answers: this.answers
-    };
+  const story = {
+    collection: "royal",
+    createdAt: new Date().toISOString(),
+    answers: this.answers
+  };
 
-    localStorage.setItem("luminaStory", JSON.stringify(story));
-    const composed = Composer.compose(story);
+  localStorage.setItem("luminaStory", JSON.stringify(story));
 
-const composedStory = Composer.compose(story);
+  const composedStory = Composer.compose(story);
 
-SceneEngine.saveScenes(composedStory);
+  SceneEngine.saveScenes(composedStory);
 
-    document.getElementById("creatorArea").style.display = "none";
-    document.getElementById("craftingArea").style.display = "block";
+  document.getElementById("creatorArea").style.display = "none";
+  document.getElementById("craftingArea").style.display = "block";
 
-    setTimeout(() => {
-      window.location.href = "experience.html";
-    }, 3500);
-  }
+  setTimeout(() => {
+    window.location.href = "experience.html";
+  }, 3500);
+}
 };
 
 document.getElementById("nextBtn").addEventListener("click", () => {
