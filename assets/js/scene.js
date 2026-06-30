@@ -5,15 +5,26 @@ const SceneEngine = {
 
     return [
       {
-        type: "hero",
-        label: "A Lumina Experience",
-        title: `For ${answers.recipient}`,
-        text: "Some people make life feel warmer just by being part of it.",
-        duration: 6000,
-        transition: "fade",
-        background: "royal",
-        image: null
-      },
+  type: "hero",
+  label: "A Lumina Experience",
+  title: "Before anything else...",
+  text: "This was created for someone who matters.",
+  duration: 5000,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
+
+{
+  type: "hero",
+  label: "From the heart",
+  title: `For ${answers.recipient}`,
+  text: "Some people make life feel warmer just by being part of it.",
+  duration: 6500,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
 
 {
   type: "photo",
