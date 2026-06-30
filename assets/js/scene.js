@@ -15,6 +15,17 @@ const SceneEngine = {
         image: null
       },
 
+{
+  type: "photo",
+  label: "A memory",
+  title: "",
+  text: "",
+  duration: 7000,
+  transition: "fade",
+  background: "royal",
+  image: "assets/wife.jpg"
+},
+      
       {
         type: "feeling",
         label: "What matters",
