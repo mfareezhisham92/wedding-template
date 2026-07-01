@@ -88,6 +88,12 @@ SceneEngine.saveScenes(composedStory);
 
 document.getElementById("creatorArea").style.display = "none";
 document.getElementById("studioArea").style.display = "block";
+document.getElementById("studioSummary").innerHTML = `
+  <strong>For:</strong> ${this.answers.recipient}<br><br>
+  <strong>Feeling:</strong> ${this.answers.feeling}<br><br>
+  <strong>Memory:</strong><br>${this.answers.memory}<br><br>
+  <strong>Message:</strong><br>${this.answers.message}
+`;    
 }
 };
 
