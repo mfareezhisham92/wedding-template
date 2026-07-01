@@ -108,10 +108,67 @@ document.getElementById("answerInput").addEventListener("keydown", (e) => {
   }
 });
 function openPreview(){
+
   document.getElementById("studioArea").style.display = "none";
   document.getElementById("craftingArea").style.display = "block";
 
-  setTimeout(() => {
-    window.location.href = "experience.html";
-  }, 3500);
+  const title = document.getElementById("craftTitle");
+  const text = document.getElementById("craftText");
+
+  const moments = [
+
+    {
+      title:"Your words have been collected.",
+      text:""
+    },
+
+    {
+      title:"Every meaningful memory deserves a thoughtful presentation.",
+      text:""
+    },
+
+    {
+      title:"This is the first time you'll experience your own story.",
+      text:""
+    }
+
+  ];
+
+  let i = 0;
+
+  function next(){
+
+    title.style.opacity = 0;
+    text.style.opacity = 0;
+
+    setTimeout(()=>{
+
+      title.innerText = moments[i].title;
+      text.innerText = moments[i].text;
+
+      title.style.opacity = 1;
+      text.style.opacity = 1;
+
+      i++;
+
+      if(i < moments.length){
+
+        setTimeout(next,2500);
+
+      }else{
+
+        setTimeout(()=>{
+
+          window.location.href="experience.html";
+
+        },2500);
+
+      }
+
+    },700);
+
+  }
+
+  next();
+
 }
