@@ -6,10 +6,21 @@ const SceneEngine = {
     return [
       {
   type: "hero",
-  label: "A Lumina Experience",
+  label: "",
   title: "Before anything else...",
-  text: "This was created for someone who matters.",
-  duration: 5000,
+  text: "",
+  duration: 4500,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
+
+{
+  type: "hero",
+  label: "",
+  title: "This was created<br>for someone<br>who matters.",
+  text: "",
+  duration: 6000,
   transition: "fade",
   background: "royal",
   image: null
