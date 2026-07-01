@@ -7,25 +7,11 @@ const Renderers = {
     );
   },
 
-  hero(moment) {
-    return this.text(moment);
-  },
-
-  feeling(moment) {
-    return this.text(moment);
-  },
-
-  memory(moment) {
-    return this.text(moment);
-  },
-
-  message(moment) {
-    return this.text(moment);
-  },
-
-  closing(moment) {
-    return this.text(moment);
-  },
+  hero(moment) { return this.text(moment); },
+  feeling(moment) { return this.text(moment); },
+  memory(moment) { return this.text(moment); },
+  message(moment) { return this.text(moment); },
+  closing(moment) { return this.text(moment); },
 
   photo(moment) {
     return Components.moment(
@@ -52,63 +38,56 @@ const Player = {
       return;
     }
 
-    this.show();
+    this.showMoment();
   },
 
-  show() {
-    const moment = this.moments[this.current];
+  showMoment() {
     const stage = document.getElementById("stage");
+    const moment = this.moments[this.current];
     const renderer = Renderers[moment.type] || Renderers.text;
 
-    stage.classList.add("fade-out");
-
-    setTimeout(() => {
-      stage.innerHTML = renderer.call(Renderers, moment);
-      stage.classList.remove("fade-out");
-      stage.classList.add("fade-in");
-
-      setTimeout(() => {
-        stage.classList.remove("fade-in");
-      }, 900);
-    }, 500);
+    stage.classList.remove("fade-out", "fade-in");
+    stage.innerHTML = renderer.call(Renderers, moment);
 
     clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
-      this.next();
+      this.nextMoment();
     }, moment.duration || 6000);
   },
 
-  next() {
-    this.current++;
+  nextMoment() {
+    const stage = document.getElementById("stage");
 
-    if (this.current >= this.moments.length) {
-      this.finish();
-      return;
-    }
+    stage.classList.add("fade-out");
 
-    this.show();
+    setTimeout(() => {
+      this.current++;
+
+      if (this.current >= this.moments.length) {
+        this.finish();
+        return;
+      }
+
+      stage.classList.remove("fade-out");
+      this.showMoment();
+    }, 800);
   },
 
   finish() {
     const stage = document.getElementById("stage");
 
-    stage.classList.add("fade-out");
+    stage.classList.remove("fade-out", "fade-in");
 
-    setTimeout(() => {
-      stage.innerHTML = `
-        <section class="moment active">
-          <div class="label">Lumina</div>
-          <h1>Thank You</h1>
-          <p>
-            We hope this small experience reminded you how meaningful your relationship already is.
-          </p>
-        </section>
-      `;
-
-      stage.classList.remove("fade-out");
-      stage.classList.add("fade-in");
-    }, 500);
+    stage.innerHTML = `
+      <section class="moment active">
+        <div class="label">Lumina</div>
+        <h1>Thank You</h1>
+        <p>
+          We hope this small experience reminded you how meaningful your relationship already is.
+        </p>
+      </section>
+    `;
   }
 };
 
