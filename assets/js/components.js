@@ -13,9 +13,9 @@ const Components = {
   },
 
   title(text){
-  if(!text) return "";
-  return `<h1>${text}</h1>`;
-},
+    if(!text) return "";
+    return `<h1>${text}</h1>`;
+  },
 
   paragraph(text){
     if(!text) return "";
@@ -23,13 +23,14 @@ const Components = {
   },
 
   photo(src){
-  if(!src) return "";
+    if(!src) return "";
 
-  return `
-    <div class="photo-moment">
-      <div class="photo-frame">
-        <img src="${src}" alt="Memory photo">
+    return `
+      <div class="photo-moment">
+        <div class="photo-frame">
+          <img src="${src}" alt="Memory photo">
+        </div>
       </div>
-    </div>
-  `;
-}
+    `;
+  }
+};
