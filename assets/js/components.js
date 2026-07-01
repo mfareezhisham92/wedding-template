@@ -23,7 +23,13 @@ const Components = {
   },
 
   photo(src){
-    if(!src) return "";
-    return `<img src="${src}" alt="Memory photo">`;
-  }
-};
+  if(!src) return "";
+
+  return `
+    <div class="photo-moment">
+      <div class="photo-frame">
+        <img src="${src}" alt="Memory photo">
+      </div>
+    </div>
+  `;
+}
