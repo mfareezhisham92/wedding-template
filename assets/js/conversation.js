@@ -78,20 +78,16 @@ const Conversation = {
     answers: this.answers
   };
 
-  localStorage.setItem("luminaStory", JSON.stringify(story));
+localStorage.setItem("luminaStory", JSON.stringify(story));
 
-  const composedStory = Composer.compose(story);
+const composedStory = Composer.compose(story);
 
 composedStory.storyStyle = Director.arrange(composedStory);
 
 SceneEngine.saveScenes(composedStory);
 
-  document.getElementById("creatorArea").style.display = "none";
-  document.getElementById("craftingArea").style.display = "block";
-
-  setTimeout(() => {
-    window.location.href = "experience.html";
-  }, 3500);
+document.getElementById("creatorArea").style.display = "none";
+document.getElementById("studioArea").style.display = "block";
 }
 };
 
@@ -105,3 +101,11 @@ document.getElementById("answerInput").addEventListener("keydown", (e) => {
     Conversation.next();
   }
 });
+function openPreview(){
+  document.getElementById("studioArea").style.display = "none";
+  document.getElementById("craftingArea").style.display = "block";
+
+  setTimeout(() => {
+    window.location.href = "experience.html";
+  }, 3500);
+}
