@@ -13,9 +13,9 @@ const Components = {
   },
 
   title(text){
-    if(!text) return "";
-    return `<h1>${text}</h1>`;
-  },
+  if(!text) return "";
+  return `<h1>${text}</h1>`;
+},
 
   paragraph(text){
     if(!text) return "";
