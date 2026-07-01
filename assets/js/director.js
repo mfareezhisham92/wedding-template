@@ -1,11 +1,8 @@
 const Director = {
-
   arrange(story){
-
-    const atmosphere = story.atmosphere;
+    const atmosphere = story.atmosphere || "calm";
 
     switch(atmosphere){
-
       case "romantic":
         return "romantic";
 
@@ -17,9 +14,6 @@ const Director = {
 
       default:
         return "calm";
-
     }
-
   }
-
 };
