@@ -81,9 +81,10 @@ const Conversation = {
   localStorage.setItem("luminaStory", JSON.stringify(story));
 
   const composedStory = Composer.compose(story);
-    composedStory.storyStyle = Director.arrange(composedStory);
 
-  SceneEngine.saveScenes(composedStory);
+composedStory.storyStyle = Director.arrange(composedStory);
+
+SceneEngine.saveScenes(composedStory);
 
   document.getElementById("creatorArea").style.display = "none";
   document.getElementById("craftingArea").style.display = "block";
