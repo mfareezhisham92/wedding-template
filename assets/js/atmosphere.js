@@ -32,8 +32,38 @@ const Atmosphere = {
 function chooseAtmosphere(type){
   Atmosphere.set(type);
 
-  document.getElementById("atmosphereArea").style.display = "none";
-  document.getElementById("creatorArea").style.display = "block";
+  const messages = {
+    nostalgic: {
+      title: "Memories have a quiet way of staying with us.",
+      text: "Today, let’s revisit one together."
+    },
+    romantic: {
+      title: "I’m glad you’re here.",
+      text: "Some thoughts stay in our hearts for years. Let’s turn them into something meaningful."
+    },
+    calm: {
+      title: "What a wonderful reason to be here.",
+      text: "Let’s create something worthy of this moment."
+    },
+    hopeful: {
+      title: "Every new chapter deserves a meaningful beginning.",
+      text: "Let’s take the first step together."
+    }
+  };
 
-  Conversation.start(LUMINA);
+  const selected = messages[type];
+
+  document.getElementById("atmosphereArea").innerHTML = `
+    <div class="small">Lumina</div>
+    <h1>${selected.title}</h1>
+    <p style="color:#d8c7a5; line-height:1.7; margin-top:20px;">
+      ${selected.text}
+    </p>
+  `;
+
+  setTimeout(() => {
+    document.getElementById("atmosphereArea").style.display = "none";
+    document.getElementById("creatorArea").style.display = "block";
+    Conversation.start(LUMINA);
+  }, 4500);
 }
