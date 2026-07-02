@@ -6,13 +6,13 @@ const EXPRESS = {
     {
       id: "recipient",
       chapter: "The Person",
-      reflection: `Every meaningful story begins with someone.
+      reflection: `Every meaningful story begins with a person who matters.
 
 Before we think about words...
 
 let's simply think about the person who brought you here today.`,
-      title: "May I ask who has been on your mind today?",
-      placeholder: "My wife... My mother... My best friend... My teacher...",
+      title: "May I ask who you're creating this for today?",
+      placeholder: "My wife... my dad... my best friend...",
       encouragement: `Trust your first thought.
 
 Hearts are often quicker than minds.`
