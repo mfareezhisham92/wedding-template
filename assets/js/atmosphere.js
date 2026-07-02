@@ -64,6 +64,6 @@ function chooseAtmosphere(type){
   setTimeout(() => {
     document.getElementById("atmosphereArea").style.display = "none";
     document.getElementById("creatorArea").style.display = "block";
-    Conversation.start(LUMINA);
+    Conversation.start(EXPRESS);
   }, 4500);
 }
