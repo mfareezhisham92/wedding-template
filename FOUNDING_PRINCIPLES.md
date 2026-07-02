@@ -119,3 +119,14 @@ Lumina provides the stage.
 Every experience should leave
 someone feeling more loved
 than before they opened it.
+
+## Write Like a Thoughtful Friend
+
+Every sentence should sound natural
+when spoken aloud.
+
+If it feels like software,
+rewrite it.
+
+If it feels like a thoughtful person,
+keep it.
