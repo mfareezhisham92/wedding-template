@@ -2,10 +2,11 @@ const Conversation = {
   step: 0,
   answers: {},
 
-  start(config) {
-    this.config = config.creatorJourney;
-    this.render();
-  },
+  start(journey) {
+  this.journey = journey;
+  this.config = journey.reflections;
+  this.render();
+},
 
   render() {
     const current = this.config[this.step];
@@ -17,7 +18,7 @@ const Conversation = {
     document.getElementById("encouragementText").innerText = current.encouragement || "";
 
     document.getElementById("progressText").innerText =
-      `Reflection ${this.step + 1}`;
+  `${current.chapter || "Reflection"} · ${this.step + 1} of ${this.config.length}`;
 
     document.getElementById("nextBtn").innerText =
       this.step === this.config.length - 1
