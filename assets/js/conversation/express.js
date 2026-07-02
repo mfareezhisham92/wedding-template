@@ -12,7 +12,7 @@ Before we think about words...
 
 let's simply think about the person who brought you here today.`,
       title: "May I ask who has been on your mind today?",
-      placeholder: "Their name...",
+      placeholder: "My wife... My mother... My best friend... My teacher...",
       encouragement: `Trust your first thought.
 
 Hearts are often quicker than minds.`
