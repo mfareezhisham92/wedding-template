@@ -1,19 +1,12 @@
 const Director = {
-  arrange(story){
-    const atmosphere = story.atmosphere || "calm";
+  journeys: {
+    romantic: EXPRESS,
+    nostalgic: EXPRESS,
+    calm: EXPRESS,
+    hopeful: EXPRESS
+  },
 
-    switch(atmosphere){
-      case "romantic":
-        return "romantic";
-
-      case "nostalgic":
-        return "nostalgic";
-
-      case "hopeful":
-        return "hopeful";
-
-      default:
-        return "calm";
-    }
+  getJourney(type){
+    return this.journeys[type] || EXPRESS;
   }
 };
