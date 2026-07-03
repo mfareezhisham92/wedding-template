@@ -79,20 +79,27 @@ const Conversation = {
     answers: this.answers
   };
 
-localStorage.setItem("luminaStory", JSON.stringify(story));
+  try {
+    localStorage.setItem("luminaStory", JSON.stringify(story));
 
-const composedStory = Composer.compose(story);
+    const composedStory = Composer.compose(story);
 
-SceneEngine.saveScenes(composedStory);
+    SceneEngine.saveScenes(composedStory);
 
-document.getElementById("creatorArea").style.display = "none";
-document.getElementById("studioArea").style.display = "block";
-document.getElementById("studioSummary").innerHTML = `
-  <strong>For:</strong> ${this.answers.recipient}<br><br>
-  <strong>Feeling:</strong> ${this.answers.feeling}<br><br>
-  <strong>Memory:</strong><br>${this.answers.memory}<br><br>
-  <strong>Message:</strong><br>${this.answers.message}
-`;    
+    document.getElementById("creatorArea").style.display = "none";
+    document.getElementById("studioArea").style.display = "block";
+
+    document.getElementById("studioSummary").innerHTML = `
+      <strong>For:</strong> ${this.answers.recipient}<br><br>
+      <strong>Feeling:</strong> ${this.answers.feeling}<br><br>
+      <strong>Memory:</strong><br>${this.answers.memory}<br><br>
+      <strong>Message:</strong><br>${this.answers.message}
+    `;
+
+  } catch (error) {
+    alert("Lumina error: " + error.message);
+    console.error(error);
+  }
 }
 };
 
