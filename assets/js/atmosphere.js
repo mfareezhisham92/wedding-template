@@ -64,6 +64,7 @@ function chooseAtmosphere(type){
   setTimeout(() => {
     document.getElementById("atmosphereArea").style.display = "none";
     document.getElementById("creatorArea").style.display = "block";
-    Conversation.start(EXPRESS);
+    const journey = Director.getJourney(type);
+Conversation.start(journey);
   }, 4500);
 }
