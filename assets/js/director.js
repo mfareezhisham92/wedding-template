@@ -2,7 +2,7 @@ const Director = {
   journeys: {
     romantic: EXPRESS,
     nostalgic: REMEMBER,
-    calm: EXPRESS,
+    calm: CELEBRATE,
     hopeful: EXPRESS
   },
 
