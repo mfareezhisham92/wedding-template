@@ -144,6 +144,29 @@ font-style:italic;
 #craftText{
 transition:opacity .7s ease;
 }
+
+.library-card{
+width:100%;
+margin-top:14px;
+padding:15px;
+border-radius:16px;
+border:1px solid #cda85d;
+background:transparent;
+color:#f4d88d;
+font-size:18px;
+cursor:pointer;
+text-align:left;
+font-family:Georgia,serif;
+}
+
+.library-card span{
+display:block;
+font-size:14px;
+color:#d8c7a5;
+margin-top:6px;
+font-style:italic;
+line-height:1.5;
+}
   
 </style>
 </head>
@@ -154,32 +177,13 @@ transition:opacity .7s ease;
 
 <div id="atmosphereArea">
   <div class="small">Welcome to Lumina</div>
-  <h1>What brings you here today?</h1>
+  <h1>What would you like to create today?</h1>
 
   <p style="color:#d8c7a5; line-height:1.6; margin-bottom:22px;">
-    Every meaningful story begins differently.<br>
-    Choose the journey that feels closest to yours.
+    Choose the meaningful moment closest to your story.
   </p>
 
-  <button onclick="chooseAtmosphere('nostalgic')">
-    🌙 Remember<br>
-    <span>For memories that deserve to be revisited.</span>
-  </button>
-
-  <button onclick="chooseAtmosphere('romantic')">
-    ❤️ Express<br>
-    <span>For thoughts your heart already knows, but words haven’t found yet.</span>
-  </button>
-
-  <button onclick="chooseAtmosphere('calm')">
-    🎉 Celebrate<br>
-    <span>Because some moments deserve to be celebrated forever.</span>
-  </button>
-
-  <button onclick="chooseAtmosphere('hopeful')">
-    🌱 Hope<br>
-    <span>For new beginnings, encouragement, and tomorrow.</span>
-  </button>
+  <div id="libraryArea"></div>
 </div>
   
 <div id="creatorArea" style="display:none;">
