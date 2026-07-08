@@ -1,9 +1,34 @@
 const EXPRESS_BLUEPRINT = [
-  "hero",
-  "recipient",
-  "photo",
-  "feeling",
-  "memory",
-  "message",
-  "closing"
+
+  {
+    type: "hero",
+    id: "intro"
+  },
+
+  {
+    type: "hero",
+    id: "recipient"
+  },
+
+  {
+    type: "photo",
+    id: "memoryPhoto"
+  },
+
+  {
+    type: "feeling"
+  },
+
+  {
+    type: "memory"
+  },
+
+  {
+    type: "message"
+  },
+
+  {
+    type: "closing"
+  }
+
 ];
