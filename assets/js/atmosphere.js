@@ -65,6 +65,10 @@ function chooseAtmosphere(type){
     document.getElementById("atmosphereArea").style.display = "none";
     document.getElementById("creatorArea").style.display = "block";
     const journey = Director.getJourney(type);
+
+localStorage.setItem("luminaJourney", journey.id);
+localStorage.setItem("luminaJourneyName", journey.name);
+
 Conversation.start(journey);
   }, 4500);
 }
