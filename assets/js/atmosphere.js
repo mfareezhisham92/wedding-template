@@ -72,3 +72,16 @@ localStorage.setItem("luminaJourneyName", journey.name);
 Conversation.start(journey);
   }, 4500);
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const libraryArea = document.getElementById("libraryArea");
+
+  if(!libraryArea) return;
+
+  libraryArea.innerHTML = ExperienceLibrary.map(item => `
+    <button class="library-card" onclick="chooseAtmosphere('${item.journey}')">
+      ${item.icon} ${item.name}
+      <span>${item.description}</span>
+    </button>
+  `).join("");
+});
