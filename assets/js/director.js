@@ -6,22 +6,18 @@ const Director = {
     hopeful: HOPE
   },
 
-  collections: {
-    romantic: ROYAL,
-    nostalgic: ROYAL,
-    calm: ROYAL,
-    hopeful: ROYAL
-},
-
-getCollection(type){
-    return this.collections[type] || ROYAL;
-},
-
   blueprints: {
     romantic: EXPRESS_BLUEPRINT,
     nostalgic: EXPRESS_BLUEPRINT,
     calm: EXPRESS_BLUEPRINT,
     hopeful: EXPRESS_BLUEPRINT
+  },
+
+  collections: {
+    romantic: ROYAL,
+    nostalgic: ROYAL,
+    calm: ROYAL,
+    hopeful: ROYAL
   },
 
   getJourney(type){
@@ -30,5 +26,9 @@ getCollection(type){
 
   getBlueprint(type){
     return this.blueprints[type] || EXPRESS_BLUEPRINT;
+  },
+
+  getCollection(type){
+    return this.collections[type] || ROYAL;
   }
 };
