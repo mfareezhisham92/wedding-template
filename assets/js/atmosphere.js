@@ -73,13 +73,25 @@ Conversation.start(journey);
   }, 4500);
 }
 
+function chooseExperience(id){
+  const selected = ExperienceLibrary.find(item => item.id === id);
+
+  if(!selected) return;
+
+  localStorage.setItem("luminaExperienceId", selected.id);
+  localStorage.setItem("luminaExperienceName", selected.name);
+  localStorage.setItem("luminaExperienceIcon", selected.icon);
+
+  chooseAtmosphere(selected.journey);
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   const libraryArea = document.getElementById("libraryArea");
 
   if(!libraryArea) return;
 
   libraryArea.innerHTML = ExperienceLibrary.map(item => `
-    <button class="library-card" onclick="chooseAtmosphere('${item.journey}')">
+    <button class="library-card" onclick="chooseExperience('${item.id}')"
       ${item.icon} ${item.name}
       <span>${item.description}</span>
     </button>
