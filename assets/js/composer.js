@@ -6,7 +6,9 @@ const Composer = {
 
     return {
 
-      collectionProfile: ROYAL,
+      collectionProfile: Director.getCollection(
+    Atmosphere.get()
+),
 
       collection: story.collection || "royal",
 
