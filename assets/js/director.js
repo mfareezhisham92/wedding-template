@@ -3,7 +3,7 @@ const Director = {
     romantic: EXPRESS,
     nostalgic: REMEMBER,
     calm: CELEBRATE,
-    hopeful: EXPRESS
+    hopeful: HOPE
   },
 
   getJourney(type){
