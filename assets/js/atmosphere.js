@@ -91,9 +91,26 @@ window.addEventListener("DOMContentLoaded", () => {
   if(!libraryArea) return;
 
   libraryArea.innerHTML = ExperienceLibrary.map(item => `
-    <button class="library-card" onclick="chooseExperience('${item.id}')"
-      ${item.icon} ${item.name}
-      <span>${item.description}</span>
-    </button>
-  `).join("");
+  <button
+    class="library-card"
+    onclick="chooseExperience('${item.id}')"
+  >
+    <div class="experience-category">
+      ${item.category}
+    </div>
+
+    <div class="experience-title">
+      <span class="experience-icon">${item.icon}</span>
+      ${item.name}
+    </div>
+
+    <div class="experience-description">
+      ${item.description}
+    </div>
+
+    <div class="experience-arrow" aria-hidden="true">
+      →
+    </div>
+  </button>
+`).join("");
 });
