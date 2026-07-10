@@ -81,8 +81,9 @@ function chooseExperience(id){
   localStorage.setItem("luminaExperienceId", selected.id);
   localStorage.setItem("luminaExperienceName", selected.name);
   localStorage.setItem("luminaExperienceIcon", selected.icon);
+  localStorage.setItem("luminaCollection", selected.collection);
 
-  chooseAtmosphere(selected.journey);
+  chooseAtmosphere(selected.journey, selected);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
