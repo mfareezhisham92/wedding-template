@@ -29,7 +29,7 @@ const Atmosphere = {
     return localStorage.getItem("luminaAtmosphere") || this.selected;
   }
 };
-function chooseAtmosphere(type){
+function chooseAtmosphere(type, experience){
   Atmosphere.set(type);
 
   const messages = {
@@ -51,7 +51,7 @@ function chooseAtmosphere(type){
     }
   };
 
-  const selected = messages[type];
+  const selected = experience?.welcome || messages[type];
 
   document.getElementById("atmosphereArea").innerHTML = `
     <div class="small">Lumina</div>
