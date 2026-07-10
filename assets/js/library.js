@@ -3,71 +3,79 @@ const ExperienceLibrary = [
     id: "anniversary",
     name: "Anniversary",
     icon: "❤️",
+    category: "Love",
     journey: "romantic",
     collection: "royal",
-    description: "For love, memories, and appreciation."
+    description: "Celebrate the journey you have shared together."
   },
 
   {
     id: "mothers-day",
     name: "Mother's Day",
     icon: "🌷",
+    category: "Gratitude",
     journey: "nostalgic",
     collection: "royal",
-    description: "For gratitude, love, and everything she has given."
+    description: "Say thank you for a lifetime of love and care."
   },
 
   {
     id: "birthday",
     name: "Birthday",
     icon: "🎂",
+    category: "Celebration",
     journey: "calm",
     collection: "royal",
-    description: "For joy, celebration, and meaningful wishes."
+    description: "Make their special day feel even more meaningful."
   },
 
   {
     id: "wedding",
     name: "Wedding",
     icon: "💍",
+    category: "Love",
     journey: "calm",
     collection: "royal",
-    description: "For celebrating love and inviting people who matter."
+    description: "Celebrate your union with the people who matter most."
   },
 
   {
     id: "teacher",
     name: "Teacher Appreciation",
-    icon: "👩‍🏫",
+    icon: "📚",
+    category: "Gratitude",
     journey: "nostalgic",
     collection: "royal",
-    description: "For someone who helped shape your journey."
+    description: "Thank someone who helped shape your journey."
   },
 
   {
     id: "farewell",
     name: "Farewell",
     icon: "✈️",
+    category: "Memories",
     journey: "nostalgic",
     collection: "royal",
-    description: "For goodbyes, memories, and appreciation."
+    description: "Honour the memories before beginning a new chapter."
   },
 
   {
     id: "newborn",
     name: "Newborn",
     icon: "👶",
+    category: "Celebration",
     journey: "calm",
     collection: "royal",
-    description: "For welcoming a new life with love."
+    description: "Welcome a beautiful new life with love and joy."
   },
 
   {
     id: "hope",
     name: "Encouragement",
     icon: "🌱",
+    category: "Hope",
     journey: "hopeful",
     collection: "royal",
-    description: "For strength, healing, and new beginnings."
+    description: "Offer strength, reassurance, and belief in tomorrow."
   }
 ];
