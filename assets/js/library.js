@@ -6,7 +6,11 @@ const ExperienceLibrary = [
     category: "Love",
     journey: "romantic",
     collection: "royal",
-    description: "Celebrate the journey you have shared together."
+    description: "Celebrate the journey you have shared together.",
+    welcome: {
+      title: "Every love story is built from moments.",
+      text: "Let’s revisit the journey you have shared and turn it into something they can feel."
+    }
   },
 
   {
@@ -16,7 +20,11 @@ const ExperienceLibrary = [
     category: "Gratitude",
     journey: "nostalgic",
     collection: "royal",
-    description: "Say thank you for a lifetime of love and care."
+    description: "Say thank you for a lifetime of love and care.",
+    welcome: {
+      title: "Some love quietly shapes our entire life.",
+      text: "Today, let’s remember the moments, sacrifices, and care that deserve to be appreciated."
+    }
   },
 
   {
@@ -26,7 +34,11 @@ const ExperienceLibrary = [
     category: "Celebration",
     journey: "calm",
     collection: "royal",
-    description: "Make their special day feel even more meaningful."
+    description: "Make their special day feel even more meaningful.",
+    welcome: {
+      title: "Today is about someone worth celebrating.",
+      text: "Let’s create something that reminds them how much joy their presence brings."
+    }
   },
 
   {
@@ -36,7 +48,11 @@ const ExperienceLibrary = [
     category: "Love",
     journey: "calm",
     collection: "royal",
-    description: "Celebrate your union with the people who matter most."
+    description: "Celebrate your union with the people who matter most.",
+    welcome: {
+      title: "A beautiful new chapter is beginning.",
+      text: "Let’s create an experience that honours your story and welcomes the people who matter most."
+    }
   },
 
   {
@@ -46,7 +62,11 @@ const ExperienceLibrary = [
     category: "Gratitude",
     journey: "nostalgic",
     collection: "royal",
-    description: "Thank someone who helped shape your journey."
+    description: "Thank someone who helped shape your journey.",
+    welcome: {
+      title: "Some lessons stay with us long after class ends.",
+      text: "Let’s remember the person who guided, encouraged, and helped shape your journey."
+    }
   },
 
   {
@@ -56,7 +76,11 @@ const ExperienceLibrary = [
     category: "Memories",
     journey: "nostalgic",
     collection: "royal",
-    description: "Honour the memories before beginning a new chapter."
+    description: "Honour the memories before beginning a new chapter.",
+    welcome: {
+      title: "Goodbyes often reveal how much someone mattered.",
+      text: "Let’s honour the memories you shared before the next chapter begins."
+    }
   },
 
   {
@@ -66,7 +90,11 @@ const ExperienceLibrary = [
     category: "Celebration",
     journey: "calm",
     collection: "royal",
-    description: "Welcome a beautiful new life with love and joy."
+    description: "Welcome a beautiful new life with love and joy.",
+    welcome: {
+      title: "A beautiful new life has entered the world.",
+      text: "Let’s welcome this little one with a story filled with love, hope, and joy."
+    }
   },
 
   {
@@ -76,6 +104,10 @@ const ExperienceLibrary = [
     category: "Hope",
     journey: "hopeful",
     collection: "royal",
-    description: "Offer strength, reassurance, and belief in tomorrow."
+    description: "Offer strength, reassurance, and belief in tomorrow.",
+    welcome: {
+      title: "Sometimes one sincere message can become a light.",
+      text: "Let’s create something that reminds them they are not walking forward alone."
+    }
   }
 ];
