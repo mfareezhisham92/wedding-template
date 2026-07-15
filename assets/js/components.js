@@ -22,15 +22,15 @@ const Components = {
     return `<p>${text}</p>`;
   },
 
-  photo(src){
-    if(!src) return "";
+  photo(src, className = "photo-default", alt = "Memory photo"){
+  if(!src) return "";
 
-    return `
-      <div class="photo-moment">
-        <div class="photo-frame">
-          <img src="${src}" alt="Memory photo">
-        </div>
+  return `
+    <div class="photo-moment ${className}">
+      <div class="photo-frame">
+        <img src="${src}" alt="${alt}">
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 };
