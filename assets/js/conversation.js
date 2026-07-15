@@ -91,7 +91,17 @@ const Conversation = {
 
     const journeyName = localStorage.getItem("luminaJourneyName") || "Lumina";
 
+    const experienceName =
+  localStorage.getItem("luminaExperienceName")
+  || "Lumina Experience";
+
+const experienceIcon =
+  localStorage.getItem("luminaExperienceIcon")
+  || "✨";
+
 document.getElementById("studioSummary").innerHTML = `
+  <strong>Experience:</strong>
+${experienceIcon} ${experienceName}<br><br>
   <strong>Journey:</strong> ${journeyName}<br><br>
   <strong>For:</strong> ${this.answers.recipient}<br><br>
   <strong>Feeling:</strong> ${this.answers.feeling}<br><br>
