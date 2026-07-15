@@ -4,7 +4,12 @@ const timing =
   StoryFactory.getTiming(
     story.storyIdentity
   );
-  
+
+const photoStyle =
+  StoryFactory.getPhotoStyle(
+    story.storyIdentity
+  );
+
   build(storyData) {
     const story = storyData;
 
@@ -57,13 +62,15 @@ const timing =
 
 {
   type: "photo",
-  label: "A memory",
+  label: "A Memory",
   title: "",
   text: "",
   duration: timing.photo,
   transition: "fade",
   background: "royal",
-  image: "assets/wife.jpg"
+  image: "assets/wife.jpg",
+  photoClass: photoStyle.className,
+  imageAlt: photoStyle.alt
 },
       
       {
