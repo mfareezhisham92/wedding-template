@@ -11,6 +11,11 @@ const SceneEngine = {
     story.recipient.name
   );
 
+    const middleCopy =
+  StoryFactory.getMiddleScenes(
+    story.storyIdentity
+  );
+
     return [
       {
   type: "hero",
@@ -57,37 +62,37 @@ const SceneEngine = {
 },
       
       {
-        type: "feeling",
-        label: "What matters",
-        title: "This was created to make you feel",
-        text: story.emotion.feeling,
-        duration: 6000,
-        transition: "fade",
-        background: "royal",
-        image: null
-      },
+  type: "feeling",
+  label: middleCopy.feeling.label,
+  title: middleCopy.feeling.title,
+  text: story.emotion.feeling,
+  duration: 6000,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
 
       {
-        type: "memory",
-        label: "A memory worth keeping",
-        title: "One moment that still stays with me",
-        text: story.memory.text,
-        duration: 8000,
-        transition: "fade",
-        background: "royal",
-        image: null
-      },
+  type: "memory",
+  label: middleCopy.memory.label,
+  title: middleCopy.memory.title,
+  text: story.memory.text,
+  duration: 8000,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
 
       {
-        type: "message",
-        label: "From the heart",
-        title: "What I want you to know",
-        text: story.message.text,
-        duration: 8000,
-        transition: "fade",
-        background: "royal",
-        image: null
-      },
+  type: "message",
+  label: middleCopy.message.label,
+  title: middleCopy.message.title,
+  text: story.message.text,
+  duration: 8000,
+  transition: "fade",
+  background: "royal",
+  image: null
+},
 
       {
   type: "closing",
