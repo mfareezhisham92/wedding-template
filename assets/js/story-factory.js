@@ -180,5 +180,146 @@ getRecipientReveal(identity, recipientName) {
     title: `For ${name}`,
     text: "Some people make life feel warmer simply by being part of it."
   };
+},
+
+  getMiddleScenes(identity) {
+  const purpose = identity?.purpose;
+
+  const middleScenes = {
+    anniversary: {
+      feeling: {
+        label: "What I Hope You Feel",
+        title: "After Everything We Have Shared"
+      },
+      memory: {
+        label: "One Chapter of Us",
+        title: "A Memory I Still Carry"
+      },
+      message: {
+        label: "From My Heart",
+        title: "What I Want You to Know"
+      }
+    },
+
+    "mothers-day": {
+      feeling: {
+        label: "What You Deserve to Feel",
+        title: "Loved, Appreciated, and Remembered"
+      },
+      memory: {
+        label: "A Memory of Your Love",
+        title: "One Moment I Will Always Carry"
+      },
+      message: {
+        label: "Words I Should Say More Often",
+        title: "What I Want You to Know, Mom"
+      }
+    },
+
+    birthday: {
+      feeling: {
+        label: "A Wish for Today",
+        title: "How I Hope This Makes You Feel"
+      },
+      memory: {
+        label: "A Moment Worth Celebrating",
+        title: "One Memory That Still Makes Me Smile"
+      },
+      message: {
+        label: "A Birthday Message",
+        title: "What I Hope You Always Remember"
+      }
+    },
+
+    wedding: {
+      feeling: {
+        label: "The Spirit of This Day",
+        title: "How We Hope You Feel"
+      },
+      memory: {
+        label: "Our Story",
+        title: "A Moment That Brought Us Here"
+      },
+      message: {
+        label: "With Love",
+        title: "What We Want to Share With You"
+      }
+    },
+
+    teacher: {
+      feeling: {
+        label: "What Your Guidance Created",
+        title: "The Feeling I Hope Stays With You"
+      },
+      memory: {
+        label: "A Lesson Beyond the Classroom",
+        title: "One Moment I Still Remember"
+      },
+      message: {
+        label: "With Sincere Gratitude",
+        title: "What I Have Always Wanted to Tell You"
+      }
+    },
+
+    farewell: {
+      feeling: {
+        label: "What We Hope You Carry",
+        title: "The Feeling We Want to Leave With You"
+      },
+      memory: {
+        label: "Before the Next Chapter",
+        title: "One Memory We Will Keep"
+      },
+      message: {
+        label: "Before We Say Goodbye",
+        title: "What We Want You to Know"
+      }
+    },
+
+    newborn: {
+      feeling: {
+        label: "Our Wish for You",
+        title: "How We Hope You Always Feel"
+      },
+      memory: {
+        label: "The Beginning of Your Story",
+        title: "A Moment We Will Never Forget"
+      },
+      message: {
+        label: "For Our Little One",
+        title: "What We Hope You Carry Through Life"
+      }
+    },
+
+    hope: {
+      feeling: {
+        label: "A Feeling to Carry Forward",
+        title: "What I Hope These Words Give You"
+      },
+      memory: {
+        label: "A Reminder of Your Strength",
+        title: "What You Have Already Overcome"
+      },
+      message: {
+        label: "A Light for the Road Ahead",
+        title: "What I Want You to Hear"
+      }
+    }
+  };
+
+  return middleScenes[purpose] || {
+    feeling: {
+      label: "What Matters",
+      title: "This Was Created to Make You Feel"
+    },
+    memory: {
+      label: "A Memory Worth Keeping",
+      title: "One Moment That Still Stays With Me"
+    },
+    message: {
+      label: "From the Heart",
+      title: "What I Want You to Know"
+    }
+  };
 }
 };
