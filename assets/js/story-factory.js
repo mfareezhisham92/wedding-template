@@ -417,5 +417,56 @@ getRecipientReveal(identity, recipientName) {
     message: 8000,
     closing: 7000
   };
+},
+
+  getPhotoStyle(identity) {
+  const purpose = identity?.purpose;
+
+  const styles = {
+    anniversary: {
+      className: "photo-romantic",
+      alt: "A shared memory"
+    },
+
+    "mothers-day": {
+      className: "photo-warm",
+      alt: "A cherished memory"
+    },
+
+    birthday: {
+      className: "photo-bright",
+      alt: "A joyful memory"
+    },
+
+    wedding: {
+      className: "photo-elegant",
+      alt: "A wedding memory"
+    },
+
+    teacher: {
+      className: "photo-classic",
+      alt: "A meaningful memory"
+    },
+
+    farewell: {
+      className: "photo-nostalgic",
+      alt: "A memory worth keeping"
+    },
+
+    newborn: {
+      className: "photo-soft",
+      alt: "A precious new beginning"
+    },
+
+    hope: {
+      className: "photo-hopeful",
+      alt: "A hopeful memory"
+    }
+  };
+
+  return styles[purpose] || {
+    className: "photo-default",
+    alt: "A meaningful memory"
+  };
 }
 };
