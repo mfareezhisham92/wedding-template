@@ -116,7 +116,69 @@ const StoryFactory = {
         label: "With Appreciation",
         title: "You Matter",
         text: "May this experience remind you how meaningful your presence truly is."
-      }
+      },
+
+    getRecipientReveal(identity, recipientName) {
+  const name = recipientName || "someone special";
+  const purpose = identity?.purpose;
+
+  const reveals = {
+    anniversary: {
+      label: "For the One I Choose",
+      title: `For ${name}`,
+      text: "For the person who has shared the ordinary days, unforgettable memories, and every chapter in between."
+    },
+
+    "mothers-day": {
+      label: "For Someone Irreplaceable",
+      title: `For ${name}`,
+      text: "For the woman whose love has quietly shaped more of my life than words can explain."
+    },
+
+    birthday: {
+      label: "Today, We Celebrate",
+      title: `For ${name}`,
+      text: "For someone whose presence gives the people around them another reason to smile."
+    },
+
+    wedding: {
+      label: "With Joy, We Invite",
+      title: `For ${name}`,
+      text: "Because this new chapter would feel more meaningful with the people we value beside us."
+    },
+
+    teacher: {
+      label: "For a Lasting Influence",
+      title: `For ${name}`,
+      text: "For someone whose guidance reached far beyond lessons and classrooms."
+    },
+
+    farewell: {
+      label: "For Someone We Will Miss",
+      title: `For ${name}`,
+      text: "For someone whose presence became part of the memories we will continue carrying."
+    },
+
+    newborn: {
+      label: "For Our Little Miracle",
+      title: `For ${name}`,
+      text: "For the little one who has already brought immeasurable love into so many hearts."
+    },
+
+    hope: {
+      label: "A Message Just for You",
+      title: `For ${name}`,
+      text: "For someone who deserves to be reminded that they are stronger, valued, and never alone."
+    }
+  };
+
+  return reveals[purpose] || {
+    label: "From the Heart",
+    title: `For ${name}`,
+    text: "Some people make life feel warmer simply by being part of it."
+  };
+}
+      
     };
   }
 };
