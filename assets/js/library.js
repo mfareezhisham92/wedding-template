@@ -111,3 +111,7 @@ const ExperienceLibrary = [
     }
   }
 ];
+
+function getExperienceById(id){
+  return ExperienceLibrary.find(item => item.id === id) || null;
+}
