@@ -106,19 +106,22 @@ const StoryFactory = {
   },
 
   get(identity) {
-    return this.stories[identity?.purpose] || {
-      opening: {
-        label: "A Lumina Experience",
-        title: "Before anything else...",
-        text: "This was created for someone who matters."
-      },
-      closing: {
-        label: "With Appreciation",
-        title: "You Matter",
-        text: "May this experience remind you how meaningful your presence truly is."
-      },
+  return this.stories[identity?.purpose] || {
+    opening: {
+      label: "A Lumina Experience",
+      title: "Before anything else...",
+      text: "This was created for someone who matters."
+    },
 
-    getRecipientReveal(identity, recipientName) {
+    closing: {
+      label: "With Appreciation",
+      title: "You Matter",
+      text: "May this experience remind you how meaningful your presence truly is."
+    }
+  };
+},
+
+getRecipientReveal(identity, recipientName) {
   const name = recipientName || "someone special";
   const purpose = identity?.purpose;
 
@@ -178,7 +181,4 @@ const StoryFactory = {
     text: "Some people make life feel warmer simply by being part of it."
   };
 }
-      
-    };
-  }
 };
