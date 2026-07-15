@@ -5,6 +5,12 @@ const SceneEngine = {
 
     const storyCopy = StoryFactory.get(story.storyIdentity);
 
+    const recipientReveal =
+  StoryFactory.getRecipientReveal(
+    story.storyIdentity,
+    story.recipient.name
+  );
+
     return [
       {
   type: "hero",
@@ -19,10 +25,10 @@ const SceneEngine = {
 
 {
   type: "hero",
-  label: "",
-  title: "This was created<br>for someone<br>who matters.",
-  text: "",
-  duration: 6000,
+  label: recipientReveal.label,
+  title: recipientReveal.title,
+  text: recipientReveal.text,
+  duration: 6500,
   transition: "fade",
   background: "royal",
   image: null
