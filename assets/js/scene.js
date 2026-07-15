@@ -3,13 +3,15 @@ const SceneEngine = {
   build(storyData) {
     const story = storyData;
 
+    const storyCopy = StoryFactory.get(story.storyIdentity);
+
     return [
       {
   type: "hero",
-  label: "",
-  title: "Before anything else...",
-  text: "",
-  duration: 4500,
+  label: storyCopy.opening.label,
+  title: storyCopy.opening.title,
+  text: storyCopy.opening.text,
+  duration: 6500,
   transition: "fade",
   background: "royal",
   image: null
@@ -82,15 +84,15 @@ const SceneEngine = {
       },
 
       {
-        type: "closing",
-        label: "With appreciation",
-        title: "You matter",
-        text: "This is not about price. This is about meaning.",
-        duration: 6000,
-        transition: "fade",
-        background: "royal",
-        image: null
-      }
+  type: "closing",
+  label: storyCopy.closing.label,
+  title: storyCopy.closing.title,
+  text: storyCopy.closing.text,
+  duration: 7000,
+  transition: "fade",
+  background: "royal",
+  image: null
+}
     ];
   },
 
