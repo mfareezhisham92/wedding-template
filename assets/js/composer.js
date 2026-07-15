@@ -1,16 +1,26 @@
 const Composer = {
-
   compose(story){
 
     const answers = story.answers;
 
-    return {
+    const experienceId =
+      localStorage.getItem("luminaExperienceId");
 
-      collectionProfile: Director.getCollection(
-    Atmosphere.get()
-),
+    const experience =
+      getExperienceById(experienceId);
+
+    return {
+      experience: {
+        id: experience?.id || "custom",
+        name: experience?.name || "Lumina Experience",
+        icon: experience?.icon || "✨",
+        category: experience?.category || "Meaningful Moment"
+      },
 
       collection: story.collection || "royal",
+
+      collectionProfile:
+        Director.getCollection(Atmosphere.get()),
 
       atmosphere: Atmosphere.get(),
 
@@ -29,9 +39,6 @@ const Composer = {
       message: {
         text: answers.message
       }
-
     };
-
   }
-
 };
