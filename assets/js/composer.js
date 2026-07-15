@@ -1,6 +1,5 @@
 const Composer = {
-  compose(story){
-
+  compose(story) {
     const answers = story.answers;
 
     const experienceId =
@@ -9,15 +8,26 @@ const Composer = {
     const experience =
       getExperienceById(experienceId);
 
-    return {
-      experience: {
-        id: experience?.id || "custom",
-        name: experience?.name || "Lumina Experience",
-        icon: experience?.icon || "✨",
-        category: experience?.category || "Meaningful Moment"
-      },
+    const experienceProfile = {
+      id: experience?.id || "custom",
+      name: experience?.name || "Lumina Experience",
+      icon: experience?.icon || "✨",
+      category: experience?.category || "Meaningful Moment"
+    };
 
-      collection: story.collection || "royal",
+    const storyIdentity = {
+      purpose: experience?.id || "custom",
+      emotion: experience?.category || "Meaningful Moment",
+      tone: experience?.journey || Atmosphere.get(),
+      collection: experience?.collection || "royal"
+    };
+
+    return {
+      storyIdentity,
+
+      experience: experienceProfile,
+
+      collection: storyIdentity.collection,
 
       collectionProfile:
         Director.getCollection(Atmosphere.get()),
