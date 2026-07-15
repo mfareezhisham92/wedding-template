@@ -321,5 +321,101 @@ getRecipientReveal(identity, recipientName) {
       title: "What I Want You to Know"
     }
   };
+},
+
+  getTiming(identity) {
+  const purpose = identity?.purpose;
+
+  const timings = {
+    anniversary: {
+      opening: 7000,
+      reveal: 7000,
+      photo: 11000,
+      feeling: 6500,
+      memory: 9000,
+      message: 9000,
+      closing: 8000
+    },
+
+    "mothers-day": {
+      opening: 7000,
+      reveal: 7000,
+      photo: 11000,
+      feeling: 7000,
+      memory: 9500,
+      message: 9500,
+      closing: 8500
+    },
+
+    birthday: {
+      opening: 5500,
+      reveal: 6000,
+      photo: 8500,
+      feeling: 5500,
+      memory: 7000,
+      message: 7000,
+      closing: 6500
+    },
+
+    wedding: {
+      opening: 6000,
+      reveal: 6000,
+      photo: 9000,
+      feeling: 6000,
+      memory: 7500,
+      message: 7500,
+      closing: 7000
+    },
+
+    teacher: {
+      opening: 6500,
+      reveal: 6500,
+      photo: 9500,
+      feeling: 6500,
+      memory: 8500,
+      message: 8500,
+      closing: 7500
+    },
+
+    farewell: {
+      opening: 7500,
+      reveal: 7000,
+      photo: 11500,
+      feeling: 7000,
+      memory: 10000,
+      message: 9500,
+      closing: 9000
+    },
+
+    newborn: {
+      opening: 6000,
+      reveal: 6500,
+      photo: 10000,
+      feeling: 6500,
+      memory: 8000,
+      message: 8000,
+      closing: 7500
+    },
+
+    hope: {
+      opening: 6500,
+      reveal: 6500,
+      photo: 9000,
+      feeling: 6500,
+      memory: 8000,
+      message: 8500,
+      closing: 7500
+    }
+  };
+
+  return timings[purpose] || {
+    opening: 6000,
+    reveal: 6500,
+    photo: 9000,
+    feeling: 6000,
+    memory: 8000,
+    message: 8000,
+    closing: 7000
+  };
 }
 };
