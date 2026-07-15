@@ -14,10 +14,14 @@ const Renderers = {
   closing(moment) { return this.text(moment); },
 
   photo(moment) {
-    return Components.moment(
-      Components.photo(moment.image)
-    );
-  }
+  return Components.moment(
+    Components.photo(
+      moment.image,
+      moment.photoClass,
+      moment.imageAlt
+    )
+  );
+}
 };
 
 const Player = {
