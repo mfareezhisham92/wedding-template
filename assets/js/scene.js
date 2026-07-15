@@ -1,5 +1,10 @@
 const SceneEngine = {
 
+const timing =
+  StoryFactory.getTiming(
+    story.storyIdentity
+  );
+  
   build(storyData) {
     const story = storyData;
 
@@ -22,7 +27,7 @@ const SceneEngine = {
   label: storyCopy.opening.label,
   title: storyCopy.opening.title,
   text: storyCopy.opening.text,
-  duration: 6500,
+  duration: timing.opening,
   transition: "fade",
   background: "royal",
   image: null
@@ -33,7 +38,7 @@ const SceneEngine = {
   label: recipientReveal.label,
   title: recipientReveal.title,
   text: recipientReveal.text,
-  duration: 6500,
+  duration: timing.reveal,
   transition: "fade",
   background: "royal",
   image: null
@@ -55,7 +60,7 @@ const SceneEngine = {
   label: "A memory",
   title: "",
   text: "",
-  duration: 7000,
+  duration: timing.photo,
   transition: "fade",
   background: "royal",
   image: "assets/wife.jpg"
@@ -66,7 +71,7 @@ const SceneEngine = {
   label: middleCopy.feeling.label,
   title: middleCopy.feeling.title,
   text: story.emotion.feeling,
-  duration: 6000,
+  duration: timing.feeling,
   transition: "fade",
   background: "royal",
   image: null
@@ -77,7 +82,7 @@ const SceneEngine = {
   label: middleCopy.memory.label,
   title: middleCopy.memory.title,
   text: story.memory.text,
-  duration: 8000,
+  duration: timing.memory,
   transition: "fade",
   background: "royal",
   image: null
@@ -88,7 +93,7 @@ const SceneEngine = {
   label: middleCopy.message.label,
   title: middleCopy.message.title,
   text: story.message.text,
-  duration: 8000,
+  duration: timing.message,
   transition: "fade",
   background: "royal",
   image: null
@@ -99,7 +104,7 @@ const SceneEngine = {
   label: storyCopy.closing.label,
   title: storyCopy.closing.title,
   text: storyCopy.closing.text,
-  duration: 7000,
+  duration: timing.closing,
   transition: "fade",
   background: "royal",
   image: null
