@@ -18,7 +18,8 @@ const Renderers = {
     Components.photo(
       moment.image,
       moment.photoClass,
-      moment.imageAlt
+      moment.imageAlt,
+      moment.duration
     )
   );
 }
