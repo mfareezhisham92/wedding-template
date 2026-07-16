@@ -271,6 +271,47 @@ padding:19px 46px 19px 18px;
 font-size:20px;
 }
 }
+
+.role-card{
+width:100%;
+margin-top:14px;
+padding:18px;
+border-radius:18px;
+border:1px solid rgba(205,168,93,.45);
+background:transparent;
+cursor:pointer;
+text-align:left;
+font-family:Georgia,serif;
+transition:
+transform .35s ease,
+border-color .35s ease,
+box-shadow .35s ease,
+background .35s ease;
+}
+
+.role-card:hover,
+.role-card:focus-visible{
+transform:translateY(-2px);
+border-color:#cda85d;
+background:rgba(205,168,93,.06);
+box-shadow:0 12px 30px rgba(205,168,93,.15);
+outline:none;
+}
+
+.role-card strong{
+display:block;
+font-size:18px;
+line-height:1.35;
+color:#fff5df;
+margin-bottom:6px;
+}
+
+.role-card span{
+display:block;
+font-size:14px;
+line-height:1.6;
+color:#d8c7a5;
+}
   
 </style>
 </head>
@@ -287,6 +328,23 @@ font-size:20px;
     Choose the meaningful moment closest to your story.
   </p>
 
+<div id="roleArea" style="display:none;">
+
+  <div class="small">One More Question</div>
+
+  <h1 id="roleTitle">
+    How are you part of this moment?
+  </h1>
+
+  <p
+    id="roleDescription"
+    style="color:#d8c7a5;line-height:1.7;margin-bottom:24px;"
+  ></p>
+
+  <div id="roleOptions"></div>
+
+</div>
+  
   <div id="libraryArea"></div>
 </div>
   
