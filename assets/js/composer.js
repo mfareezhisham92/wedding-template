@@ -34,6 +34,12 @@ const Composer = {
 
       atmosphere: Atmosphere.get(),
 
+      media: {
+  photo:
+    localStorage.getItem("luminaPhoto") ||
+    "assets/wife.jpg"
+},
+      
       recipient: {
         name: answers.recipient
       },
