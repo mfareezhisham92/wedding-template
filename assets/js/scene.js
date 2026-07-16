@@ -57,7 +57,9 @@ const SceneEngine = {
   duration: timing.photo,
   transition: "fade",
   background: "royal",
-  image: "assets/wife.jpg",
+  image:
+  story.media?.photo ||
+  "assets/wife.jpg",
   photoClass: photoStyle.className,
   imageAlt: photoStyle.alt
 },
