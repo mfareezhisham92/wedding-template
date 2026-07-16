@@ -42,18 +42,32 @@ const ExperienceLibrary = [
   },
 
   {
-    id: "wedding",
-    name: "Wedding",
-    icon: "💍",
-    category: "Love",
-    journey: "calm",
-    collection: "royal",
-    description: "Celebrate your union with the people who matter most.",
-    welcome: {
-      title: "A beautiful new chapter is beginning.",
-      text: "Let’s create an experience that honours your story and welcomes the people who matter most."
+  id: "wedding",
+  name: "Wedding",
+  icon: "💍",
+  category: "Love",
+  journey: "calm",
+  collection: "royal",
+  description: "Celebrate your union with the people who matter most.",
+
+  roles: [
+    {
+      id: "couple",
+      title: "We're getting married",
+      subtitle: "Create a beautiful invitation for your guests."
+    },
+    {
+      id: "guest",
+      title: "I'm celebrating the couple",
+      subtitle: "Create a heartfelt blessing or congratulatory message."
     }
-  },
+  ],
+
+  welcome: {
+    title: "A beautiful new chapter is beginning.",
+    text: "Let's create an experience that honours your story and welcomes the people who matter most."
+  }
+},
 
   {
     id: "teacher",
