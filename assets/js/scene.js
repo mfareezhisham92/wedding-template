@@ -1,30 +1,30 @@
 const SceneEngine = {
-
-const timing =
-  StoryFactory.getTiming(
-    story.storyIdentity
-  );
-
-const photoStyle =
-  StoryFactory.getPhotoStyle(
-    story.storyIdentity
-  );
-
   build(storyData) {
     const story = storyData;
 
-    const storyCopy = StoryFactory.get(story.storyIdentity);
+    const storyCopy =
+      StoryFactory.get(story.storyIdentity);
 
     const recipientReveal =
-  StoryFactory.getRecipientReveal(
-    story.storyIdentity,
-    story.recipient.name
-  );
+      StoryFactory.getRecipientReveal(
+        story.storyIdentity,
+        story.recipient.name
+      );
 
     const middleCopy =
-  StoryFactory.getMiddleScenes(
-    story.storyIdentity
-  );
+      StoryFactory.getMiddleScenes(
+        story.storyIdentity
+      );
+
+    const timing =
+      StoryFactory.getTiming(
+        story.storyIdentity
+      );
+
+    const photoStyle =
+      StoryFactory.getPhotoStyle(
+        story.storyIdentity
+      );
 
     return [
       {
@@ -44,17 +44,6 @@ const photoStyle =
   title: recipientReveal.title,
   text: recipientReveal.text,
   duration: timing.reveal,
-  transition: "fade",
-  background: "royal",
-  image: null
-},
-
-{
-  type: "hero",
-  label: "From the heart",
-  title: `For ${story.recipient.name}`,
-  text: "Some people make life feel warmer just by being part of it.",
-  duration: 6500,
   transition: "fade",
   background: "royal",
   image: null
