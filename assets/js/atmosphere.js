@@ -74,16 +74,121 @@ Conversation.start(journey);
 }
 
 function chooseExperience(id){
-  const selected = ExperienceLibrary.find(item => item.id === id);
+  const selected =
+    ExperienceLibrary.find(item => item.id === id);
 
   if(!selected) return;
 
-  localStorage.setItem("luminaExperienceId", selected.id);
-  localStorage.setItem("luminaExperienceName", selected.name);
-  localStorage.setItem("luminaExperienceIcon", selected.icon);
-  localStorage.setItem("luminaCollection", selected.collection);
+  localStorage.setItem(
+    "luminaExperienceId",
+    selected.id
+  );
 
-  chooseAtmosphere(selected.journey, selected);
+  localStorage.setItem(
+    "luminaExperienceName",
+    selected.name
+  );
+
+  localStorage.setItem(
+    "luminaExperienceIcon",
+    selected.icon
+  );
+
+  localStorage.setItem(
+    "luminaCollection",
+    selected.collection
+  );
+
+  localStorage.removeItem("luminaRole");
+  localStorage.removeItem("luminaRoleTitle");
+
+  if(selected.roles && selected.roles.length){
+    showRoles(selected);
+  }else{
+    chooseAtmosphere(
+      selected.journey,
+      selected
+    );
+  }
+}
+
+function showRoles(experience){
+  const atmosphereArea =
+    document.getElementById("atmosphereArea");
+
+  const roleArea =
+    document.getElementById("roleArea");
+
+  const roleDescription =
+    document.getElementById("roleDescription");
+
+  const roleOptions =
+    document.getElementById("roleOptions");
+
+  if(
+    !atmosphereArea ||
+    !roleArea ||
+    !roleDescription ||
+    !roleOptions
+  ){
+    console.error(
+      "Lumina role screen elements are missing."
+    );
+    return;
+  }
+
+  atmosphereArea.style.display = "none";
+  roleArea.style.display = "block";
+
+  roleDescription.innerText =
+    "Help Lumina understand how you are part of this moment.";
+
+  roleOptions.innerHTML =
+    experience.roles.map(role => `
+      <button
+        class="role-card"
+        onclick="chooseRole(
+          '${experience.id}',
+          '${role.id}'
+        )"
+      >
+        <strong>${role.title}</strong>
+        <span>${role.subtitle}</span>
+      </button>
+    `).join("");
+}
+
+function chooseRole(experienceId, roleId){
+  const experience =
+    getExperienceById(experienceId);
+
+  if(!experience) return;
+
+  const role =
+    experience.roles?.find(
+      item => item.id === roleId
+    );
+
+  if(!role) return;
+
+  localStorage.setItem(
+    "luminaRole",
+    role.id
+  );
+
+  localStorage.setItem(
+    "luminaRoleTitle",
+    role.title
+  );
+
+  document.getElementById(
+    "roleArea"
+  ).style.display = "none";
+
+  chooseAtmosphere(
+    experience.journey,
+    experience
+  );
 }
 
 window.addEventListener("DOMContentLoaded", () => {
