@@ -62,15 +62,16 @@ function chooseAtmosphere(type, experience){
   `;
 
   setTimeout(() => {
-    document.getElementById("atmosphereArea").style.display = "none";
-    document.getElementById("creatorArea").style.display = "block";
-    const journey = Director.getJourney(type);
+  document.getElementById("atmosphereArea").style.display = "none";
+  document.getElementById("creatorArea").style.display = "block";
 
-localStorage.setItem("luminaJourney", journey.id);
-localStorage.setItem("luminaJourneyName", journey.name);
+  const journey = Director.getJourney(type);
 
-Conversation.start(journey);
-  }, 4500);
+  localStorage.setItem("luminaJourney", journey.id);
+  localStorage.setItem("luminaJourneyName", journey.name);
+
+  Conversation.start(journey);
+}, 4500);
 }
 
 function chooseExperience(id){
