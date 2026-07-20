@@ -62,6 +62,15 @@ function chooseAtmosphere(type, experience){
   `;
 
   setTimeout(() => {
+  const atmosphereArea =
+    document.getElementById("atmosphereArea");
+
+  const roleArea =
+    document.getElementById("roleArea");
+
+  const creatorArea =
+    document.getElementById("creatorArea");
+
   try {
     const journey = Director.getJourney(type);
 
@@ -71,24 +80,59 @@ function chooseAtmosphere(type, experience){
 
     if(!Array.isArray(journey.reflections)){
       throw new Error(
-        `${journey.name || type} journey has no reflections`
+        `${journey.name || type} journey has no reflections.`
       );
     }
 
-    // Start and render the conversation first.
+    if(!creatorArea){
+      throw new Error("Creator area is missing from creator.html.");
+    }
+
+    // Show the Reflection area before rendering into it.
+    creatorArea.style.display = "block";
+
     Conversation.start(journey);
 
-    localStorage.setItem("luminaJourney", journey.id);
-    localStorage.setItem("luminaJourneyName", journey.name);
+    localStorage.setItem(
+      "luminaJourney",
+      journey.id
+    );
 
-    // Only hide the welcome after Conversation starts successfully.
-    document.getElementById("atmosphereArea").style.display = "none";
-    document.getElementById("roleArea").style.display = "none";
-    document.getElementById("creatorArea").style.display = "block";
+    localStorage.setItem(
+      "luminaJourneyName",
+      journey.name
+    );
+
+    // Hide previous screens only after a successful render.
+    atmosphereArea.style.display = "none";
+
+    if(roleArea){
+      roleArea.style.display = "none";
+    }
 
   } catch(error) {
     console.error("Lumina journey error:", error);
-    alert("Lumina journey error: " + error.message);
+
+    creatorArea.style.display = "none";
+
+    if(roleArea){
+      roleArea.style.display = "none";
+    }
+
+    atmosphereArea.style.display = "block";
+    atmosphereArea.innerHTML = `
+      <div class="small">Lumina needs attention</div>
+
+      <h1>We couldn't begin this journey.</h1>
+
+      <p style="color:#d8c7a5;line-height:1.7;margin-bottom:22px;">
+        ${error.message}
+      </p>
+
+      <button onclick="location.reload()">
+        Return to Experiences
+      </button>
+    `;
   }
 }, 4500);
 }
