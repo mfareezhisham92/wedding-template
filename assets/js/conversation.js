@@ -79,11 +79,67 @@ const Conversation = {
     card.classList.add("fade");
 
     setTimeout(() => {
-      this.render();
-      card.classList.remove("fade");
-      card.classList.add("show");
-      document.getElementById("answerInput").focus();
-    }, 450);
+  const atmosphereArea =
+    document.getElementById("atmosphereArea");
+
+  const roleArea =
+    document.getElementById("roleArea");
+
+  const creatorArea =
+    document.getElementById("creatorArea");
+
+  try {
+    const journey = Director.getJourney(type);
+
+    if(!journey){
+      throw new Error(`No journey found for: ${type}`);
+    }
+
+    if(!Array.isArray(journey.reflections)){
+      throw new Error(
+        `${journey.name || type} has no reflections.`
+      );
+    }
+
+    // Make the Reflection area visible first.
+    creatorArea.style.display = "block";
+
+    // Then populate it.
+    Conversation.start(journey);
+
+    localStorage.setItem(
+      "luminaJourney",
+      journey.id
+    );
+
+    localStorage.setItem(
+      "luminaJourneyName",
+      journey.name
+    );
+
+    // Hide the earlier screens only after success.
+    atmosphereArea.style.display = "none";
+    roleArea.style.display = "none";
+
+  } catch(error) {
+    console.error("Lumina journey error:", error);
+
+    creatorArea.style.display = "none";
+    roleArea.style.display = "none";
+    atmosphereArea.style.display = "block";
+
+    atmosphereArea.innerHTML = `
+      <div class="small">Lumina needs attention</div>
+      <h1>We couldn't begin this journey.</h1>
+      <p style="color:#d8c7a5;line-height:1.7;">
+        ${error.message}
+      </p>
+      <button onclick="location.reload()">
+        Return to Experiences
+      </button>
+    `;
+  }
+}, 4500);
   },
 
   finish() {
