@@ -364,14 +364,36 @@ color:#d8c7a5;
 
 
   <div id="studioArea" style="display:none;">
-    <!-- your existing Studio content -->
-  </div>
+  <div class="small">Creator Studio</div>
+  <h1>Your Lumina experience is ready.</h1>
+  <p>Review your story before entering the experience.</p>
 
+  <div id="studioSummary" style="
+    margin-top:22px;
+    padding:18px;
+    border:1px solid rgba(205,168,93,.35);
+    border-radius:18px;
+    background:#080604;
+    text-align:left;
+    line-height:1.6;
+    color:#d8c7a5;
+    font-size:15px;
+  "></div>
 
-  <div id="craftingArea" style="display:none;">
-    <!-- your existing Crafting content -->
-  </div>
+  <button onclick="openPreview()">Preview Experience</button>
+  <button onclick="location.reload()">Start Again</button>
+</div>
 
+<div id="craftingArea" style="display:none;">
+  <div class="small">Lumina</div>
+
+  <h1 id="craftTitle">Your words have been collected.</h1>
+
+  <p id="craftText">
+    Preparing something meaningful...
+  </p>
+
+  <div class="craft-line"></div>
 </div>
 
 </div>
