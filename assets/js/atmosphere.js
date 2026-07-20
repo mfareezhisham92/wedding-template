@@ -182,14 +182,15 @@ function chooseRole(experienceId, roleId){
     role.title
   );
 
-  document.getElementById(
-    "roleArea"
-  ).style.display = "none";
+  document.getElementById("roleArea").style.display = "none";
 
-  chooseAtmosphere(
-    experience.journey,
-    experience
-  );
+// Show the welcome area again before inserting its content.
+document.getElementById("atmosphereArea").style.display = "block";
+
+chooseAtmosphere(
+  experience.journey,
+  experience
+);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
