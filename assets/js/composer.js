@@ -16,11 +16,24 @@ const Composer = {
     };
 
     const storyIdentity = {
-      purpose: experience?.id || "custom",
-      emotion: experience?.category || "Meaningful Moment",
-      tone: experience?.journey || Atmosphere.get(),
-      collection: experience?.collection || "royal"
-    };
+  purpose: experience?.id || "custom",
+
+  role:
+    localStorage.getItem("luminaRole") ||
+    "default",
+
+  emotion:
+    experience?.category ||
+    "Meaningful Moment",
+
+  tone:
+    experience?.journey ||
+    Atmosphere.get(),
+
+  collection:
+    experience?.collection ||
+    "royal"
+};
 
     return {
       storyIdentity,
