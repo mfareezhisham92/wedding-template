@@ -3,8 +3,17 @@ const Conversation = {
   answers: {},
 
   start(journey) {
+  if(!journey || !Array.isArray(journey.reflections)){
+    throw new Error("The selected journey is not valid.");
+  }
+
   this.journey = journey;
   this.config = journey.reflections;
+
+  // Always begin a new occasion from the first reflection.
+  this.step = 0;
+  this.answers = {};
+
   this.render();
 },
 
