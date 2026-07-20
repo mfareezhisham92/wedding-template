@@ -72,7 +72,18 @@ function chooseAtmosphere(type, experience){
     document.getElementById("creatorArea");
 
   try {
-    const journey = Director.getJourney(type);
+    const experienceId =
+  localStorage.getItem("luminaExperienceId");
+
+const roleId =
+  localStorage.getItem("luminaRole");
+
+const journey =
+  ConversationRouter.getJourney(
+    experienceId,
+    roleId,
+    type
+  );
 
     if(!journey){
       throw new Error(`No journey found for: ${type}`);
