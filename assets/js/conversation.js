@@ -9,10 +9,15 @@ const Conversation = {
 
   this.journey = journey;
   this.config = journey.reflections;
-
-  // Always begin a new occasion from the first reflection.
   this.step = 0;
   this.answers = {};
+
+  const card = document.getElementById("card");
+
+  if(card){
+    card.classList.remove("fade");
+    card.classList.add("show");
+  }
 
   this.render();
 },
