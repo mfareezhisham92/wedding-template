@@ -62,15 +62,34 @@ function chooseAtmosphere(type, experience){
   `;
 
   setTimeout(() => {
-  document.getElementById("atmosphereArea").style.display = "none";
-  document.getElementById("creatorArea").style.display = "block";
+  try {
+    const journey = Director.getJourney(type);
 
-  const journey = Director.getJourney(type);
+    if(!journey){
+      throw new Error(`No journey found for: ${type}`);
+    }
 
-  localStorage.setItem("luminaJourney", journey.id);
-  localStorage.setItem("luminaJourneyName", journey.name);
+    if(!Array.isArray(journey.reflections)){
+      throw new Error(
+        `${journey.name || type} journey has no reflections`
+      );
+    }
 
-  Conversation.start(journey);
+    // Start and render the conversation first.
+    Conversation.start(journey);
+
+    localStorage.setItem("luminaJourney", journey.id);
+    localStorage.setItem("luminaJourneyName", journey.name);
+
+    // Only hide the welcome after Conversation starts successfully.
+    document.getElementById("atmosphereArea").style.display = "none";
+    document.getElementById("roleArea").style.display = "none";
+    document.getElementById("creatorArea").style.display = "block";
+
+  } catch(error) {
+    console.error("Lumina journey error:", error);
+    alert("Lumina journey error: " + error.message);
+  }
 }, 4500);
 }
 
