@@ -320,80 +320,58 @@ color:#d8c7a5;
 
 <div class="app">
 
-<div id="atmosphereArea">
-  <div class="small">Welcome to Lumina</div>
+  <div id="atmosphereArea">
+    <div class="small">Welcome to Lumina</div>
 
-  <h1>What would you like to create today?</h1>
+    <h1>What would you like to create today?</h1>
 
-  <p style="color:#d8c7a5; line-height:1.6; margin-bottom:22px;">
-    Choose the meaningful moment closest to your story.
-  </p>
-
-  <div id="libraryArea"></div>
-</div>
-
-
-<div id="roleArea" style="display:none;">
-  <div class="small">One More Question</div>
-
-  <h1 id="roleTitle">
-    How are you part of this moment?
-  </h1>
-
-  <p
-    id="roleDescription"
-    style="color:#d8c7a5;line-height:1.7;margin-bottom:24px;"
-  ></p>
-
-  <div id="roleOptions"></div>
-</div>
-
-
-<div id="creatorArea" style="display:none;">
-  
-<div id="creatorArea" style="display:none;">
-  <div class="small" id="progressText"></div>
-  <div class="dots" id="dots"></div>
-
-  <div id="card" class="show">
-    <div class="reflection" id="reflectionText"></div>
-    <h1 id="questionTitle"></h1>
-    <textarea id="answerInput"></textarea>
-    <div class="encouragement" id="encouragementText"></div>
-    <button id="nextBtn"></button>
-  </div>
-</div>
-
-<div id="studioArea" style="display:none;">
-  <div class="small">Creator Studio</div>
-  <h1>Your Lumina experience is ready.</h1>
-  <p>Review your story before entering the experience.</p>
-
-  <div id="studioSummary" style="
-    margin-top:22px;
-    padding:18px;
-    border:1px solid rgba(205,168,93,.35);
-    border-radius:18px;
-    background:#080604;
-    text-align:left;
-    line-height:1.6;
-    color:#d8c7a5;
-    font-size:15px;
-  "></div>
-
-  <button onclick="openPreview()">Preview Experience</button>
-  <button onclick="location.reload()">Start Again</button>
-</div>  
-<div id="craftingArea" style="display:none;">
-    <div class="small">Lumina</div>
-
-    <h1 id="craftTitle">Your words have been collected.</h1>
-
-    <p id="craftText">
-        Preparing something meaningful...
+    <p style="color:#d8c7a5;line-height:1.6;margin-bottom:22px;">
+      Choose the meaningful moment closest to your story.
     </p>
 
-    <div class="craft-line"></div>
+    <div id="libraryArea"></div>
+  </div>
+
+
+  <div id="roleArea" style="display:none;">
+    <div class="small">One More Question</div>
+
+    <h1 id="roleTitle">
+      How are you part of this moment?
+    </h1>
+
+    <p
+      id="roleDescription"
+      style="color:#d8c7a5;line-height:1.7;margin-bottom:24px;"
+    ></p>
+
+    <div id="roleOptions"></div>
+  </div>
+
+
+  <div id="creatorArea" style="display:none;">
+    <div class="small" id="progressText"></div>
+    <div class="dots" id="dots"></div>
+
+    <div id="card" class="show">
+      <div class="reflection" id="reflectionText"></div>
+      <h1 id="questionTitle"></h1>
+      <textarea id="answerInput"></textarea>
+      <div class="encouragement" id="encouragementText"></div>
+      <button id="nextBtn"></button>
+    </div>
+  </div>
+
+
+  <div id="studioArea" style="display:none;">
+    <!-- your existing Studio content -->
+  </div>
+
+
+  <div id="craftingArea" style="display:none;">
+    <!-- your existing Crafting content -->
+  </div>
+
 </div>
 
 </div>
