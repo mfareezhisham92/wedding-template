@@ -134,18 +134,6 @@ return {
     text:"May this experience remind you how meaningful your presence truly is."
   }
 };
-    opening: {
-      label: "A Lumina Experience",
-      title: "Before anything else...",
-      text: "This was created for someone who matters."
-    },
-
-    closing: {
-      label: "With Appreciation",
-      title: "You Matter",
-      text: "May this experience remind you how meaningful your presence truly is."
-    }
-  };
 },
 
 getRecipientReveal(identity, recipientName) {
@@ -166,56 +154,22 @@ getRecipientReveal(identity, recipientName) {
     },
 
     birthday: {
-      label: "Today, We Celebrate",
-      title: `For ${name}`,
-      text: "For someone whose presence gives the people around them another reason to smile."
-    },
-
-    wedding: {
-
-  couple: {
-
-    opening: {
-      label: "A New Chapter",
-      title: "Our Story Continues",
-      text:
-        "Two lives are becoming one story, and we'd love to celebrate this new beginning with the people who matter most."
-    },
-
-    closing: {
-      label: "With Love",
-      title: "We Hope You'll Celebrate With Us",
-      text:
-        "Your presence would make this day even more meaningful."
-    }
-
-  },
-
-  guest: {
-
-    opening: {
-      label: "A Beautiful Beginning",
-      title: "Today Is About Two Hearts",
-      text:
-        "Some stories deserve to be celebrated. This is one of them."
-    },
-
-    closing: {
-      label: "With Warm Wishes",
-      title: "Congratulations",
-      text:
-        "May your journey together be filled with love, laughter, and countless beautiful memories."
-    }
-
-  }
-
+  label: "Today, We Celebrate",
+  title: `For ${name}`,
+  text: "For someone whose presence gives the people around them another reason to smile."
 },
 
-    teacher: {
-      label: "For a Lasting Influence",
-      title: `For ${name}`,
-      text: "For someone whose guidance reached far beyond lessons and classrooms."
-    },
+wedding: {
+  label: "For the People Who Matter",
+  title: `For ${name}`,
+  text: "For the people whose presence, love, and support make this beautiful beginning even more meaningful."
+},
+
+teacher: {
+  label: "For a Lasting Influence",
+  title: `For ${name}`,
+  text: "For someone whose guidance reached far beyond lessons and classrooms."
+},
 
     farewell: {
       label: "For Someone We Will Miss",
