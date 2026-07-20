@@ -106,7 +106,34 @@ const StoryFactory = {
   },
 
   get(identity) {
-  return this.stories[identity?.purpose] || {
+  const role = identity?.role || "default";  
+  const story =
+  this.stories[identity?.purpose];
+
+if(
+  story &&
+  story[role]
+){
+  return story[role];
+}
+
+if(story){
+  return story;
+}
+
+return {
+  opening:{
+    label:"A Lumina Experience",
+    title:"Before anything else...",
+    text:"This was created for someone who matters."
+  },
+
+  closing:{
+    label:"With Appreciation",
+    title:"You Matter",
+    text:"May this experience remind you how meaningful your presence truly is."
+  }
+};
     opening: {
       label: "A Lumina Experience",
       title: "Before anything else...",
@@ -145,10 +172,44 @@ getRecipientReveal(identity, recipientName) {
     },
 
     wedding: {
-      label: "With Joy, We Invite",
-      title: `For ${name}`,
-      text: "Because this new chapter would feel more meaningful with the people we value beside us."
+
+  couple: {
+
+    opening: {
+      label: "A New Chapter",
+      title: "Our Story Continues",
+      text:
+        "Two lives are becoming one story, and we'd love to celebrate this new beginning with the people who matter most."
     },
+
+    closing: {
+      label: "With Love",
+      title: "We Hope You'll Celebrate With Us",
+      text:
+        "Your presence would make this day even more meaningful."
+    }
+
+  },
+
+  guest: {
+
+    opening: {
+      label: "A Beautiful Beginning",
+      title: "Today Is About Two Hearts",
+      text:
+        "Some stories deserve to be celebrated. This is one of them."
+    },
+
+    closing: {
+      label: "With Warm Wishes",
+      title: "Congratulations",
+      text:
+        "May your journey together be filled with love, laughter, and countless beautiful memories."
+    }
+
+  }
+
+},
 
     teacher: {
       label: "For a Lasting Influence",
