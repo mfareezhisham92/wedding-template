@@ -198,6 +198,8 @@ teacher: {
 },
 
   getMiddleScenes(identity) {
+
+  const role = identity?.role || "default";
   const purpose = identity?.purpose;
 
   const middleScenes = {
@@ -246,20 +248,43 @@ teacher: {
       }
     },
 
-    wedding: {
-      feeling: {
-        label: "The Spirit of This Day",
-        title: "How We Hope You Feel"
-      },
-      memory: {
-        label: "Our Story",
-        title: "A Moment That Brought Us Here"
-      },
-      message: {
-        label: "With Love",
-        title: "What We Want to Share With You"
-      }
+    wedding:{
+
+    couple:{
+        feeling:{
+            label:"The Celebration",
+            title:"How We Hope You Feel"
+        },
+
+        memory:{
+            label:"Our Journey",
+            title:"A Story Worth Sharing"
+        },
+
+        message:{
+            label:"Our Invitation",
+            title:"We Can't Wait To Celebrate With You"
+        }
     },
+
+    guest:{
+        feeling:{
+            label:"A Beautiful Beginning",
+            title:"What I Hope You Feel Today"
+        },
+
+        memory:{
+            label:"A Memory of You",
+            title:"What Makes This Couple Special"
+        },
+
+        message:{
+            label:"My Blessing",
+            title:"What I Wish For Your Future"
+        }
+    }
+
+},
 
     teacher: {
       feeling: {
@@ -322,21 +347,36 @@ teacher: {
     }
   };
 
-  return middleScenes[purpose] || {
-    feeling: {
-      label: "What Matters",
-      title: "This Was Created to Make You Feel"
+  const scenes =
+    middleScenes[purpose];
+
+if(
+    scenes &&
+    scenes[role]
+){
+    return scenes[role];
+}
+
+if(scenes){
+    return scenes;
+}
+
+return {
+    feeling:{
+        label:"What Matters",
+        title:"This Was Created To Make You Feel"
     },
-    memory: {
-      label: "A Memory Worth Keeping",
-      title: "One Moment That Still Stays With Me"
+
+    memory:{
+        label:"A Memory Worth Keeping",
+        title:"One Moment That Still Stays With Me"
     },
-    message: {
-      label: "From the Heart",
-      title: "What I Want You to Know"
+
+    message:{
+        label:"From The Heart",
+        title:"What I Want You To Know"
     }
-  };
-},
+};
 
   getTiming(identity) {
   const purpose = identity?.purpose;
