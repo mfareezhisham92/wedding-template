@@ -39,8 +39,6 @@ const Composer = {
     "royal"
 };
 
-console.log("Lumina story identity:", storyIdentity);    
-
     return {
       storyIdentity,
 
