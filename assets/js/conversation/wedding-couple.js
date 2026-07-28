@@ -1,54 +1,78 @@
-const WEDDING_COUPLE = {
+const WEDDING_COUPLE_JOURNEY = {
   id: "wedding-couple",
-  name: "Wedding Invitation",
 
-  reflections: [
+  style: "celebration",
+
+  title: "Your Wedding Invitation",
+
+  introduction: {
+    eyebrow: "A Celebration Begins",
+    title: "Let us shape an invitation that feels like both of you.",
+    text:
+      "Three simple moments are all we need to create something warm, personal, and joyful."
+  },
+
+  moments: [
     {
-      id: "recipient",
-      chapter: "The Guests",
-      reflection: `A wedding becomes even more meaningful when it is shared with the people who matter.
+      id: "people",
 
-Before we think about the invitation...
+      label: "Your People",
 
-let's think about who you hope will be there.`,
-      title: "Who are you creating this invitation for?",
-      placeholder: "Our family... our closest friends... everyone we love...",
-      encouragement: `Think of the people whose presence would make your day feel complete.`
+      reflection:
+        "A celebration becomes meaningful because of the people who share it with you.",
+
+      title:
+        "Who are you inviting to celebrate this day with you?",
+
+      placeholder:
+        "Family, close friends, colleagues, or everyone who has been part of your journey...",
+
+      encouragement:
+        "Keep it simple. You only need to describe the people you hope will be there."
     },
 
     {
-      id: "feeling",
-      chapter: "The Atmosphere",
-      reflection: `Every wedding carries its own feeling.
+      id: "celebration",
 
-Some feel intimate and peaceful.
+      label: "The Celebration",
 
-Others feel joyful, grand, and full of celebration.`,
-      title: "How would you like your guests to feel?",
-      placeholder: "Welcomed... joyful... excited... deeply appreciated...",
-      encouragement: `Let that feeling guide the invitation.`
+      reflection:
+        "Before your guests arrive, your invitation gives them the first feeling of the day.",
+
+      title:
+        "How would you like your guests to feel when they receive it?",
+
+      placeholder:
+        "Warmly welcomed, excited, honoured, joyful, or like part of the family...",
+
+      encouragement:
+        "Choose the feeling that best represents the celebration you are creating."
     },
 
     {
-      id: "memory",
-      chapter: "Our Story",
-      reflection: `Behind this celebration is a journey that brought two people here.
+      id: "invitation",
 
-It may have begun through one meeting, one friendship, or one unforgettable moment.`,
-      title: "What part of your story would you love to share?",
-      placeholder: "How we met... when we knew... what brought us here...",
-      encouragement: `It does not need to tell everything. One meaningful chapter is enough.`
-    },
+      label: "Your Invitation",
 
-    {
-      id: "message",
-      chapter: "The Invitation",
-      reflection: `The people receiving this are not simply being given event details.
+      reflection:
+        "This is your chance to welcome them in words that sound like both of you.",
 
-They are being invited to witness the beginning of your next chapter.`,
-      title: "What would you like to say to your guests?",
-      placeholder: "Your presence would make our celebration complete...",
-      encouragement: `Invite them warmly, in words that sound like both of you.`
+      title:
+        "What would you like to say to your guests?",
+
+      placeholder:
+        "We would be honoured to celebrate this special day with you...",
+
+      encouragement:
+        "A short and sincere message is enough."
     }
-  ]
+  ],
+
+  closing: {
+    eyebrow: "Your Invitation Is Ready",
+    title: "Let Lumina turn these moments into your celebration.",
+    button: "Craft My Experience"
+  }
 };
+
+window.WEDDING_COUPLE_JOURNEY = WEDDING_COUPLE_JOURNEY;
