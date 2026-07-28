@@ -16,7 +16,7 @@ const WEDDING_COUPLE = {
     {
       id: "people",
 
-      label: "Your Guests",
+      chapter: "Your Guests"
 
       reflection:
         "Every wedding becomes unforgettable because of the people who celebrate it with you.",
@@ -34,7 +34,7 @@ const WEDDING_COUPLE = {
     {
       id: "celebration",
 
-      label: "Your Celebration",
+      chapter: "Your Celebration",
 
       reflection:
         "Your invitation gives your guests their first feeling of the celebration before the day even begins.",
@@ -52,7 +52,7 @@ const WEDDING_COUPLE = {
     {
       id: "welcome",
 
-      label: "Your Welcome",
+      chapter: "Your Welcome",
 
       reflection:
         "Imagine your guests can hear both of your voices as they open the invitation.",
