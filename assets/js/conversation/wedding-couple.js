@@ -16,55 +16,55 @@ const WEDDING_COUPLE = {
     {
       id: "people",
 
-      label: "Your People",
+      label: "Your Guests",
 
       reflection:
-        "A celebration becomes meaningful because of the people who share it with you.",
+        "Every wedding becomes unforgettable because of the people who celebrate it with you.",
 
       title:
-        "Who are you inviting to celebrate this day with you?",
+        "Who are the people you will be happiest to see on your special day?",
 
       placeholder:
-        "Family, close friends, colleagues, or everyone who has been part of your journey...",
+        "Family, close friends, colleagues, and everyone who has shared part of your journey...",
 
       encouragement:
-        "Keep it simple. You only need to describe the people you hope will be there."
+        "You do not need to name everyone. Simply describe the people whose presence will make the day feel complete."
     },
 
     {
       id: "celebration",
 
-      label: "The Celebration",
+      label: "Your Celebration",
 
       reflection:
-        "Before your guests arrive, your invitation gives them the first feeling of the day.",
+        "Your invitation gives your guests their first feeling of the celebration before the day even begins.",
 
       title:
-        "How would you like your guests to feel when they receive it?",
+        "When they open it, what is the first feeling you hope fills their hearts?",
 
       placeholder:
         "Warmly welcomed, excited, honoured, joyful, or like part of the family...",
 
       encouragement:
-        "Choose the feeling that best represents the celebration you are creating."
+        "Choose the feeling that best represents the celebration you are creating together."
     },
 
     {
-      id: "invitation",
+      id: "welcome",
 
-      label: "Your Invitation",
+      label: "Your Welcome",
 
       reflection:
-        "This is your chance to welcome them in words that sound like both of you.",
+        "Imagine your guests can hear both of your voices as they open the invitation.",
 
       title:
-        "What would you like to say to your guests?",
+        "What would you like them to hear?",
 
       placeholder:
         "We would be honoured to celebrate this special day with you...",
 
       encouragement:
-        "A short and sincere message is enough."
+        "A short and sincere welcome is enough. Lumina will help shape it into the experience."
     }
   ],
 
