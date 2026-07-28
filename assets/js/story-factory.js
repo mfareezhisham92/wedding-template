@@ -376,6 +376,7 @@ return {
         label:"From The Heart",
         title:"What I Want You To Know"
     }
+  };
 };
 
   getTiming(identity) {
