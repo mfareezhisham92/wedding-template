@@ -31,8 +31,34 @@ const Conversation = {
     document.getElementById("answerInput").value = this.answers[current.id] || "";
     document.getElementById("encouragementText").innerText = current.encouragement || "";
 
-    document.getElementById("progressText").innerText =
-  `${current.chapter || "Reflection"} · ${this.step + 1} of ${this.config.length}`;
+    const style =
+    localStorage.getItem("luminaExperienceStyle") || "personal";
+
+let chapterTitle = current.chapter;
+
+if (!chapterTitle) {
+
+    switch(style){
+
+        case "celebration":
+            chapterTitle = "Celebration";
+            break;
+
+        case "legacy":
+            chapterTitle = "Reflection";
+            break;
+
+        case "personal":
+        default:
+            chapterTitle = "Message";
+            break;
+
+    }
+
+}
+
+document.getElementById("progressText").innerText =
+`${chapterTitle} · ${this.step + 1} of ${this.config.length}`;
 
     document.getElementById("nextBtn").innerText =
       this.step === this.config.length - 1
