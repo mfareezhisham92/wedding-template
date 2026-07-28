@@ -22,6 +22,10 @@ const Composer = {
     localStorage.getItem("luminaRole") ||
     "default",
 
+  style:
+    experience?.experienceStyle ||
+    "personal",    
+
   emotion:
     experience?.category ||
     "Meaningful Moment",
@@ -34,6 +38,8 @@ const Composer = {
     experience?.collection ||
     "royal"
 };
+
+console.log("Lumina story identity:", storyIdentity);    
 
     return {
       storyIdentity,
