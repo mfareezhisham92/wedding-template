@@ -5,7 +5,7 @@ const ExperienceLibrary = [
     icon: "❤️",
     category: "Love",
     journey: "romantic",
-    experienceStyle: "legacy"
+    experienceStyle: "legacy",
     collection: "royal",
     description: "Celebrate the journey you have shared together.",
     welcome: {
@@ -20,7 +20,7 @@ const ExperienceLibrary = [
     icon: "🌷",
     category: "Gratitude",
     journey: "nostalgic",
-    experienceStyle: "legacy"  
+    experienceStyle: "legacy", 
     collection: "royal",
     description: "Say thank you for a lifetime of love and care.",
     welcome: {
@@ -79,7 +79,7 @@ const ExperienceLibrary = [
     icon: "📚",
     category: "Gratitude",
     journey: "nostalgic",
-    experienceStyle: "personal"
+    experienceStyle: "personal",
     collection: "royal",
     description: "Thank someone who helped shape your journey.",
     welcome: {
@@ -94,7 +94,7 @@ const ExperienceLibrary = [
     icon: "✈️",
     category: "Memories",
     journey: "nostalgic",
-    experienceStyle: "personal"
+    experienceStyle: "personal",
     collection: "royal",
     description: "Honour the memories before beginning a new chapter.",
     welcome: {
@@ -124,7 +124,7 @@ const ExperienceLibrary = [
     icon: "🌱",
     category: "Hope",
     journey: "hopeful",
-    experienceStyle: "legacy"  
+    experienceStyle: "legacy",  
     collection: "royal",
     description: "Offer strength, reassurance, and belief in tomorrow.",
     welcome: {
