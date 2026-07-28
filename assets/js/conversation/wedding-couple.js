@@ -1,4 +1,4 @@
-const WEDDING_COUPLE_JOURNEY = {
+const WEDDING_COUPLE = {
   id: "wedding-couple",
 
   style: "celebration",
@@ -75,4 +75,4 @@ const WEDDING_COUPLE_JOURNEY = {
   }
 };
 
-window.WEDDING_COUPLE_JOURNEY = WEDDING_COUPLE_JOURNEY;
+window.WEDDING_COUPLE = WEDDING_COUPLE;
