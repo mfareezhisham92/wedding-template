@@ -377,7 +377,7 @@ return {
         title:"What I Want You To Know"
     }
   };
-};
+},
 
   getTiming(identity) {
   const purpose = identity?.purpose;
