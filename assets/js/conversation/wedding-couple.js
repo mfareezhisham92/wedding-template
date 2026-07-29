@@ -12,7 +12,7 @@ const WEDDING_COUPLE = {
       "Three simple moments are all we need to create something warm, personal, and joyful."
   },
 
-  reflections: [
+  sections: [
     {
       id: "people",
 
