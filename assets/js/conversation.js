@@ -67,8 +67,14 @@ if (!chapterTitle) {
 
 }
 
+const sectionTitle =
+  current.chapter ||
+  current.label ||
+  this.journey.title ||
+  "Your Experience";
+
 document.getElementById("progressText").innerText =
-`${chapterTitle} · ${this.step + 1} of ${this.config.length}`;
+  `${sectionTitle} · ${this.step + 1} of ${this.config.length}`;
 
     document.getElementById("nextBtn").innerText =
       this.step === this.config.length - 1
