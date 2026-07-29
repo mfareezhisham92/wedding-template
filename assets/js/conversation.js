@@ -3,18 +3,28 @@ const Conversation = {
   answers: {},
 
   start(journey) {
-  if(!journey || !Array.isArray(journey.reflections)){
+  if (!journey) {
     throw new Error("The selected journey is not valid.");
   }
 
+  const sections = Array.isArray(journey.sections)
+    ? journey.sections
+    : journey.reflections;
+
+  if (!Array.isArray(sections) || sections.length === 0) {
+    throw new Error(
+      `${journey.name || journey.id || "Selected"} journey has no sections.`
+    );
+  }
+
   this.journey = journey;
-  this.config = journey.reflections;
+  this.config = sections;
   this.step = 0;
   this.answers = {};
 
   const card = document.getElementById("card");
 
-  if(card){
+  if (card) {
     card.classList.remove("fade");
     card.classList.add("show");
   }
