@@ -127,9 +127,10 @@ const Composer = {
     storyIdentity
   }) {
     if (
-      experienceId === "wedding-couple" ||
-      experienceId === "wedding-host"
-    ) {
+  experienceId === "wedding" ||
+  experienceId === "wedding-couple" ||
+  experienceId === "wedding-host"
+) {
       return this.composeWeddingHost(
         answers,
         storyIdentity
