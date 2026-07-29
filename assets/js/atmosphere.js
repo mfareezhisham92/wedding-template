@@ -89,11 +89,15 @@ const journey =
       throw new Error(`No journey found for: ${type}`);
     }
 
-    if(!Array.isArray(journey.reflections)){
-      throw new Error(
-        `${journey.name || type} journey has no reflections.`
-      );
-    }
+    const journeySections = Array.isArray(journey.sections)
+  ? journey.sections
+  : journey.reflections;
+
+if (!Array.isArray(journeySections) || journeySections.length === 0) {
+  throw new Error(
+    `${journey.name || type} journey has no sections.`
+  );
+}
 
     if(!creatorArea){
       throw new Error("Creator area is missing from creator.html.");
