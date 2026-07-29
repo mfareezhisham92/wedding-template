@@ -16,7 +16,7 @@ const WEDDING_COUPLE = {
     {
       id: "people",
 
-      chapter: "Your Guests"
+      chapter: "Your Guests",
 
       reflection:
         "Every wedding becomes unforgettable because of the people who celebrate it with you.",
