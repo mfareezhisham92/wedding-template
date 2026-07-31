@@ -40,17 +40,20 @@ const StoryFactory = {
     },
 
     wedding: {
-      opening: {
-        label: "A New Chapter",
-        title: "Two lives are becoming one story.",
-        text: "And the people who matter most are warmly invited to share the beginning."
-      },
-      closing: {
-        label: "With Love",
-        title: "Your Presence Would Mean So Much",
-        text: "Thank you for being part of a day we will remember for the rest of our lives."
-      }
-    },
+  opening: {
+    label: "Walimatul Urus",
+    title: "Together, We Begin",
+    text:
+      "A beautiful new chapter is beginning, and we would love to share it with the people who matter most."
+  },
+
+  closing: {
+    label: "With Love",
+    title: "We Hope You Will Be There",
+    text:
+      "Our celebration would not be complete without you."
+  }
+},
 
     teacher: {
       opening: {
@@ -160,9 +163,10 @@ getRecipientReveal(identity, recipientName) {
 },
 
 wedding: {
-  label: "For the People Who Matter",
+  label: "A Special Invitation",
   title: `For ${name}`,
-  text: "For the people whose presence, love, and support make this beautiful beginning even more meaningful."
+  text:
+    "Because some moments become more meaningful when they are shared with the people we cherish."
 },
 
 teacher: {
@@ -250,22 +254,22 @@ teacher: {
 
     wedding:{
 
-    couple:{
-        feeling:{
-            label:"The Celebration",
-            title:"How We Hope You Feel"
-        },
+    couple: {
+  feeling: {
+    label: "The Celebration",
+    title: "A Day Filled With Love"
+  },
 
-        memory:{
-            label:"Our Journey",
-            title:"A Story Worth Sharing"
-        },
+  memory: {
+    label: "From Our Hearts",
+    title: "Why This Day Means So Much"
+  },
 
-        message:{
-            label:"Our Invitation",
-            title:"We Can't Wait To Celebrate With You"
-        }
-    },
+  message: {
+    label: "Our Invitation",
+    title: "Celebrate This Moment With Us"
+  }
+},
 
     guest:{
         feeling:{
