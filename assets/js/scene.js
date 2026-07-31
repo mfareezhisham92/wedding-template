@@ -34,7 +34,7 @@ const SceneEngine = {
   text: storyCopy.opening.text,
   duration: timing.opening,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 },
 
@@ -45,7 +45,7 @@ const SceneEngine = {
   text: recipientReveal.text,
   duration: timing.reveal,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 },
 
@@ -56,7 +56,7 @@ const SceneEngine = {
   text: "",
   duration: timing.photo,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image:
   story.media?.photo ||
   "assets/wife.jpg",
@@ -71,7 +71,7 @@ const SceneEngine = {
   text: story.emotion.feeling,
   duration: timing.feeling,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 },
 
@@ -79,10 +79,12 @@ const SceneEngine = {
   type: "memory",
   label: middleCopy.memory.label,
   title: middleCopy.memory.title,
-  text: story.memory.text,
+  text:
+  story.narrative?.opening ||
+  story.memory.text,
   duration: timing.memory,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 },
 
@@ -90,10 +92,12 @@ const SceneEngine = {
   type: "message",
   label: middleCopy.message.label,
   title: middleCopy.message.title,
-  text: story.message.text,
+  text:
+  story.narrative?.invitation ||
+  story.message.text,
   duration: timing.message,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 },
 
@@ -101,10 +105,12 @@ const SceneEngine = {
   type: "closing",
   label: storyCopy.closing.label,
   title: storyCopy.closing.title,
-  text: storyCopy.closing.text,
+  text:
+  story.narrative?.closing ||
+  storyCopy.closing.text,
   duration: timing.closing,
   transition: "fade",
-  background: "royal",
+  background:   story.collection || "royal",
   image: null
 }
     ];
