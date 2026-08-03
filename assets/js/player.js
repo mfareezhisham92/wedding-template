@@ -39,6 +39,39 @@ openingLumina(moment) {
   "opening-lumina"(moment) {
   return this.openingLumina(moment);
 },
+
+welcomeLumina(moment) {
+  const lines = Array.isArray(moment.lines)
+    ? moment.lines
+    : [];
+
+  return `
+    <section class="moment lumina-welcome">
+      <div class="lumina-welcome-label">
+        ${moment.label || ""}
+      </div>
+
+      <div class="lumina-welcome-lines">
+        ${lines
+          .map(
+            (line, index) => `
+              <p
+                class="lumina-welcome-line"
+                style="--line-index:${index};"
+              >
+                ${line}
+              </p>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+},
+
+"welcome-lumina"(moment) {
+  return this.welcomeLumina(moment);
+},
   
   hero(moment) { return this.text(moment); },
   feeling(moment) { return this.text(moment); },
