@@ -44,6 +44,23 @@ const SceneEngine = {
   background: story.collection || "royal",
   image: null
 },
+
+{
+  type: "welcome-lumina",
+
+  label: "Buat insan-insan yang dihargai,",
+
+  lines: [
+    "Doa dan kehadiran anda",
+    "amat kami hargai,",
+    "kerana andalah yang akan menjadikan hari ini lebih bermakna."
+  ],
+
+  duration: 9000,
+  transition: "fade",
+  background: story.collection || "royal",
+  image: null
+},
       
       {
   type: "hero",
