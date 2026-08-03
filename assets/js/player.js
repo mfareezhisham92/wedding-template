@@ -14,13 +14,22 @@ openingLumina(moment) {
 
   return `
     <section class="moment lumina-opening">
-      <div class="label">
+      <div class="label lumina-opening-label">
         ${moment.label || ""}
       </div>
 
       <div class="lumina-opening-lines">
         ${lines
-          .map(line => `<p>${line}</p>`)
+          .map(
+            (line, index) => `
+              <p
+                class="lumina-opening-line"
+                style="--line-index:${index};"
+              >
+                ${line}
+              </p>
+            `
+          )
           .join("")}
       </div>
     </section>
