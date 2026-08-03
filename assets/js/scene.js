@@ -61,17 +61,6 @@ const SceneEngine = {
   background: story.collection || "royal",
   image: null
 },
-      
-      {
-  type: "hero",
-  label: storyCopy.opening.label,
-  title: storyCopy.opening.title,
-  text: storyCopy.opening.text,
-  duration: timing.opening,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image: null
-},
 
 {
   type: "hero",
