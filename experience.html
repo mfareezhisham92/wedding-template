@@ -237,6 +237,40 @@
     font-size:14px;
   }
 }
+
+/* ---------- Scene 3 Reveal ---------- */
+
+.formal-part{
+  opacity:0;
+  transform:translateY(10px);
+  animation:
+    formalReveal
+    .9s
+    ease
+    forwards;
+}
+
+.formal-part-1{animation-delay:.5s;}
+.formal-part-2{animation-delay:1.3s;}
+.formal-part-3{animation-delay:2.1s;}
+.formal-part-4{animation-delay:3.0s;}
+.formal-part-5{animation-delay:4.0s;}
+.formal-part-6{animation-delay:5.2s;}
+.formal-part-7{animation-delay:6.2s;}
+
+@keyframes formalReveal{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+    filter:blur(1.5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
   
 *{box-sizing:border-box;margin:0;padding:0}
 
