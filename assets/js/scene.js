@@ -74,6 +74,52 @@ const SceneEngine = {
 },
 
 {
+  type: "formal-invitation",
+
+  basmala:
+    "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ",
+
+  label:
+    "Majlis Walimatul Urus",
+
+  introduction:
+    "Dengan penuh kesyukuran ke hadrat Allah SWT, kami dengan segala hormatnya menjemput Dato’ / Datin / Tuan / Puan / Encik / Cik / Saudara / Saudari ke majlis perkahwinan putera kami",
+
+  hosts:
+    "Hj Tajudin bin Ahmad & Hjh Ashiqin binti Azmi",
+
+  groom:
+    "Nor Azmi bin Tajudin",
+
+  bride:
+    "Nurul Ain binti Mohsin",
+
+  date:
+    "31 Disember 2026",
+
+  time:
+    "11.00 pagi – 4.00 petang",
+
+  venue:
+    "D’ Persada Baroqah Event Hall, Kuantan, Pahang",
+
+  rsvp:
+    "",
+
+  duration:
+    14000,
+
+  transition:
+    "fade",
+
+  background:
+    story.collection || "royal",
+
+  image:
+    null
+},
+      
+{
   type: "photo",
   label: "A Memory",
   title: "",
