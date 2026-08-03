@@ -72,6 +72,62 @@ welcomeLumina(moment) {
 "welcome-lumina"(moment) {
   return this.welcomeLumina(moment);
 },
+
+formalInvitation(moment) {
+  return `
+    <section class="moment formal-invitation">
+
+      <div class="formal-basmala">
+        ${moment.basmala || ""}
+      </div>
+
+      <div class="formal-label">
+        ${moment.label || ""}
+      </div>
+
+      <p class="formal-introduction">
+        ${moment.introduction || ""}
+      </p>
+
+      <div class="formal-hosts">
+        ${moment.hosts || ""}
+      </div>
+
+      <div class="formal-couple">
+        <div class="formal-name">
+          ${moment.groom || ""}
+        </div>
+
+        <div class="formal-ampersand">
+          &
+        </div>
+
+        <div class="formal-name">
+          ${moment.bride || ""}
+        </div>
+      </div>
+
+      <div class="formal-details">
+        <div>${moment.date || ""}</div>
+        <div>${moment.time || ""}</div>
+        <div>${moment.venue || ""}</div>
+      </div>
+
+      ${
+        moment.rsvp
+          ? `<div class="formal-rsvp">
+               RSVP · ${moment.rsvp}
+             </div>`
+          : ""
+      }
+
+    </section>
+  `;
+},
+
+"formal-invitation"(moment) {
+  return this.formalInvitation(moment);
+},
   
   hero(moment) { return this.text(moment); },
   feeling(moment) { return this.text(moment); },
