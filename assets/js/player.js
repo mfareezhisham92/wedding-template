@@ -77,23 +77,23 @@ formalInvitation(moment) {
   return `
     <section class="moment formal-invitation">
 
-      <div class="formal-basmala">
+      <div class="formal-basmala formal-part formal-part-1">
         ${moment.basmala || ""}
       </div>
 
-      <div class="formal-label">
+      <div class="formal-label formal-part formal-part-2">
         ${moment.label || ""}
       </div>
 
-      <p class="formal-introduction">
+      <p class="formal-introduction formal-part formal-part-3">
         ${moment.introduction || ""}
       </p>
 
-      <div class="formal-hosts">
+      <div class="formal-hosts formal-part formal-part-4">
         ${moment.hosts || ""}
       </div>
 
-      <div class="formal-couple">
+      <div class="formal-couple formal-part formal-part-5">
         <div class="formal-name">
           ${moment.groom || ""}
         </div>
@@ -107,7 +107,7 @@ formalInvitation(moment) {
         </div>
       </div>
 
-      <div class="formal-details">
+      <div class="formal-details formal-part formal-part-6">
         <div>${moment.date || ""}</div>
         <div>${moment.time || ""}</div>
         <div>${moment.venue || ""}</div>
@@ -115,9 +115,11 @@ formalInvitation(moment) {
 
       ${
         moment.rsvp
-          ? `<div class="formal-rsvp">
-               RSVP · ${moment.rsvp}
-             </div>`
+          ? `
+            <div class="formal-rsvp formal-part formal-part-7">
+              RSVP · ${moment.rsvp}
+            </div>
+          `
           : ""
       }
 
