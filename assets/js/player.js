@@ -7,6 +7,30 @@ const Renderers = {
     );
   },
 
+openingLumina(moment) {
+  const lines = Array.isArray(moment.lines)
+    ? moment.lines
+    : [];
+
+  return `
+    <section class="moment lumina-opening">
+      <div class="label">
+        ${moment.label || ""}
+      </div>
+
+      <div class="lumina-opening-lines">
+        ${lines
+          .map(line => `<p>${line}</p>`)
+          .join("")}
+      </div>
+    </section>
+  `;
+},
+
+  "opening-lumina"(moment) {
+  return this.openingLumina(moment);
+},
+  
   hero(moment) { return this.text(moment); },
   feeling(moment) { return this.text(moment); },
   memory(moment) { return this.text(moment); },
