@@ -27,6 +27,24 @@ const SceneEngine = {
       );
 
     return [
+
+  {
+  type: "opening-lumina",
+
+  label: "Walimatul Urus",
+
+  lines: [
+    "Setiap permulaan yang indah",
+    "akan menjadi lebih bermakna",
+    "apabila diraikan bersama insan yang tersayang."
+  ],
+
+  duration: 10000,
+  transition: "fade",
+  background: story.collection || "royal",
+  image: null
+},
+      
       {
   type: "hero",
   label: storyCopy.opening.label,
