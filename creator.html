@@ -380,54 +380,111 @@ color:#d8c7a5;
 
   <div id="weddingPreparationArea" style="display:none;">
 
-  <div class="small">
-    Preparing Your Invitation
-  </div>
+  <!-- STEP 1: FAMILY -->
+  <div id="familyPreparationStep">
 
-  <h1>
-    Let’s begin with the family.
-  </h1>
+    <div class="small">
+      Preparing Your Invitation
+    </div>
 
-  <p
-    style="
-      color:#d8c7a5;
-      line-height:1.7;
-      margin-bottom:24px;
-    "
-  >
-    Enter the names of the parents hosting the wedding.
-  </p>
+    <h1>
+      Let’s begin with the family.
+    </h1>
 
-  <div class="preparation-field">
-    <label for="fatherName">
-      Father’s Name
-    </label>
-
-    <input
-      id="fatherName"
-      type="text"
-      placeholder="Example: Hj Tajudin bin Ahmad"
+    <p
+      style="
+        color:#d8c7a5;
+        line-height:1.7;
+        margin-bottom:24px;
+      "
     >
+      Enter the names of the parents hosting the wedding.
+    </p>
+
+    <div class="preparation-field">
+      <label for="fatherName">
+        Father’s Name
+      </label>
+
+      <input
+        id="fatherName"
+        type="text"
+        placeholder="Example: Hj Tajudin bin Ahmad"
+      >
+    </div>
+
+    <div class="preparation-field">
+      <label for="motherName">
+        Mother’s Name
+      </label>
+
+      <input
+        id="motherName"
+        type="text"
+        placeholder="Example: Hjh Ashiqin binti Azmi"
+      >
+    </div>
+
+    <button id="saveFamilyBtn">
+      Continue
+    </button>
+
   </div>
 
-  <div class="preparation-field">
-    <label for="motherName">
-      Mother’s Name
-    </label>
 
-    <input
-      id="motherName"
-      type="text"
-      placeholder="Example: Hjh Ashiqin binti Azmi"
+  <!-- STEP 2: COUPLE -->
+  <div id="couplePreparationStep" style="display:none;">
+
+    <div class="small">
+      Preparing Your Invitation
+    </div>
+
+    <h1>
+      Now, tell us about the couple.
+    </h1>
+
+    <p
+      style="
+        color:#d8c7a5;
+        line-height:1.7;
+        margin-bottom:24px;
+      "
     >
-  </div>
+      Enter the full names exactly as you would like them to appear.
+    </p>
 
-  <button id="saveFamilyBtn">
-    Continue
-  </button>
+    <div class="preparation-field">
+      <label for="groomName">
+        Groom’s Name
+      </label>
+
+      <input
+        id="groomName"
+        type="text"
+        placeholder="Example: Nor Azmi bin Tajudin"
+      >
+    </div>
+
+    <div class="preparation-field">
+      <label for="brideName">
+        Bride’s Name
+      </label>
+
+      <input
+        id="brideName"
+        type="text"
+        placeholder="Example: Nurul Ain binti Mohsin"
+      >
+    </div>
+
+    <button id="saveCoupleBtn">
+      Continue
+    </button>
+
+  </div>
 
 </div>
-
+  
   <div id="creatorArea" style="display:none;">
     <div class="small" id="progressText"></div>
     <div class="dots" id="dots"></div>
@@ -502,8 +559,11 @@ color:#d8c7a5;
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const preparationArea =
-    document.getElementById("weddingPreparationArea");
+  const familyStep =
+    document.getElementById("familyPreparationStep");
+
+  const coupleStep =
+    document.getElementById("couplePreparationStep");
 
   const fatherInput =
     document.getElementById("fatherName");
@@ -511,15 +571,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const motherInput =
     document.getElementById("motherName");
 
-  const saveButton =
+  const groomInput =
+    document.getElementById("groomName");
+
+  const brideInput =
+    document.getElementById("brideName");
+
+  const saveFamilyButton =
     document.getElementById("saveFamilyBtn");
 
+  const saveCoupleButton =
+    document.getElementById("saveCoupleBtn");
+
   if (
-    !preparationArea ||
+    !familyStep ||
+    !coupleStep ||
     !fatherInput ||
     !motherInput ||
-    !saveButton
+    !groomInput ||
+    !brideInput ||
+    !saveFamilyButton ||
+    !saveCoupleButton
   ) {
+    console.error(
+      "Lumina wedding preparation elements are missing."
+    );
     return;
   }
 
@@ -532,7 +608,13 @@ document.addEventListener("DOMContentLoaded", () => {
   motherInput.value =
     saved.family.motherName || "";
 
-  saveButton.addEventListener("click", () => {
+  groomInput.value =
+    saved.couple.groomName || "";
+
+  brideInput.value =
+    saved.couple.brideName || "";
+
+  saveFamilyButton.addEventListener("click", () => {
     const fatherName =
       fatherInput.value.trim();
 
@@ -540,21 +622,39 @@ document.addEventListener("DOMContentLoaded", () => {
       motherInput.value.trim();
 
     if (!fatherName || !motherName) {
-      alert(
-        "Please enter both parents’ names."
-      );
+      alert("Please enter both parents’ names.");
       return;
     }
 
-    WeddingPreparation.update(
-      "family",
-      {
-        fatherName,
-        motherName
-      }
-    );
+    WeddingPreparation.update("family", {
+      fatherName,
+      motherName
+    });
 
-    alert("Family details saved.");
+    familyStep.style.display = "none";
+    coupleStep.style.display = "block";
+
+    groomInput.focus();
+  });
+
+  saveCoupleButton.addEventListener("click", () => {
+    const groomName =
+      groomInput.value.trim();
+
+    const brideName =
+      brideInput.value.trim();
+
+    if (!groomName || !brideName) {
+      alert("Please enter both names.");
+      return;
+    }
+
+    WeddingPreparation.update("couple", {
+      groomName,
+      brideName
+    });
+
+    alert("Couple details saved.");
   });
 });
 </script>  
