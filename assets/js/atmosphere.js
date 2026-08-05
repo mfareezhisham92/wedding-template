@@ -260,6 +260,69 @@ function chooseRole(experienceId, roleId){
     role.title
   );
 
+if (
+  experience.id === "wedding" &&
+  role.id === "couple"
+) {
+  const atmosphereArea =
+    document.getElementById("atmosphereArea");
+
+  const roleArea =
+    document.getElementById("roleArea");
+
+  const creatorArea =
+    document.getElementById("creatorArea");
+
+  const studioArea =
+    document.getElementById("studioArea");
+
+  const craftingArea =
+    document.getElementById("craftingArea");
+
+  const preparationArea =
+    document.getElementById("weddingPreparationArea");
+
+  const familyStep =
+    document.getElementById("familyPreparationStep");
+
+  const coupleStep =
+    document.getElementById("couplePreparationStep");
+
+  if (atmosphereArea) {
+    atmosphereArea.style.display = "none";
+  }
+
+  if (roleArea) {
+    roleArea.style.display = "none";
+  }
+
+  if (creatorArea) {
+    creatorArea.style.display = "none";
+  }
+
+  if (studioArea) {
+    studioArea.style.display = "none";
+  }
+
+  if (craftingArea) {
+    craftingArea.style.display = "none";
+  }
+
+  if (preparationArea) {
+    preparationArea.style.display = "block";
+  }
+
+  if (familyStep) {
+    familyStep.style.display = "block";
+  }
+
+  if (coupleStep) {
+    coupleStep.style.display = "none";
+  }
+
+  return;
+}
+  
   document.getElementById("roleArea").style.display = "none";
 
 // Show the welcome area again before inserting its content.
