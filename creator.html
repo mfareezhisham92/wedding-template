@@ -483,6 +483,90 @@ color:#d8c7a5;
 
   </div>
 
+<!-- STEP 3: CELEBRATION -->
+<div id="celebrationPreparationStep" style="display:none;">
+
+  <div class="small">
+    Preparing Your Invitation
+  </div>
+
+  <h1>
+    Now, let’s prepare the celebration.
+  </h1>
+
+  <p
+    style="
+      color:#d8c7a5;
+      line-height:1.7;
+      margin-bottom:24px;
+    "
+  >
+    Enter the date, time and venue exactly as you would like them to appear.
+  </p>
+
+  <div class="preparation-field">
+    <label for="weddingDate">
+      Wedding Date
+    </label>
+
+    <input
+      id="weddingDate"
+      type="date"
+    >
+  </div>
+
+  <div class="preparation-field">
+    <label for="weddingStartTime">
+      Start Time
+    </label>
+
+    <input
+      id="weddingStartTime"
+      type="time"
+    >
+  </div>
+
+  <div class="preparation-field">
+    <label for="weddingEndTime">
+      End Time
+    </label>
+
+    <input
+      id="weddingEndTime"
+      type="time"
+    >
+  </div>
+
+  <div class="preparation-field">
+    <label for="weddingVenue">
+      Venue
+    </label>
+
+    <input
+      id="weddingVenue"
+      type="text"
+      placeholder="Example: D’ Persada Baroqah Event Hall"
+    >
+  </div>
+
+  <div class="preparation-field">
+    <label for="weddingCityState">
+      City / State
+    </label>
+
+    <input
+      id="weddingCityState"
+      type="text"
+      placeholder="Example: Kuantan, Pahang"
+    >
+  </div>
+
+  <button id="saveCelebrationBtn">
+    Continue
+  </button>
+
+</div>
+    
 </div>
   
   <div id="creatorArea" style="display:none;">
@@ -559,39 +643,43 @@ color:#d8c7a5;
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const familyStep =
-    document.getElementById("familyPreparationStep");
+  const celebrationStep =
+  document.getElementById("celebrationPreparationStep");
 
-  const coupleStep =
-    document.getElementById("couplePreparationStep");
+const dateInput =
+  document.getElementById("weddingDate");
 
-  const fatherInput =
-    document.getElementById("fatherName");
+const startTimeInput =
+  document.getElementById("weddingStartTime");
 
-  const motherInput =
-    document.getElementById("motherName");
+const endTimeInput =
+  document.getElementById("weddingEndTime");
 
-  const groomInput =
-    document.getElementById("groomName");
+const venueInput =
+  document.getElementById("weddingVenue");
 
-  const brideInput =
-    document.getElementById("brideName");
+const cityStateInput =
+  document.getElementById("weddingCityState");
 
-  const saveFamilyButton =
-    document.getElementById("saveFamilyBtn");
-
-  const saveCoupleButton =
-    document.getElementById("saveCoupleBtn");
+const saveCelebrationButton =
+  document.getElementById("saveCelebrationBtn");
 
   if (
-    !familyStep ||
-    !coupleStep ||
-    !fatherInput ||
-    !motherInput ||
-    !groomInput ||
-    !brideInput ||
-    !saveFamilyButton ||
-    !saveCoupleButton
+  !familyStep ||
+  !coupleStep ||
+  !celebrationStep ||
+  !fatherInput ||
+  !motherInput ||
+  !groomInput ||
+  !brideInput ||
+  !dateInput ||
+  !startTimeInput ||
+  !endTimeInput ||
+  !venueInput ||
+  !cityStateInput ||
+  !saveFamilyButton ||
+  !saveCoupleButton ||
+  !saveCelebrationButton
   ) {
     console.error(
       "Lumina wedding preparation elements are missing."
@@ -613,6 +701,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   brideInput.value =
     saved.couple.brideName || "";
+
+  dateInput.value =
+  saved.celebration.date || "";
+
+startTimeInput.value =
+  saved.celebration.startTime || "";
+
+endTimeInput.value =
+  saved.celebration.endTime || "";
+
+venueInput.value =
+  saved.celebration.venue || "";
+
+cityStateInput.value =
+  saved.celebration.cityState || "";
 
   saveFamilyButton.addEventListener("click", () => {
     const fatherName =
@@ -654,7 +757,54 @@ document.addEventListener("DOMContentLoaded", () => {
       brideName
     });
 
-    alert("Couple details saved.");
+    coupleStep.style.display = "none";
+celebrationStep.style.display = "block";
+
+dateInput.focus();
+
+saveCelebrationButton.addEventListener("click", () => {
+  const date =
+    dateInput.value.trim();
+
+  const startTime =
+    startTimeInput.value.trim();
+
+  const endTime =
+    endTimeInput.value.trim();
+
+  const venue =
+    venueInput.value.trim();
+
+  const cityState =
+    cityStateInput.value.trim();
+
+  if (
+    !date ||
+    !startTime ||
+    !endTime ||
+    !venue ||
+    !cityState
+  ) {
+    alert(
+      "Please complete all celebration details."
+    );
+    return;
+  }
+
+  WeddingPreparation.update(
+    "celebration",
+    {
+      date,
+      startTime,
+      endTime,
+      venue,
+      cityState
+    }
+  );
+
+  alert("Celebration details saved.");
+});
+    
   });
 });
 </script>  
