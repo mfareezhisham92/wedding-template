@@ -145,10 +145,16 @@ const WeddingJourney = {
 
   showStep(stepName) {
     const steps = {
-      family: this.elements.familyStep,
-      couple: this.elements.coupleStep,
-      celebration: this.elements.celebrationStep
-    };
+
+    family: this.elements.familyStep,
+
+    couple: this.elements.coupleStep,
+
+    celebration: this.elements.celebrationStep,
+
+    review: document.getElementById("reviewPreparationStep")
+
+};
 
     Object.values(steps).forEach(step => {
       if (step) {
@@ -244,7 +250,7 @@ const WeddingJourney = {
       cityState
     });
 
-    alert("Celebration details saved.");
+    this.showStep("review");
   },
 
   start() {
