@@ -242,6 +242,17 @@ const WeddingJourney = {
       return;
     }
 
+    WeddingPreparation.update("celebration", {
+      date,
+      startTime,
+      endTime,
+      venue,
+      cityState
+    });
+
+    this.showReview();
+  },
+    
     showReview() {
 
     const saved = WeddingPreparation.get();
