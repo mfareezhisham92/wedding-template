@@ -49,7 +49,10 @@ const WeddingJourney = {
         document.getElementById("saveCoupleBtn"),
 
       saveCelebrationButton:
-        document.getElementById("saveCelebrationBtn")
+        document.getElementById("saveCelebrationBtn"),
+
+      createExperienceButton:
+        document.getElementById("createExperienceBtn")
     };
 
     if (!this.hasRequiredElements()) {
@@ -140,6 +143,13 @@ const WeddingJourney = {
         "click",
         () => this.saveCelebration()
       );
+
+      if (this.elements.createExperienceButton) {
+  this.elements.createExperienceButton.addEventListener(
+    "click",
+    () => this.createExperience()
+  );
+}
     }
   },
 
@@ -309,6 +319,92 @@ const WeddingJourney = {
 
 },
 
+createExperience() {
+  try {
+    const preparation =
+      WeddingPreparation.get();
+
+    const weddingStory = {
+      storyIdentity: {
+        purpose: "wedding",
+        role: "couple",
+        style: "celebration",
+        emotion: "love",
+        tone: "calm",
+        collection: "royal"
+      },
+
+      collection: "royal",
+
+      family: {
+        fatherName:
+          preparation.family.fatherName,
+
+        motherName:
+          preparation.family.motherName
+      },
+
+      couple: {
+        groomName:
+          preparation.couple.groomName,
+
+        brideName:
+          preparation.couple.brideName
+      },
+
+      celebration: {
+        date:
+          preparation.celebration.date,
+
+        startTime:
+          preparation.celebration.startTime,
+
+        endTime:
+          preparation.celebration.endTime,
+
+        venue:
+          preparation.celebration.venue,
+
+        cityState:
+          preparation.celebration.cityState
+      },
+
+      optional: {
+        rsvp:
+          preparation.optional.rsvp || "",
+
+        photo:
+          preparation.optional.photo || ""
+      },
+
+      media: {
+        photo:
+          preparation.optional.photo ||
+          "assets/wife.jpg"
+      }
+    };
+
+    localStorage.setItem(
+      "luminaWeddingStory",
+      JSON.stringify(weddingStory)
+    );
+
+    SceneEngine.saveScenes(weddingStory);
+
+    window.location.href =
+      "experience.html";
+  } catch (error) {
+    console.error(
+      "Lumina could not create the wedding experience:",
+      error
+    );
+
+    alert(
+      "Lumina could not create the experience. Please try again."
+    );
+  }
+},
+  
   start() {
     this.elements.preparationArea.style.display = "block";
     this.showStep("family");
