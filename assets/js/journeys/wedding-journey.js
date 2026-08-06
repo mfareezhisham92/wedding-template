@@ -336,6 +336,36 @@ createExperience() {
 
       collection: "royal",
 
+      recipient: {
+  name: "Tetamu Yang Dihargai"
+},
+
+emotion: {
+  feeling:
+    "Kehadiran anda amat bermakna buat kami sekeluarga."
+},
+
+memory: {
+  text:
+    "Setiap permulaan yang indah menjadi lebih bermakna apabila diraikan bersama insan yang tersayang."
+},
+
+message: {
+  text:
+    "Doa dan kehadiran anda amat kami hargai."
+},
+
+narrative: {
+  opening:
+    "Setiap permulaan yang indah menjadi lebih bermakna apabila diraikan bersama insan yang tersayang.",
+
+  invitation:
+    "Doa dan kehadiran anda amat kami hargai, kerana andalah yang akan menjadikan hari ini lebih bermakna.",
+
+  closing:
+    "Semoga Allah SWT memberkati majlis ini dan mengurniakan rahmat-Nya kepada kita semua."
+},
+      
       family: {
         fatherName:
           preparation.family.fatherName,
