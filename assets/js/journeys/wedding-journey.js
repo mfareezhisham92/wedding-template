@@ -242,16 +242,61 @@ const WeddingJourney = {
       return;
     }
 
-    WeddingPreparation.update("celebration", {
-      date,
-      startTime,
-      endTime,
-      venue,
-      cityState
-    });
+    showReview() {
 
-    this.showStep("review");
-  },
+    const saved = WeddingPreparation.get();
+
+    const reviewContent =
+        document.getElementById("reviewContent");
+
+    reviewContent.innerHTML = `
+        <h3>Hosted By</h3>
+
+        <p>
+            ${saved.family.fatherName}
+            <br>
+            &
+            <br>
+            ${saved.family.motherName}
+        </p>
+
+        <hr>
+
+        <h3>Celebrating</h3>
+
+        <p>
+            ${saved.couple.groomName}
+            <br>
+            ❤️
+            <br>
+            ${saved.couple.brideName}
+        </p>
+
+        <hr>
+
+        <h3>Celebration</h3>
+
+        <p>
+            ${saved.celebration.date}
+            <br><br>
+
+            ${saved.celebration.startTime}
+            —
+            ${saved.celebration.endTime}
+
+            <br><br>
+
+            ${saved.celebration.venue}
+
+            <br>
+
+            ${saved.celebration.cityState}
+        </p>
+    `;
+
+    this.showReview();
+
+}
 
   start() {
     this.elements.preparationArea.style.display = "block";
