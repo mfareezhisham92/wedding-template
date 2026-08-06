@@ -307,7 +307,7 @@ const WeddingJourney = {
 
     this.showReview();
 
-}
+},
 
   start() {
     this.elements.preparationArea.style.display = "block";
