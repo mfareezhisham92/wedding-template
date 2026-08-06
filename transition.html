@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lumina</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:#080604;
+  color:#f3ead8;
+  font-family:Georgia,serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.transition-screen{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(205,168,93,.18),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #080604,
+      #151006 55%,
+      #080604
+    );
+}
+
+.transition-content{
+  width:100%;
+  max-width:360px;
+}
+
+.transition-brand{
+  color:#cda85d;
+  font-size:16px;
+  letter-spacing:.45em;
+  margin-bottom:30px;
+}
+
+.transition-status{
+  color:#d8c7a5;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:34px;
+}
+
+.transition-message{
+  color:#f3ead8;
+  font-size:29px;
+  line-height:1.45;
+}
+
+.transition-message span{
+  display:block;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<main class="transition-screen">
+
+  <div class="transition-content">
+
+    <div class="transition-brand">
+      LUMINA
+    </div>
+
+    <div class="transition-status">
+      Preparing your moment...
+    </div>
+
+    <div class="transition-message">
+      <span>Every celebration</span>
+      <span>deserves</span>
+      <span>a meaningful beginning.</span>
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
