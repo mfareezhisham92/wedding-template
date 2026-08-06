@@ -305,7 +305,7 @@ const WeddingJourney = {
         </p>
     `;
 
-    this.showReview();
+    this.showStep("review");
 
 },
 
