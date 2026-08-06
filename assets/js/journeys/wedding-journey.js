@@ -422,7 +422,7 @@ narrative: {
     SceneEngine.saveScenes(weddingStory);
 
     window.location.href =
-      "experience.html";
+      "transition.html";
   } catch (error) {
     console.error(
       "Lumina could not create the wedding experience:",
