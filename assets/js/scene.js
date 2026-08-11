@@ -113,21 +113,6 @@ rsvp:
     null
 },
       
-{
-  type: "photo",
-  label: "A Memory",
-  title: "",
-  text: "",
-  duration: timing.photo,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image:
-  story.media?.photo ||
-  "assets/wife.jpg",
-  photoClass: photoStyle.className,
-  imageAlt: photoStyle.alt
-},
-      
       {
   type: "feeling",
   label: middleCopy.feeling.label,
