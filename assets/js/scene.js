@@ -63,17 +63,6 @@ const SceneEngine = {
 },
 
 {
-  type: "hero",
-  label: recipientReveal.label,
-  title: recipientReveal.title,
-  text: recipientReveal.text,
-  duration: timing.reveal,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image: null
-},
-
-{
   type: "formal-invitation",
 
   basmala:
