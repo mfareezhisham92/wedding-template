@@ -112,17 +112,6 @@ rsvp:
   image:
     null
 },
-      
-      {
-  type: "feeling",
-  label: middleCopy.feeling.label,
-  title: middleCopy.feeling.title,
-  text: story.emotion.feeling,
-  duration: timing.feeling,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image: null
-},
 
       {
   type: "memory",
