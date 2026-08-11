@@ -317,6 +317,18 @@ const WeddingJourney = {
 
     this.showStep("review");
 
+    const createBtn =
+    document.getElementById("createExperienceBtn");
+
+createBtn.onclick = () => {
+
+    const invitationData =
+        WeddingPreparation.get();
+
+    console.log(invitationData);
+
+};  
+      
 },
 
 createExperience() {
