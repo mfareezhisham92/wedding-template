@@ -86,25 +86,30 @@ const SceneEngine = {
     "Dengan penuh kesyukuran ke hadrat Allah SWT, kami dengan segala hormatnya menjemput Dato’ / Datin / Tuan / Puan / Encik / Cik / Saudara / Saudari ke majlis perkahwinan putera kami",
 
   hosts:
-    "Hj Tajudin bin Ahmad & Hjh Ashiqin binti Azmi",
+  `${story.family?.fatherName || ""} & ${story.family?.motherName || ""}`,
 
-  groom:
-    "Nor Azmi bin Tajudin",
+groom:
+  story.couple?.groomName || "",
 
-  bride:
-    "Nurul Ain binti Mohsin",
+bride:
+  story.couple?.brideName || "",
 
-  date:
-    "31 Disember 2026",
+date:
+  story.celebration?.date || "",
 
-  time:
-    "11.00 pagi – 4.00 petang",
+time:
+  `${story.celebration?.startTime || ""} – ${story.celebration?.endTime || ""}`,
 
-  venue:
-    "D’ Persada Baroqah Event Hall, Kuantan, Pahang",
+venue:
+  [
+    story.celebration?.venue,
+    story.celebration?.cityState
+  ]
+    .filter(Boolean)
+    .join(", "),
 
-  rsvp:
-    "",
+rsvp:
+  story.optional?.rsvp || "",
 
   duration:
     14000,
