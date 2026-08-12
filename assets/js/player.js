@@ -221,6 +221,7 @@ const Player = {
   moments: [],
   current: 0,
   timer: null,
+  countdownTimer: null,
 
   start() {
     this.moments = JSON.parse(localStorage.getItem("luminaScenes") || "[]");
@@ -246,6 +247,10 @@ const Player = {
     stage.classList.remove("fade-out", "fade-in");
     stage.innerHTML = renderer.call(Renderers, moment);
 
+    if (moment.type === "wedding-finale") {
+  this.startWeddingCountdown(moment);
+}
+
     clearTimeout(this.timer);
 
     if (moment.type === "wedding-finale") {
@@ -257,6 +262,77 @@ const Player = {
     }, moment.duration || 6000);
   },
 
+startWeddingCountdown(moment) {
+  const countdownElement =
+    document.querySelector(
+      ".wedding-finale-countdown-value"
+    );
+
+  if (!countdownElement) {
+    return;
+  }
+
+  const date =
+    moment.countdownDate || "";
+
+  const time =
+    moment.countdownTime || "00:00";
+
+  if (!date) {
+    countdownElement.innerText = "";
+    return;
+  }
+
+  const target =
+    new Date(`${date}T${time}:00`);
+
+  const updateCountdown = () => {
+    const now = new Date();
+    const difference =
+      target.getTime() - now.getTime();
+
+    if (difference <= 0) {
+      const weddingDay =
+        target.toDateString() ===
+        now.toDateString();
+
+      countdownElement.innerText =
+        weddingDay
+          ? "Hari yang dinanti telah tiba."
+          : "";
+
+      return;
+    }
+
+    const totalMinutes =
+      Math.floor(difference / 60000);
+
+    const days =
+      Math.floor(totalMinutes / 1440);
+
+    const hours =
+      Math.floor(
+        (totalMinutes % 1440) / 60
+      );
+
+    const minutes =
+      totalMinutes % 60;
+
+    countdownElement.innerText =
+      `${days} Hari · ${hours} Jam · ${minutes} Minit`;
+  };
+
+  updateCountdown();
+
+  clearInterval(this.countdownTimer);
+
+  this.countdownTimer =
+    setInterval(
+      updateCountdown,
+      60000
+    );
+},
+  
   nextMoment() {
     const stage = document.getElementById("stage");
 
