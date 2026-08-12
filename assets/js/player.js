@@ -234,6 +234,10 @@ const Player = {
 
     clearTimeout(this.timer);
 
+    if (moment.type === "wedding-finale") {
+  return;
+}
+
     this.timer = setTimeout(() => {
       this.nextMoment();
     }, moment.duration || 6000);
