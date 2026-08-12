@@ -26,6 +26,34 @@ const SceneEngine = {
         story.storyIdentity
       );
 
+const formatMalayDate = (dateValue) => {
+  if (!dateValue) return "";
+
+  const months = [
+    "Januari",
+    "Februari",
+    "Mac",
+    "April",
+    "Mei",
+    "Jun",
+    "Julai",
+    "Ogos",
+    "September",
+    "Oktober",
+    "November",
+    "Disember"
+  ];
+
+  const [year, month, day] =
+    dateValue.split("-").map(Number);
+
+  if (!year || !month || !day) {
+    return dateValue;
+  }
+
+  return `${day} ${months[month - 1]} ${year}`;
+};
+    
     return [
 
   {
@@ -84,7 +112,7 @@ bride:
   story.couple?.brideName || "",
 
 date:
-  story.celebration?.date || "",
+    formatMalayDate(story.celebration?.date),
 
 time:
   `${story.celebration?.startTime || ""} – ${story.celebration?.endTime || ""}`,
@@ -126,7 +154,7 @@ rsvp:
     story.couple?.brideName || "",
 
   date:
-    story.celebration?.date || "",
+      formatMalayDate(story.celebration?.date),
 
   venue:
     [
