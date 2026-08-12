@@ -156,6 +156,12 @@ rsvp:
   date:
       formatMalayDate(story.celebration?.date),
 
+  countdownDate:
+      story.celebration?.date || "",
+
+  countdownTime:
+      story.celebration?.startTime || "",
+
   venue:
     [
       story.celebration?.venue,
