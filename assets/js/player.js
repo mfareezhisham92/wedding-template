@@ -137,6 +137,60 @@ formalInvitation(moment) {
   message(moment) { return this.text(moment); },
   closing(moment) { return this.text(moment); },
 
+  weddingFinale(moment) {
+  return `
+    <section class="moment wedding-finale">
+
+      <div class="label">
+        ${moment.label || ""}
+      </div>
+
+      <div class="wedding-finale-couple">
+
+        <div class="wedding-finale-name">
+          ${moment.groom || ""}
+        </div>
+
+        <div class="wedding-finale-ampersand">
+          &
+        </div>
+
+        <div class="wedding-finale-name">
+          ${moment.bride || ""}
+        </div>
+
+      </div>
+
+      <div class="wedding-finale-date">
+        ${moment.date || ""}
+      </div>
+
+      <div class="wedding-finale-venue">
+        ${moment.venue || ""}
+      </div>
+
+      <div class="wedding-finale-closing">
+        ${moment.closingLine || ""}
+      </div>
+
+      ${
+        moment.hashtag
+          ? `
+            <div class="wedding-finale-hashtag">
+              ${moment.hashtag}
+            </div>
+          `
+          : ""
+      }
+
+    </section>
+  `;
+},
+
+"wedding-finale"(moment) {
+  return this.weddingFinale(moment);
+},
+
   photo(moment) {
   return Components.moment(
     Components.photo(
