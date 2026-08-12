@@ -114,16 +114,45 @@ rsvp:
 },
 
       {
-  type: "closing",
-  label: storyCopy.closing.label,
-  title: storyCopy.closing.title,
-  text:
-  story.narrative?.closing ||
-  storyCopy.closing.text,
-  duration: timing.closing,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image: null
+  type: "wedding-finale",
+
+  label:
+    "Walimatul Urus",
+
+  groom:
+    story.couple?.groomName || "",
+
+  bride:
+    story.couple?.brideName || "",
+
+  date:
+    story.celebration?.date || "",
+
+  venue:
+    [
+      story.celebration?.venue,
+      story.celebration?.cityState
+    ]
+      .filter(Boolean)
+      .join(", "),
+
+  closingLine:
+    "Kehadiran anda amat kami nanti-nantikan.",
+
+  hashtag:
+    "",
+
+  duration:
+    15000,
+
+  transition:
+    "fade",
+
+  background:
+    story.collection || "royal",
+
+  image:
+    null
 }
     ];
   },
