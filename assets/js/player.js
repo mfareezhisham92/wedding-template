@@ -169,6 +169,20 @@ formalInvitation(moment) {
         ${moment.venue || ""}
       </div>
 
+      <div
+  class="wedding-finale-countdown"
+  data-date="${moment.countdownDate || ""}"
+  data-time="${moment.countdownTime || ""}"
+>
+  <div class="wedding-finale-countdown-label">
+    Menuju Hari Bahagia
+  </div>
+
+  <div class="wedding-finale-countdown-value">
+    Mengira detik...
+  </div>
+</div>
+
       <div class="wedding-finale-closing">
         ${moment.closingLine || ""}
       </div>
