@@ -114,19 +114,6 @@ rsvp:
 },
 
       {
-  type: "message",
-  label: middleCopy.message.label,
-  title: middleCopy.message.title,
-  text:
-  story.narrative?.invitation ||
-  story.message.text,
-  duration: timing.message,
-  transition: "fade",
-  background:   story.collection || "royal",
-  image: null
-},
-
-      {
   type: "closing",
   label: storyCopy.closing.label,
   title: storyCopy.closing.title,
